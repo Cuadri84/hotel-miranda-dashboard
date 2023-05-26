@@ -7,13 +7,17 @@ const TopbarContainer = styled.div`
   height: 12rem;
 `;
 
+const LogoContainer = styled.div`
+  width: 450px;
+  padding-left: 2rem;
+  margin: auto;
+  overflow: hidden;
+`;
+
 const TopbarTitle = styled.div`
-  display: flex;
-  align-items: center;
-  width: 20%;
-  gap: 5rem;
   p {
-    padding-left: 10rem;
+    margin-left: 8rem;
+    padding-top: 1rem;
     font-family: var(--font-poppins);
     font-size: 2.8rem;
     font-weight: 700;
@@ -24,7 +28,7 @@ const TopbarTitle = styled.div`
 const IconContainer = styled.div`
   display: flex;
   width: 70%;
-  padding-right: 10%;
+  padding-right: 5%;
   justify-content: flex-end;
   align-items: center;
   gap: 6rem;
@@ -119,4 +123,4 @@ const Icon = styled.div`
   }
 `;
 
-export { TopbarContainer, TopbarTitle, IconContainer, Icon };
+export { TopbarContainer, TopbarTitle, IconContainer, Icon, LogoContainer };

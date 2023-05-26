@@ -8,11 +8,14 @@ import {
   TopbarTitle,
   IconContainer,
   Icon,
+  LogoContainer,
 } from "./TopBarStyled";
 //assets
 import Arrows from "../../assets/topbar/no-burguer-arrows.png";
 import Logo from "../../assets/sidebar/logo.png";
-// Topbar component. It gets the title from the url dinamically to update the current page header. To logOut the authContext gets used
+
+import display from "../sidebar/SideBar";
+
 const TopBar = () => {
   let location = useLocation();
   const [title, setTitle] = useState("");
@@ -41,8 +44,13 @@ const TopBar = () => {
 
   return (
     <TopbarContainer>
-      <img src={Logo} style={{ width: 240, height: 70 }} />
-      <img src={Arrows} style={{ width: 50, height: 50 }} />
+      <LogoContainer>
+        <img
+          src={Logo}
+          style={{ width: 240, height: 70 }}
+          alt="Hotel admin logo"
+        />
+      </LogoContainer>
       <TopbarTitle>
         <p>{title}</p>
       </TopbarTitle>
