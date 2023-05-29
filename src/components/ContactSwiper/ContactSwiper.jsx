@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 
 // Swiper Modules
 import { Navigation } from "swiper";
-import { color } from "d3";
 
 export const ContactSwiper = () => {
   return (
@@ -17,7 +16,7 @@ export const ContactSwiper = () => {
       modules={[Navigation]}
       slidesPerView={3}
     >
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -55,7 +54,7 @@ export const ContactSwiper = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -93,7 +92,7 @@ export const ContactSwiper = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -131,7 +130,7 @@ export const ContactSwiper = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -169,7 +168,7 @@ export const ContactSwiper = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -207,7 +206,7 @@ export const ContactSwiper = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="slider-container">
+      <SwiperSlide>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

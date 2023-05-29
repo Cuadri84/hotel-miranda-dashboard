@@ -11,7 +11,6 @@ const Layout = styled.div`
   height: 100%;
   .window-container {
     width: 100%;
-    padding-left: 100px;
   }
 `;
 

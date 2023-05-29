@@ -75,7 +75,7 @@ const Dashboard = () => {
       {/* <CalendarAndGraph>
         <CalendarAndGraphSubcontainer></CalendarAndGraphSubcontainer>
       </CalendarAndGraph> */}
-      <ContactSwiperContainer>
+      <ContactSwiperContainer variant="white">
         <p>Latest Contacts by Customers</p>
         <ContactSwiper></ContactSwiper>
       </ContactSwiperContainer>

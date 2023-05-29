@@ -88,7 +88,7 @@ const CalendarAndGraphSubcontainer = styled.div`
 
 const ContactSwiperContainer = styled.div`
   position: relative;
-  background-color: #FFFFFF;
+  ${(props) => (props.variant === "white" ? "background-color:#fff" : "")};
   box-shadow: 0px 4px 4px #00000005;
   border-radius: 2rem;
   overflow: hidden;
@@ -101,67 +101,70 @@ const ContactSwiperContainer = styled.div`
   }
   .swiper {
     width: 96%;
-    .swiper-button-prev, .swiper-button-next {
+    .swiper-button-prev,
+    .swiper-button-next {
       background-color: #135846;
       color: white;
       height: 5.6rem;
       width: 5.6rem;
-      border: 1px solid #FFFFFF;
+      border: 1px solid #ffffff;
       border-radius: 12px;
-      & .swiper-button-disabled{
+      & .swiper-button-disabled {
         opacity: 0;
       }
-      :after{
+      :after {
         font-size: 2rem;
         font-weight: 600;
       }
     }
-    .swiper-button-prev{
+    .swiper-button-prev {
       left: 0;
     }
-    .swiper-button-next{
+    .swiper-button-next {
       right: 0;
     }
-    .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
+    .swiper-button-prev.swiper-button-disabled,
+    .swiper-button-next.swiper-button-disabled {
       opacity: 0;
     }
   }
-  .swiper-wrapper{
+  .swiper-wrapper {
   }
 
   .swiper-slide {
     text-align: center;
-    background: #FFFFFF;
-    border: 1px solid #EBEBEB;
+    background: #ffffff;
+    border: 1px solid #ebebeb;
     border-radius: 2rem;
     animation: all 2s;
     margin: 3rem 2% 7rem 2%;
     width: 29.1% !important;
-    :hover{
+    :hover {
       box-shadow: 0px 16px 30px #00000014;
     }
-    p{
+    p {
       font-size: 1.6rem;
       font-weight: 400;
-      color:#4E4E4E;
-      margin: 3rem
+      color: #4e4e4e;
+      margin: 3rem;
     }
-    .reviewUser{
-        display: flex;
-        flex-direction: row;
+    .reviewUser {
+      display: flex;
+      flex-direction: row;
       text-align: left;
       margin: 3rem;
       justify-content: space-between;
-      img{
+      img {
         width: 80px;
         height: 80px;
         border-radius: 15px;
         object-fit: cover;
       }
-      p{
+      p {
         margin: 0;
       }
     }
+  }
 `;
 
 export {
