@@ -90,8 +90,8 @@ const Link = styled.li`
 `;
 
 const UserCard = styled.div`
-  padding-bottom: 5rem;
-  padding-top: 1rem;
+  padding-bottom: 4rem;
+  padding-top: 0rem;
   overflow: hidden;
 `;
 const NavigationDescription = styled.p`
@@ -106,7 +106,6 @@ const NavigationDescription = styled.p`
 
 const NavigationRights = styled.p`
   margin: 0;
-  padding-top: 0.5rem;
   padding-left: 15%;
   overflow: hidden;
   color: #799283;
@@ -118,7 +117,7 @@ const NavigationAuthor = styled.p`
   overflow: hidden;
   color: #799283;
   font-size: 1.4rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   img {
     height: 1.1em;
     width: 1.1em;

@@ -4,7 +4,7 @@ const Card = styled.div`
   width: 100%;
   max-width: 20rem;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 18px;
   box-shadow: 0px 20px 30px #00000014;
   display: flex;
