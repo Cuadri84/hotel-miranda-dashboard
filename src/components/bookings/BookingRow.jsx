@@ -1,5 +1,6 @@
 // React & Router
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 // Styled Components
 import {
@@ -14,36 +15,49 @@ import {
   DropDown,
 } from "./BookingRowStyled";
 
-export const BookinmgRow = () => {
+export const BookingRow = (props) => {
+  const navigate = useNavigate();
+
   const [showOptions, setShowOptions] = useState(false);
+
+  const goToSingleBooking = (id) => {
+    navigate("/bookings/" + id);
+  };
+
   return (
-    <Row>
+    <Row
+      onClick={() => {
+        goToSingleBooking(props.booking.bookingID);
+      }}
+    >
       <td>
         <GuestContainer>
           <div>
-            <GuestName>Ramón López</GuestName>
-            <BookingID>id: 500</BookingID>
+            <GuestName>{props.booking.userName}</GuestName>
+            <BookingID>#{props.booking.bookingID}</BookingID>
           </div>
         </GuestContainer>
       </td>
       <DataContainer className="data-container__text">
-        <p>5/8</p>
+        <p>{props.booking.orderDate}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>8/8</p>
+        <p>{props.booking.checkIn}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>10/8</p>
+        <p>{props.booking.checkOut}</p>
       </DataContainer>
       <td>
-        <NotesButton>Beauty view</NotesButton>
+        <NotesButton>
+          {props.booking.specialRequest === "" ? "No Notes" : "View Notes"}
+        </NotesButton>
       </td>
 
       <DataContainer className="data-container__text">
-        <p>Suite</p>
+        <p>{props.booking.roomType}</p>
       </DataContainer>
       <td>
-        <Status $type={"Check In"}>Check In</Status>
+        <Status $type={props.booking.status}>{props.booking.status}</Status>
       </td>
       <DataContainerButton style={{ position: "relative" }}>
         <button>

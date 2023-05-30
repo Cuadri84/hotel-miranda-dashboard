@@ -10,11 +10,13 @@ import {
   TableButtons,
 } from "../../components/styled/Tables.jsx";
 
+import booking from "../../data/bookings.json";
+
 import { Container } from "../../components/styled/ContainerStyled.jsx";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
 import { Loader } from "../../components/styled/Loader.jsx";
 import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
-import { BookinmgRow } from "../../components/bookings/BookingRow.jsx";
+import { BookingRow } from "../../components/bookings/BookingRow.jsx";
 
 export const Bookings = () => {
   const [activeFilter, setActiveFilter] = useState("Order Date");
@@ -53,28 +55,9 @@ export const Bookings = () => {
             </tr>
           </thead>
           <tbody>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
-            <BookinmgRow></BookinmgRow>
+            {booking.map((booking) => (
+              <BookingRow key={booking.id} booking={booking} />
+            ))}
           </tbody>
         </Table>
       </Container>

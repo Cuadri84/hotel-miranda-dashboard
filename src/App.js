@@ -8,6 +8,7 @@ import { Login } from "./pages/login/Login";
 import TopBar from "./components/topbar/TopBar";
 import { SideBar } from "./components/sidebar/SideBar";
 import Layout from "./components/Layout";
+import { SingleBooking } from "./pages/bookings/SingleBooking";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<SingleBooking />} />
             <Route path="rooms" element={<Rooms />} />
             <Route path="contact" element={<Contact />} />
             <Route path="users" element={<Users />} />
