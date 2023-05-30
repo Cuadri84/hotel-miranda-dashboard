@@ -14,6 +14,8 @@ import { Container } from "../../components/styled/ContainerStyled.jsx";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
 import { Loader } from "../../components/styled/Loader.jsx";
 import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
+import { BookinmgRow } from "../../components/bookings/BookingRow.jsx";
+
 export const Bookings = () => {
   const [activeFilter, setActiveFilter] = useState("Order Date");
   return (
@@ -37,6 +39,45 @@ export const Bookings = () => {
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
+      <Container>
+        <Table>
+          <thead>
+            <tr>
+              <HeaderTitle>Guest</HeaderTitle>
+              <HeaderTitle>Order Date</HeaderTitle>
+              <HeaderTitle>Check In</HeaderTitle>
+              <HeaderTitle>Check Out</HeaderTitle>
+              <HeaderTitle>Special Request</HeaderTitle>
+              <HeaderTitle>Room type</HeaderTitle>
+              <HeaderTitle>Status</HeaderTitle>
+            </tr>
+          </thead>
+          <tbody>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+            <BookinmgRow></BookinmgRow>
+          </tbody>
+        </Table>
+      </Container>
     </>
   );
 };
