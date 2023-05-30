@@ -24,13 +24,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-            alt="User portrait"
-          />
           <div>
             <h2>Nadia Mera</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg
@@ -62,13 +60,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
-            alt="User portrait"
-          />
           <div>
             <h2>Ramon Alcorta</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg
@@ -100,13 +96,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://xsgames.co/randomusers/assets/avatars/male/63.jpg"
-            alt="User portrait"
-          />
           <div>
             <h2>Paco Díaz</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg
@@ -138,13 +132,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            alt="User portrait"
-          />
           <div>
             <h2>Lorena Moll</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg
@@ -176,13 +168,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHVzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
-            alt="User portrait"
-          />
           <div>
             <h2>Iker Gonzalez</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg
@@ -214,13 +204,11 @@ export const ContactSwiper = () => {
         </p>
         <div className="reviewUser">
           {" "}
-          <img
-            src="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            alt="User portrait"
-          />
           <div>
             <h2>Laura Sancho</h2>
             <h4 style={{ color: "#94A89C" }}>4m ago</h4>
+            <h4 style={{ color: "#94A89C" }}>nadiaMera@gmail.com</h4>
+            <h4 style={{ color: "#94A89C" }}>666666666</h4>
           </div>
           <div>
             <svg

@@ -34,7 +34,12 @@ export const Rooms = () => {
           <DropdownMenu
             setActiveFilter={setActiveFilter}
             type="white"
-            options={["Room Nr.", "Highest rate first", "Lowest rate first"]}
+            options={[
+              "Available",
+              "Booked",
+              "Highest rate first",
+              "Lowest rate first",
+            ]}
           ></DropdownMenu>
         </TableButtons>
       </TableActions>

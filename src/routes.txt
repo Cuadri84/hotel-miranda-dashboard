@@ -1,0 +1,26 @@
+Login/Dashboard (dependiendo del Auth):
+    - /
+
+Bookings:
+    - GET/Bookings
+    - GET/Bookings/:id
+    - POST/Bookings
+    - PUT/Bookings/:id
+    - DELETE/Bookings/:id
+
+Rooms:
+    - GET/Rooms
+    - GET/Rooms/:id
+    - POST/Rooms
+    - PUT/Rooms/:id
+    - DELETE/Rooms/:id
+
+Users:
+    - GET/User
+    - POST/User
+    - PUT/User/:id
+    - DELETE/User/:id
+
+Contact:
+    - GET/Contact
+    - POST/Contact

@@ -26,7 +26,6 @@ export const Contact = () => {
       <TableActions>
         <TableFilters>
           <FilterButton>All Customer Reviews</FilterButton>
-          <FilterButton>Published</FilterButton>
           <FilterButton>Archived</FilterButton>
         </TableFilters>
         <TableButtons>
