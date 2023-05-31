@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // Styled Components
 import {
@@ -16,7 +16,6 @@ import booking from "../../data/bookings.json";
 //Components
 import { Container } from "../../components/styled/ContainerStyled.jsx";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
-import { Loader } from "../../components/styled/Loader.jsx";
 import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
 import { BookingRow } from "../../components/bookings/BookingRow.jsx";
 

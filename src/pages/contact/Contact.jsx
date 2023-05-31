@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // Styled Components
 import {
@@ -10,10 +10,15 @@ import {
   TableButtons,
 } from "../../components/styled/Tables.jsx";
 
+//Data
+import contacts from "../../data/contact.json";
+
+//Components
 import { ContactSwiper } from "../../components/ContactSwiper/ContactSwiper";
 import { Container } from "../../components/styled/ContainerStyled";
 import { ContactSwiperContainer } from "../dashboard/DashboardStyled";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
+import { ContactRow } from "../../components/contacts/ContactRow.jsx";
 
 export const Contact = () => {
   const [activeFilter, setActiveFilter] = useState("Date");
@@ -36,6 +41,24 @@ export const Contact = () => {
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
+      <Container>
+        <Table>
+          <thead>
+            <tr>
+              <HeaderTitle>Order ID</HeaderTitle>
+              <HeaderTitle>Date</HeaderTitle>
+              <HeaderTitle>Customer</HeaderTitle>
+              <HeaderTitle>Comment</HeaderTitle>
+              <HeaderTitle>Action</HeaderTitle>
+            </tr>
+          </thead>
+          <tbody className="task-container">
+            {contacts.map((contact) => (
+              <ContactRow key={contact.id} contact={contact} />
+            ))}
+          </tbody>
+        </Table>
+      </Container>
     </>
   );
 };
