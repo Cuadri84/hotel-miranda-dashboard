@@ -13,8 +13,9 @@ import {
 } from "./SideBarStyled";
 
 //assets
-import Arrow from "../../assets/topbar/no-burguer-arrows.png";
-import ArrowClose from "../../assets/topbar/arrows-close.png";
+
+import Arrows from "../../assets/sidebar/arrows.png";
+import ArrowsClose from "../../assets/sidebar/arrows-left.png";
 import Heart from "../../assets/sidebar/heart-icon.svg";
 import CurrentUser from "./CurrentUser";
 
@@ -33,9 +34,9 @@ export const SideBar = () => {
     >
       <ArrowButton onClick={displayMenu}>
         {!display ? (
-          <img src={Arrow} alt="Menu icon" />
+          <img src={Arrows} alt="Menu icon" />
         ) : (
-          <img src={ArrowClose} alt="Menu icon" />
+          <img src={ArrowsClose} alt="Menu icon" />
         )}
       </ArrowButton>
 
