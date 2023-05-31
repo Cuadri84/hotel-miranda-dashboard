@@ -116,12 +116,13 @@ const Status = styled.p`
         return css`
           background-color: #e8ffee;
           font-family: var(--font-poppins);
-          color: #5ad07a;
+          color: rgba(38, 166, 91, 1);
           font-size: 1.2rem;
           font-weight: 600;
           letter-spacing: 0.05rem;
           transition: background-color 0.3s;
           :hover {
+            color: #e8ffee;
             background-color: rgba(38, 166, 91, 1);
           }
         `;
@@ -135,20 +136,22 @@ const Status = styled.p`
           letter-spacing: 0.05rem;
           transition: background-color 0.3s;
           :hover {
+            color: #f9cac7;
             background-color: rgba(236, 100, 75, 1);
           }
         `;
       case "In Progress":
         return css`
-          background-color: rgba(254, 241, 96, 0.5);
+          background-color: #fcffcd;
           font-family: var(--font-poppins);
-          color: #393939;
+          color: #ffbf00;
           font-size: 1.2rem;
           font-weight: 600;
           letter-spacing: 0.05rem;
           transition: background-color 0.3s;
           :hover {
-            background-color: rgba(254, 241, 96, 1);
+            color: #fcffcd;
+            background-color: #ffbf00;
           }
         `;
       default:
