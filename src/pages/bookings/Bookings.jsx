@@ -10,8 +10,10 @@ import {
   TableButtons,
 } from "../../components/styled/Tables.jsx";
 
+//Data
 import booking from "../../data/bookings.json";
 
+//Components
 import { Container } from "../../components/styled/ContainerStyled.jsx";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
 import { Loader } from "../../components/styled/Loader.jsx";
