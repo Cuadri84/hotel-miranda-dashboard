@@ -176,7 +176,7 @@ const DropDown = styled.div`
   position: absolute;
   background-color: #777777;
   top: 60%;
-  left: 0%;
+  left: 20%;
   z-index: 2;
   ul {
     list-style: none;
