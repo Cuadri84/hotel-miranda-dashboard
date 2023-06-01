@@ -1,3 +1,81 @@
+// React & Router
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Styled Components
+import {
+  LoginContainer,
+  LoginCard,
+  LogoContainer,
+  InputContainer,
+  Input,
+  LoginButton,
+  Description,
+} from "./LoginStyled";
+
+import Logo from "../../assets/sidebar/logo.png";
+
 export const Login = () => {
-  return <h1>Login</h1>;
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+
+  const handleSubmit = () => {
+    if (userName === "d" && email === "d@mail.com" && password === "1234") {
+      localStorage.setItem("username", "d");
+      localStorage.setItem("mail", "d@mail.com");
+      localStorage.setItem("passW", "1234");
+      navigate("/dashboard");
+    }
+  };
+
+  return (
+    <LoginContainer>
+      <LoginCard>
+        <LogoContainer>
+          <img
+            src={Logo}
+            style={{ width: 240, height: 70 }}
+            alt="Hotel admin logo"
+          />
+        </LogoContainer>
+        {/* <Description>
+          Please use <strong>test@test.com</strong> and <strong>12345</strong>{" "}
+          as login data for testing purposes and keep in mind that this Website
+          is meant to be used on a computer (not a mobile device)
+        </Description> */}
+        <form onSubmit={handleSubmit}>
+          <InputContainer>
+            <Input
+              type="text"
+              value={userName}
+              placeholder="User Name"
+              onChange={(e) => setUserName(e.target.value)}
+            ></Input>
+          </InputContainer>
+          <InputContainer>
+            <Input
+              type="text"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
+          </InputContainer>
+          <InputContainer>
+            <Input
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            ></Input>
+          </InputContainer>
+          <LoginButton type="login" text="LOGIN">
+            Login
+          </LoginButton>
+        </form>
+      </LoginCard>
+    </LoginContainer>
+  );
 };
