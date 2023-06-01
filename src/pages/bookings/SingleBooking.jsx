@@ -2,7 +2,10 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 
+//DATA
 import booking from "../../data/bookings.json";
+
+//STYLED
 import { Container } from "../../components/styled/ContainerStyled";
 import { Subcontainer, VerticalLine } from "./SingleBookingStyled";
 import {

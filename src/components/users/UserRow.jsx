@@ -1,5 +1,6 @@
 // React & Router
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 // Styled Components
 import {
@@ -14,9 +15,18 @@ import {
 import { DataContainerButton, DropDown } from "../bookings/BookingRowStyled";
 export const UserRow = (props) => {
   const [showOptions, setShowOptions] = useState(false);
+  const navigate = useNavigate();
+
+  const goToSingleUser = (id) => {
+    navigate("/users/" + id);
+  };
 
   return (
-    <Row>
+    <Row
+      onClick={() => {
+        goToSingleUser(props.user.id);
+      }}
+    >
       <td>
         <UserContainer>
           <img src={props.user.photo} alt="User portrait" />

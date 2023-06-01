@@ -9,6 +9,7 @@ import TopBar from "./components/topbar/TopBar";
 import { SideBar } from "./components/sidebar/SideBar";
 import Layout from "./components/Layout";
 import { SingleBooking } from "./pages/bookings/SingleBooking";
+import { SingleUser } from "./pages/users/SingleUser";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="rooms" element={<Rooms />} />
             <Route path="contact" element={<Contact />} />
             <Route path="users" element={<Users />} />
+            <Route path="users/:userId" element={<SingleUser />} />
             <Route path="login" element={<Login />} />
           </Routes>
         </div>
