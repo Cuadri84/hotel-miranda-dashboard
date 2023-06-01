@@ -10,6 +10,7 @@ import { SideBar } from "./components/sidebar/SideBar";
 import Layout from "./components/Layout";
 import { SingleBooking } from "./pages/bookings/SingleBooking";
 import { SingleUser } from "./pages/users/SingleUser";
+import { SingleRoom } from "./pages/rooms/SingleRoom";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="bookings" element={<Bookings />} />
             <Route path="bookings/:bookingId" element={<SingleBooking />} />
             <Route path="rooms" element={<Rooms />} />
+            <Route path="rooms/:roomId" element={<SingleRoom />} />
             <Route path="contact" element={<Contact />} />
             <Route path="users" element={<Users />} />
             <Route path="users/:userId" element={<SingleUser />} />

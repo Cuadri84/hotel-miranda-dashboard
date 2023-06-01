@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+
 // Styled Components
 import {
   RoomNameContainer,
@@ -13,9 +15,19 @@ import {
 import { Row, DropDown } from "../bookings/BookingRowStyled";
 
 export const RoomRow = (props) => {
+  const navigate = useNavigate();
+
   const [showOptions, setShowOptions] = useState(false);
+
+  const goToSingleRoom = (id) => {
+    navigate("/rooms/" + id);
+  };
   return (
-    <Row>
+    <Row
+      onClick={() => {
+        goToSingleRoom(props.room.room_number);
+      }}
+    >
       <td>
         <RoomNameContainer>
           <img src={props.room.photo} alt="Room Img" />
