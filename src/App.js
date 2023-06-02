@@ -13,6 +13,7 @@ import { SingleUser } from "./pages/users/SingleUser";
 import { SingleRoom } from "./pages/rooms/SingleRoom";
 import { ProtectRoute } from "./components/ProtectedRoute";
 import { NewBooking } from "./pages/bookings/NewBooking";
+import NewUser from "./pages/users/NewUser";
 
 function App() {
   const authReady = window.localStorage.getItem("auth");
@@ -43,6 +44,7 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="users" element={<Users />} />
               <Route path="users/:userId" element={<SingleUser />} />
+              <Route path="newUser" element={<NewUser />} />
               <Route path="login" element={<Login />} />
             </Route>
           </Routes>
