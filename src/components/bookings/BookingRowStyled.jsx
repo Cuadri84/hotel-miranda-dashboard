@@ -156,7 +156,7 @@ const Status = styled.p`
         `;
       default:
         return css`
-          background-color: blue;
+          background-color: whitesmoke;
           font-family: var(--font-poppins);
           color: #393939;
           font-size: 1rem;

@@ -73,7 +73,7 @@ const Input = styled.input`
   }
 `;
 
-const LoginButton = styled.div`
+const LoginButton = styled.button`
   background-color: #ebf1ef;
   border: none;
   border-radius: 8px;

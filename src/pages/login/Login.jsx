@@ -22,12 +22,20 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (userName === "d" && email === "d@mail.com" && password === "1234") {
-      localStorage.setItem("username", "d");
-      localStorage.setItem("mail", "d@mail.com");
-      localStorage.setItem("passW", "1234");
-      navigate("/dashboard");
+      localStorage.setItem(
+        "auth",
+        JSON.stringify([
+          {
+            userName: "d",
+            email: "d@mail.com",
+            password: "1234",
+          },
+        ])
+      );
+      navigate("/");
     }
   };
 

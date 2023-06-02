@@ -1,6 +1,6 @@
 // React & Router
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 // Styled Components
 import {
@@ -10,14 +10,13 @@ import {
   Icon,
   LogoContainer,
 } from "./TopBarStyled";
-//assets
-import Arrows from "../../assets/topbar/no-burguer-arrows.png";
-import Logo from "../../assets/sidebar/logo.png";
 
-import display from "../sidebar/SideBar";
+//assets
+import Logo from "../../assets/sidebar/logo.png";
 
 const TopBar = () => {
   let location = useLocation();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
 
   useEffect(() => {
@@ -41,6 +40,11 @@ const TopBar = () => {
         setTitle("");
     }
   }, [location]);
+
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    navigate("/login");
+  };
 
   return (
     <TopbarContainer>
@@ -83,7 +87,7 @@ const TopBar = () => {
             <p>0</p>
           </div>
         </Icon>
-        <Icon>
+        <Icon onClick={() => logOut()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="3rem"
