@@ -20,16 +20,14 @@ export const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName === "d" && email === "d@mail.com" && password === "1234") {
+    if (email === "d" && password === "d") {
       localStorage.setItem(
         "auth",
         JSON.stringify([
           {
-            userName: "d",
             email: "d@mail.com",
             password: "1234",
           },
@@ -55,14 +53,6 @@ export const Login = () => {
           is meant to be used on a computer (not a mobile device)
         </Description> */}
         <form onSubmit={handleSubmit}>
-          <InputContainer>
-            <Input
-              type="text"
-              value={userName}
-              placeholder="User Name"
-              onChange={(e) => setUserName(e.target.value)}
-            ></Input>
-          </InputContainer>
           <InputContainer>
             <Input
               type="text"
