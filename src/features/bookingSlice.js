@@ -15,6 +15,13 @@ export const getBooking = createAsyncThunk(
   }
 );
 
+export const deleteBooking = createAsyncThunk(
+  "bookings/DeleteBooking",
+  async (bookingID) => {
+    return await bookingID;
+  }
+);
+
 const initialState = {
   bookingsList: [],
   status: "loading",
@@ -53,6 +60,11 @@ export const bookingSlice = createSlice({
         state.singleBookingStatus = "failed";
         console.error("Not possible to fetch the booking");
       });
+    builder.addCase(deleteBooking.fulfilled, (state, action) => {
+      state.bookingsList = state.bookingsList.filter(
+        (booking) => booking.bookingID !== action.payload
+      );
+    });
   },
 });
 

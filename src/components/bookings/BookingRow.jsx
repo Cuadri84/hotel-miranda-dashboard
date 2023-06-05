@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { deleteBooking } from "../../features/bookingSlice";
+
 // Styled Components
 import {
   Row,
@@ -15,8 +19,9 @@ import {
   DropDown,
 } from "./BookingRowStyled";
 
-export const BookingRow = (props) => {
+export const BookingRow = (booking) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -24,40 +29,45 @@ export const BookingRow = (props) => {
     navigate("/bookings/" + id);
   };
 
+  const deleteCurrentBooking = (e, bookingID) => {
+    e.preventDefault();
+    dispatch(deleteBooking(bookingID));
+  };
+
   return (
     <Row
       onClick={() => {
-        goToSingleBooking(props.booking.bookingID);
+        goToSingleBooking(booking.booking.bookingID);
       }}
     >
       <td>
         <GuestContainer>
           <div>
-            <GuestName>{props.booking.userName}</GuestName>
-            <BookingID>#{props.booking.bookingID}</BookingID>
+            <GuestName>{booking.booking.userName}</GuestName>
+            <BookingID>#{booking.booking.bookingID}</BookingID>
           </div>
         </GuestContainer>
       </td>
       <DataContainer className="data-container__text">
-        <p>{props.booking.orderDate}</p>
+        <p>{booking.booking.orderDate}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{props.booking.checkIn}</p>
+        <p>{booking.booking.checkIn}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{props.booking.checkOut}</p>
+        <p>{booking.booking.checkOut}</p>
       </DataContainer>
       <td>
         <NotesButton>
-          {props.booking.specialRequest === "" ? "No Notes" : "View Notes"}
+          {booking.booking.specialRequest === "" ? "No Notes" : "View Notes"}
         </NotesButton>
       </td>
 
       <DataContainer className="data-container__text">
-        <p>{props.booking.roomType}</p>
+        <p>{booking.booking.roomType}</p>
       </DataContainer>
       <td>
-        <Status $type={props.booking.status}>{props.booking.status}</Status>
+        <Status $type={booking.booking.status}>{booking.booking.status}</Status>
       </td>
       <DataContainerButton style={{ position: "relative" }}>
         <button>
@@ -67,7 +77,6 @@ export const BookingRow = (props) => {
             width="30"
             viewBox="0 0 48 48"
             onClick={(e) => {
-              // With this check I avoid the parents event listener to be fired when the child event listener should be fired
               if (e && e.stopPropagation) e.stopPropagation();
               setShowOptions(!showOptions);
             }}
@@ -82,7 +91,14 @@ export const BookingRow = (props) => {
                 <button>Edit booking</button>
               </li>
               <li>
-                <button>Delete booking</button>
+                <button
+                  onClick={(e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    deleteCurrentBooking(e, booking.booking.bookingID);
+                  }}
+                >
+                  Delete booking
+                </button>
               </li>
             </ul>
           </DropDown>
