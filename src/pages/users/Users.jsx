@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { getDataUsers } from "../../features/usersSlice";
+import { useTypedSelector } from "../../store/store";
+
 // Styled Components
 import {
   Table,
@@ -11,8 +16,6 @@ import {
   FilterButton,
   TableButtons,
 } from "../../components/styled/Tables";
-//Data
-import users from "../../data/users.json";
 
 //Components
 import { Container } from "../../components/styled/ContainerStyled";
@@ -22,7 +25,18 @@ import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { UserRow } from "../../components/users/UserRow";
 
 export const Users = () => {
+  const dispatch = useDispatch();
+  const { usersList } = useTypedSelector((state) => state.users);
+
+  //para hacer el loader
+  const { status } = useTypedSelector((state) => state.users);
+
   const [activeFilter, setActiveFilter] = useState("Start date");
+
+  useEffect(() => {
+    dispatch(getDataUsers());
+  }, []);
+
   return (
     <>
       <TableActions>
@@ -53,7 +67,7 @@ export const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {usersList.map((user) => (
               <UserRow key={user.id} user={user} />
             ))}
           </tbody>
