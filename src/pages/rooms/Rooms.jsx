@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { getDataContacts } from "../../features/contacSlice";
+import { useTypedSelector } from "../../store/store";
+
 // Styled Components
 import {
   Table,
@@ -12,18 +17,22 @@ import {
   TableButtons,
 } from "../../components/styled/Tables";
 
-//Data
-import rooms from "../../data/rooms.json";
-
 //Components
 import { Container } from "../../components/styled/ContainerStyled";
 import { DropdownMenu } from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
 import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { RoomRow } from "../../components/rooms/RoomRow";
+import { getDataRooms } from "../../features/roomsSlice";
 
 export const Rooms = () => {
+  const dispatch = useDispatch();
+  const { roomsList } = useTypedSelector((state) => state.rooms);
   const [activeFilter, setActiveFilter] = useState("Room Nr.");
+
+  useEffect(() => {
+    dispatch(getDataRooms());
+  }, []);
   return (
     <>
       {" "}
@@ -63,7 +72,7 @@ export const Rooms = () => {
             </tr>
           </thead>
           <tbody>
-            {rooms.map((rooms) => (
+            {roomsList.map((rooms) => (
               <RoomRow key={rooms.id} room={rooms} />
             ))}
           </tbody>
