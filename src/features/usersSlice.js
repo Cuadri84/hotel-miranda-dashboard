@@ -7,6 +7,9 @@ export const getDataUsers = createAsyncThunk("contacts/fetchUsers", () => {
 export const getUser = createAsyncThunk("user/GetUserDetails", async (id) => {
   return await id;
 });
+export const deleteUser = createAsyncThunk("users/DeleteUser", async (id) => {
+  return await id;
+});
 
 const initialState = {
   usersList: [],
@@ -46,6 +49,11 @@ export const usersSlice = createSlice({
         state.singleUserStatus = "failed";
         console.error("Not possible to fetch the user");
       });
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.usersList = state.usersList.filter(
+        (user) => user.id !== action.payload
+      );
+    });
   },
 });
 
