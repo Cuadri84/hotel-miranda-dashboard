@@ -1,9 +1,11 @@
-import React from "react";
+// React & Router
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router";
 
-//DATA
-import booking from "../../data/bookings.json";
+// Redux
+import { useDispatch } from "react-redux";
+import { getBooking } from "../../features/bookingSlice";
+import { useTypedSelector } from "../../store/store";
 
 //STYLED
 import { Container } from "../../components/styled/ContainerStyled";
@@ -16,46 +18,41 @@ import {
   Status,
 } from "../../components/bookings/BookingRowStyled";
 
-import Arrow from "../../assets/leftArrow-icon.svg";
-
 export const SingleBooking = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
   const { bookingId } = params;
+  const { singleBooking } = useTypedSelector((state) => state.bookings);
+  const [currentBooking, setCurrentBooking] = useState(singleBooking);
 
-  let room = booking.find((room) => room.bookingID === Number(bookingId));
+  useEffect(() => {
+    dispatch(getBooking(Number(bookingId)));
 
-  const goToBooking = (id) => {
-    navigate("/bookings/");
-  };
+    setCurrentBooking(singleBooking);
+  }, [singleBooking, dispatch, bookingId]);
 
   return (
     <Container>
       <Subcontainer>
         <GuestContainer>
           <div>
-            <img
-              src={Arrow}
-              alt="Back arrow"
-              onClick={() => {
-                goToBooking();
-              }}
-            />
-            <GuestName>{room.userName}</GuestName>
-            <BookingID>ID:{room.bookingID}</BookingID>
+            <GuestName>{currentBooking.userName}</GuestName>
+            <BookingID>ID:{currentBooking.bookingID}</BookingID>
             <DataContainer>
-              <p>Check in: {room.checkIn}</p>
-              <p>Check Out: {room.checkOut}</p>
-              <p>Order Date: {room.orderDate}</p>
-              <p>Room Type: {room.roomType}</p>
-              <Status $type={room.status}>{room.status}</Status>
+              <p>Check in: {currentBooking.checkIn}</p>
+              <p>Check Out: {currentBooking.checkOut}</p>
+              <p>Order Date: {currentBooking.orderDate}</p>
+              <p>Room Type: {currentBooking.roomType}</p>
+              <Status $type={currentBooking.status}>
+                {currentBooking.status}
+              </Status>
             </DataContainer>
           </div>
           <VerticalLine />
           <DataContainer>
             <p>Special Request:</p>
-            {room.specialRequest ? (
-              <p>{room.specialRequest}</p>
+            {currentBooking.specialRequest ? (
+              <p>{currentBooking.specialRequest}</p>
             ) : (
               <p>No special request registered.</p>
             )}

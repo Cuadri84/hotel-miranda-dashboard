@@ -11,7 +11,7 @@ export const getUser = createAsyncThunk("user/GetUserDetails", async (id) => {
 const initialState = {
   usersList: [],
   status: "loading",
-  singleUser: null,
+  singleUser: "",
   singleUserStatus: "loading",
 };
 
