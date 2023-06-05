@@ -28,7 +28,6 @@ export const SingleUser = () => {
   const { singleUser } = useTypedSelector((state) => state.users);
 
   const [currentUser, setCurrentUser] = useState(singleUser);
-  console.log(currentUser);
 
   // let user = users.find((user) => user.id === Number(userId));
   useEffect(() => {
@@ -44,6 +43,7 @@ export const SingleUser = () => {
     <Container>
       <Subcontainer>
         <GuestContainer>
+          {/* este div comentarlo y actualizar y entonces funciona porque a veces falla el redux */}
           <div>
             <img
               src={Arrow}
