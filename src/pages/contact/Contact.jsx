@@ -21,6 +21,7 @@ import { Container } from "../../components/styled/ContainerStyled";
 import { ContactSwiperContainer } from "../dashboard/DashboardStyled";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
 import { ContactRow } from "../../components/contacts/ContactRow.jsx";
+import { Loader } from "../../components/styled/Loader";
 
 export const Contact = () => {
   const dispatch = useDispatch();
@@ -54,24 +55,28 @@ export const Contact = () => {
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
-      <Container>
-        <Table>
-          <thead>
-            <tr>
-              <HeaderTitle>Order ID</HeaderTitle>
-              <HeaderTitle>Date</HeaderTitle>
-              <HeaderTitle>Customer</HeaderTitle>
-              <HeaderTitle>Comment</HeaderTitle>
-              <HeaderTitle>Action</HeaderTitle>
-            </tr>
-          </thead>
-          <tbody className="task-container">
-            {contactsList.map((contact) => (
-              <ContactRow key={contact.id} contact={contact} />
-            ))}
-          </tbody>
-        </Table>
-      </Container>
+      {status === "loading" ? (
+        <Loader />
+      ) : (
+        <Container>
+          <Table>
+            <thead>
+              <tr>
+                <HeaderTitle>Order ID</HeaderTitle>
+                <HeaderTitle>Date</HeaderTitle>
+                <HeaderTitle>Customer</HeaderTitle>
+                <HeaderTitle>Comment</HeaderTitle>
+                <HeaderTitle>Action</HeaderTitle>
+              </tr>
+            </thead>
+            <tbody className="task-container">
+              {contactsList.map((contact) => (
+                <ContactRow key={contact.id} contact={contact} />
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+      )}
     </>
   );
 };

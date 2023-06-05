@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { getDataContacts } from "../../features/contacSlice";
 import { useTypedSelector } from "../../store/store";
 
 // Styled Components
@@ -29,6 +28,9 @@ export const Rooms = () => {
   const dispatch = useDispatch();
   const { roomsList } = useTypedSelector((state) => state.rooms);
   const [activeFilter, setActiveFilter] = useState("Room Nr.");
+
+  //para hacer el loader
+  const { status } = useTypedSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(getDataRooms());
@@ -58,26 +60,30 @@ export const Rooms = () => {
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
-      <Container>
-        <Table>
-          {" "}
-          <thead>
-            <tr>
-              <HeaderTitle>Room Name</HeaderTitle>
-              <HeaderTitle>Bed Type</HeaderTitle>
-              <HeaderTitle>Facilities</HeaderTitle>
-              <HeaderTitle>Rate</HeaderTitle>
-              <HeaderTitle>Offer Price</HeaderTitle>
-              <HeaderTitle>Status</HeaderTitle>
-            </tr>
-          </thead>
-          <tbody>
-            {roomsList.map((rooms) => (
-              <RoomRow key={rooms.id} room={rooms} />
-            ))}
-          </tbody>
-        </Table>
-      </Container>
+      {status === "loading" ? (
+        <Loader />
+      ) : (
+        <Container>
+          <Table>
+            {" "}
+            <thead>
+              <tr>
+                <HeaderTitle>Room Name</HeaderTitle>
+                <HeaderTitle>Bed Type</HeaderTitle>
+                <HeaderTitle>Facilities</HeaderTitle>
+                <HeaderTitle>Rate</HeaderTitle>
+                <HeaderTitle>Offer Price</HeaderTitle>
+                <HeaderTitle>Status</HeaderTitle>
+              </tr>
+            </thead>
+            <tbody>
+              {roomsList.map((rooms) => (
+                <RoomRow key={rooms.id} room={rooms} />
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+      )}
     </>
   );
 };

@@ -5,7 +5,7 @@ const Loader = styled.div`
   margin: 10rem auto;
   width: 150px;
   height: 150px;
-  border-left: 5px solid #ff9c3a;
+  border-left: 5px solid #e23428;
   border-radius: 50%;
   animation: right5231 1.3s linear infinite;
   &::before,

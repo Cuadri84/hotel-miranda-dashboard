@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./fetchData";
+import { addDelay } from "../functions/extras";
 
 export const getDataContacts = createAsyncThunk(
   "contacts/fetchContacts",
   () => {
-    return fetchData("Contacts");
+    return addDelay(fetchData("Contacts"), 200);
   }
 );
 

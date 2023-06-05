@@ -56,23 +56,27 @@ export const Users = () => {
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
-      <Container>
-        <Table>
-          <thead>
-            <tr>
-              <HeaderTitle>Name</HeaderTitle>
-              <HeaderTitle>Job Desk</HeaderTitle>
-              <HeaderTitle>Contact</HeaderTitle>
-              <HeaderTitle>Status</HeaderTitle>
-            </tr>
-          </thead>
-          <tbody>
-            {usersList.map((user) => (
-              <UserRow key={user.id} user={user} />
-            ))}
-          </tbody>
-        </Table>
-      </Container>
+      {status === "loading" ? (
+        <Loader />
+      ) : (
+        <Container>
+          <Table>
+            <thead>
+              <tr>
+                <HeaderTitle>Name</HeaderTitle>
+                <HeaderTitle>Job Desk</HeaderTitle>
+                <HeaderTitle>Contact</HeaderTitle>
+                <HeaderTitle>Status</HeaderTitle>
+              </tr>
+            </thead>
+            <tbody>
+              {usersList.map((user) => (
+                <UserRow key={user.id} user={user} />
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+      )}
     </>
   );
 };

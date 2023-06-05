@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./fetchData";
+import { addDelay } from "../functions/extras";
 
 export const getDataRooms = createAsyncThunk("contacts/fetchRooms", () => {
-  return fetchData("Rooms");
+  return addDelay(fetchData("Rooms"), 200);
 });
 
 export const getRoom = createAsyncThunk("room/GetRoomDetails", async (id) => {
