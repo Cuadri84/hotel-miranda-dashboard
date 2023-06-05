@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import contactSlice from "../features/contacSlice";
 import { useSelector } from "react-redux";
+import contactSlice from "../features/contacSlice";
+import bookingSlice from "../features/bookingSlice";
 
 export const store = configureStore({
   reducer: {
     contacts: contactSlice,
+    bookings: bookingSlice,
   },
 });
 
