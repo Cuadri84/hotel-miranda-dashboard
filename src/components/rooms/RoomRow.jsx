@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { deleteRoom } from "../../features/roomsSlice";
+
 // Styled Components
 import {
   RoomNameContainer,
@@ -14,62 +18,69 @@ import {
 } from "./RoomRowStyled";
 import { Row, DropDown } from "../bookings/BookingRowStyled";
 
-export const RoomRow = (props) => {
+export const RoomRow = (room) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showOptions, setShowOptions] = useState(false);
 
   const goToSingleRoom = (id) => {
     navigate("/rooms/" + id);
   };
+
+  const deleteCurrentRoom = (e, id) => {
+    e.preventDefault();
+    dispatch(deleteRoom(id));
+  };
+
   return (
     <Row
       onClick={() => {
-        goToSingleRoom(props.room.room_number);
+        goToSingleRoom(room.room.room_number);
       }}
     >
       <td>
         <RoomNameContainer>
-          <img src={props.room.photo} alt="Room Img" />
+          <img src={room.room.photo} alt="Room Img" />
           <div>
-            <RoomNumber>Room Nr: {props.room.room_number}</RoomNumber>
-            <RoomId>#{props.room.id}</RoomId>
+            <RoomNumber>Room Nr: {room.room.room_number}</RoomNumber>
+            <RoomId>#{room.room.id}</RoomId>
           </div>
         </RoomNameContainer>
       </td>
       <DataContainer>
-        <RoomText>{props.room.bed_type}</RoomText>
+        <RoomText>{room.room.bed_type}</RoomText>
       </DataContainer>
       <DataContainer>
         <RoomText>
-          {props.room.room_facilities.map((facility, index) => (
+          {room.room.room_facilities.map((facility, index) => (
             <span key={index}>
               {/* Small logic to includes ",", "." and "&" in the right places of the displayed array. */}
-              {(index && index !== props.room.room_facilities.length - 1
+              {(index && index !== room.room.room_facilities.length - 1
                 ? ", "
                 : "") +
-                (index && index === props.room.room_facilities.length - 1
+                (index && index === room.room.room_facilities.length - 1
                   ? " & "
                   : "") +
                 facility +
-                (index === props.room.room_facilities.length - 1 ? "." : "")}
+                (index === room.room.room_facilities.length - 1 ? "." : "")}
             </span>
           ))}
         </RoomText>
       </DataContainer>
       <DataContainer>
         <RoomPrice>
-          ${props.room.room_rate}
+          ${room.room.room_rate}
           <span>/night</span>
         </RoomPrice>
       </DataContainer>
       <DataContainer>
         <RoomPrice>
           $
-          {props.room.discount === "Yes"
+          {room.room.discount === "Yes"
             ? (
-                props.room.room_rate -
-                (props.room.room_rate * props.room.discountPercent) / 100
+                room.room.room_rate -
+                (room.room.room_rate * room.room.discountPercent) / 100
               ).toFixed(2)
             : "-"}
           <span>/night</span>
@@ -78,11 +89,9 @@ export const RoomRow = (props) => {
       <td>
         <RoomStatus
           id="testingStatus"
-          status={
-            props.room.room_status === "Available" ? "#5AD07A" : "#E23428"
-          }
+          status={room.room.room_status === "Available" ? "#5AD07A" : "#E23428"}
         >
-          {props.room.room_status}
+          {room.room.room_status}
         </RoomStatus>
       </td>
       <DataContainerButton>
@@ -111,7 +120,14 @@ export const RoomRow = (props) => {
                 <button>Edit room</button>
               </li>
               <li>
-                <button>Delete room</button>
+                <button
+                  onClick={(e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    deleteCurrentRoom(e, room.room.id);
+                  }}
+                >
+                  Delete room
+                </button>
               </li>
             </ul>
           </DropDown>

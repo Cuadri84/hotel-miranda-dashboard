@@ -4,7 +4,12 @@ import { fetchData } from "./fetchData";
 export const getDataRooms = createAsyncThunk("contacts/fetchRooms", () => {
   return fetchData("Rooms");
 });
+
 export const getRoom = createAsyncThunk("room/GetRoomDetails", async (id) => {
+  return await id;
+});
+
+export const deleteRoom = createAsyncThunk("rooms/DeleteRooms", async (id) => {
   return await id;
 });
 
@@ -46,6 +51,11 @@ export const roomsSlice = createSlice({
         state.singleRoomStatus = "failed";
         console.error("Not possible to fetch the room");
       });
+    builder.addCase(deleteRoom.fulfilled, (state, action) => {
+      state.roomsList = state.roomsList.filter(
+        (room) => room.id !== action.payload
+      );
+    });
   },
 });
 
