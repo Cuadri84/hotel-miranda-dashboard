@@ -27,22 +27,52 @@ import { getDataRooms } from "../../features/roomsSlice";
 export const Rooms = () => {
   const dispatch = useDispatch();
   const { roomsList } = useTypedSelector((state) => state.rooms);
-  const [activeFilter, setActiveFilter] = useState("Room Nr.");
-
-  //para hacer el loader
   const { status } = useTypedSelector((state) => state.users);
+  const [rooms, setRooms] = useState(roomsList);
+  const [activeFilter, setActiveFilter] = useState("Room Nr.");
 
   useEffect(() => {
     dispatch(getDataRooms());
   }, []);
+
+  const getAllRooms = () => {
+    setRooms(roomsList);
+  };
+
+  const filterByType = (type) => {
+    setRooms(roomsList.filter((room) => room.room_status === type));
+  };
+
+  useEffect(() => {
+    const orderedRooms = [...roomsList];
+    switch (activeFilter) {
+      case "Room Nr.":
+        orderedRooms.sort((a, b) => a.room_number - b.room_number);
+        break;
+      case "Highest rate first":
+        orderedRooms.sort((a, b) => b.room_rate - a.room_rate);
+        break;
+      case "Lowest rate first":
+        orderedRooms.sort((a, b) => a.room_rate - b.room_rate);
+        break;
+      default:
+        break;
+    }
+    setRooms(orderedRooms);
+  }, [activeFilter, roomsList]);
+
   return (
     <>
       {" "}
       <TableActions>
         <TableFilters>
-          <FilterButton>All Rooms</FilterButton>
-          <FilterButton>Available Rooms</FilterButton>
-          <FilterButton>Booked Rooms</FilterButton>
+          <FilterButton onClick={getAllRooms}>All Rooms</FilterButton>
+          <FilterButton onClick={() => filterByType("Available")}>
+            Available Rooms
+          </FilterButton>
+          <FilterButton onClick={() => filterByType("Booked")}>
+            Booked Rooms
+          </FilterButton>
         </TableFilters>
         <TableButtons>
           <CreateButton>
@@ -51,12 +81,7 @@ export const Rooms = () => {
           <DropdownMenu
             setActiveFilter={setActiveFilter}
             type="white"
-            options={[
-              "Available",
-              "Booked",
-              "Highest rate first",
-              "Lowest rate first",
-            ]}
+            options={["Room Nr.", "Highest rate first", "Lowest rate first"]}
           ></DropdownMenu>
         </TableButtons>
       </TableActions>
@@ -77,7 +102,7 @@ export const Rooms = () => {
               </tr>
             </thead>
             <tbody>
-              {roomsList.map((rooms) => (
+              {rooms.map((rooms) => (
                 <RoomRow key={rooms.id} room={rooms} />
               ))}
             </tbody>
