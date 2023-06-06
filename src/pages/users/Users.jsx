@@ -34,8 +34,8 @@ export const Users = () => {
   const [activeFilter, setActiveFilter] = useState("Start date");
 
   useEffect(() => {
-    dispatch(getDataUsers());
-  }, []);
+    if (status === "idle") dispatch(getDataUsers());
+  }, [users, dispatch, status]);
 
   const getAllUsers = () => {
     setUsers(usersList);

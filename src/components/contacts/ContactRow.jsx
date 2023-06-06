@@ -22,7 +22,6 @@ export const ContactRow = (props) => {
         <p>{props.contact.message.body}</p>
       </DataContainer>
       <DataContainerButton>
-        <button className="green">Publish</button>
         <button className="red">Archive</button>
       </DataContainerButton>
     </Row>

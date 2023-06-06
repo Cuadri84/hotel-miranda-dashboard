@@ -47,7 +47,6 @@ const NewUser = () => {
 
   const handleSubmit = (e) => {
     dispatch(createNewUser(currentUser));
-    console.log(usersList);
     navigate("/users");
   };
   return (

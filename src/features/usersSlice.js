@@ -21,7 +21,7 @@ export const createNewUser = createAsyncThunk(
 
 const initialState = {
   usersList: [],
-  status: "loading",
+  status: "idle",
   singleUser: "",
   singleUserStatus: "loading",
 };
