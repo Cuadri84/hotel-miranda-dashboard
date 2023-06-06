@@ -2,10 +2,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { createNewBooking } from "../../features/bookingSlice";
+
 //Components
 import BookingForm from "../../components/bookings/BookingForm";
 
 export const NewBooking = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formTitle = "Please fill the form to create a new booking";
@@ -33,6 +38,7 @@ export const NewBooking = () => {
   };
 
   const handleSubmit = () => {
+    dispatch(createNewBooking(currentBooking));
     navigate("/bookings");
   };
   return (

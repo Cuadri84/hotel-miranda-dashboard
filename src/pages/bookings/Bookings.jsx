@@ -33,8 +33,8 @@ export const Bookings = () => {
   const [activeFilter, setActiveFilter] = useState("Order Date");
 
   useEffect(() => {
-    dispatch(getDataBookings());
-  }, []);
+    if (status === "idle") dispatch(getDataBookings());
+  }, [bookings, dispatch, status]);
 
   const getAllBookings = () => {
     setBookings(bookingsList);

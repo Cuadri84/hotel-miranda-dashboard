@@ -23,9 +23,16 @@ export const deleteBooking = createAsyncThunk(
   }
 );
 
+export const createNewBooking = createAsyncThunk(
+  "bookings/CreateBooking",
+  async (newBooking) => {
+    return await newBooking;
+  }
+);
+
 const initialState = {
   bookingsList: [],
-  status: "loading",
+  status: "idle",
   singleBooking: null,
   singleBookingStatus: "loading",
 };
@@ -65,6 +72,9 @@ export const bookingSlice = createSlice({
       state.bookingsList = state.bookingsList.filter(
         (booking) => booking.bookingID !== action.payload
       );
+    });
+    builder.addCase(createNewBooking.fulfilled, (state, action) => {
+      state.bookingsList = [...state.bookingsList, action.payload];
     });
   },
 });

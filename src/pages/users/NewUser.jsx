@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 // Redux
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../features/usersSlice";
-import { useTypedSelector } from "../../store/store";
 
 // Components
 import UserForm from "../../components/users/UserForm";
