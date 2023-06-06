@@ -40,6 +40,7 @@ export const Users = () => {
   const getAllUsers = () => {
     setUsers(usersList);
   };
+
   const filterByType = (type) => {
     setUsers(usersList.filter((user) => user.state === type));
   };
