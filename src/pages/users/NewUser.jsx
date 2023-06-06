@@ -13,7 +13,6 @@ import UserForm from "../../components/users/UserForm";
 const NewUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { usersList } = useTypedSelector((state) => state.users);
 
   const formTitle = "Please fill the form to create a new user";
   const [currentUser, setCurrentUser] = useState({
