@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
 
-export const getDataRooms = createAsyncThunk("contacts/fetchRooms", () => {
+export const getDataRooms = createAsyncThunk("rooms/fetchRooms", () => {
   return addDelay(fetchData("Rooms"), 200);
 });
 
@@ -14,15 +14,22 @@ export const deleteRoom = createAsyncThunk("rooms/DeleteRooms", async (id) => {
   return await id;
 });
 
+export const createNewRoom = createAsyncThunk(
+  "rooms/CreateRoom",
+  async (newRoom) => {
+    return await newRoom;
+  }
+);
+
 const initialState = {
   roomsList: [],
-  status: "loading",
-  singleRoom: "ramon",
+  status: "idle",
+  singleRoom: "",
   singleRoomStatus: "loading",
 };
 
 export const roomsSlice = createSlice({
-  name: "contacts",
+  name: "rooms",
   initialState,
   extraReducers: (builder) => {
     builder
@@ -35,7 +42,7 @@ export const roomsSlice = createSlice({
       })
       .addCase(getDataRooms.rejected, (state) => {
         state.status = "failed";
-        console.error("Not possible to fetch the contacts");
+        console.error("Not possible to fetch the rooms");
       });
     builder
       .addCase(getRoom.pending, (state) => {
@@ -56,6 +63,9 @@ export const roomsSlice = createSlice({
       state.roomsList = state.roomsList.filter(
         (room) => room.id !== action.payload
       );
+    });
+    builder.addCase(createNewRoom.fulfilled, (state, action) => {
+      state.roomsList = [...state.roomsList, action.payload];
     });
   },
 });

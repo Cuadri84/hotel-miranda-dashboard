@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
+import { getDataRooms } from "../../features/roomsSlice";
 import { useTypedSelector } from "../../store/store";
 
 // Styled Components
@@ -22,18 +23,17 @@ import { DropdownMenu } from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
 import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { RoomRow } from "../../components/rooms/RoomRow";
-import { getDataRooms } from "../../features/roomsSlice";
 
 export const Rooms = () => {
   const dispatch = useDispatch();
   const { roomsList } = useTypedSelector((state) => state.rooms);
-  const { status } = useTypedSelector((state) => state.users);
+  const { status } = useTypedSelector((state) => state.rooms);
   const [rooms, setRooms] = useState(roomsList);
   const [activeFilter, setActiveFilter] = useState("Room Nr.");
 
   useEffect(() => {
-    dispatch(getDataRooms());
-  }, []);
+    if (status === "idle") dispatch(getDataRooms());
+  }, [rooms, dispatch, status]);
 
   const getAllRooms = () => {
     setRooms(roomsList);

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
 
-export const getDataUsers = createAsyncThunk("contacts/fetchUsers", () => {
+export const getDataUsers = createAsyncThunk("users/fetchUsers", () => {
   return addDelay(fetchData("Users"), 200);
 });
 export const getUser = createAsyncThunk("user/GetUserDetails", async (id) => {
@@ -40,7 +40,7 @@ export const usersSlice = createSlice({
       })
       .addCase(getDataUsers.rejected, (state) => {
         state.status = "failed";
-        console.error("Not possible to fetch the contacts");
+        console.error("Not possible to fetch the users");
       });
     builder
       .addCase(getUser.pending, (state) => {

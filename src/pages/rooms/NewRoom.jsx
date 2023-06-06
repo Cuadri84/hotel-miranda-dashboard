@@ -2,11 +2,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { createNewRoom } from "../../features/roomsSlice";
+
 // Components
 import RoomForm from "../../components/rooms/RoomForm";
 
+import { useTypedSelector } from "../../store/store";
+
 const NewRoom = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { status } = useTypedSelector((state) => state.users);
 
   const formTitle = "Please fill the form to create a new room";
   const [currentRoom, setCurrentRoom] = useState({
@@ -52,6 +61,7 @@ const NewRoom = () => {
   };
 
   const handleSubmit = () => {
+    dispatch(createNewRoom(currentRoom));
     navigate("/rooms");
   };
   return (
