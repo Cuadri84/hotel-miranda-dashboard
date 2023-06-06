@@ -12,6 +12,13 @@ export const deleteUser = createAsyncThunk("users/DeleteUser", async (id) => {
   return await id;
 });
 
+export const createNewUser = createAsyncThunk(
+  "users/CreateUser",
+  async (newUser) => {
+    return await newUser;
+  }
+);
+
 const initialState = {
   usersList: [],
   status: "loading",
@@ -54,6 +61,9 @@ export const usersSlice = createSlice({
       state.usersList = state.usersList.filter(
         (user) => user.id !== action.payload
       );
+    });
+    builder.addCase(createNewUser.fulfilled, (state, action) => {
+      state.usersList = [...state.usersList, action.payload];
     });
   },
 });

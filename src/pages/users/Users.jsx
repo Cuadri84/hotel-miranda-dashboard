@@ -15,6 +15,7 @@ import {
   TableFilters,
   FilterButton,
   TableButtons,
+  InputText,
 } from "../../components/styled/Tables";
 
 //Components
@@ -27,24 +28,80 @@ import { UserRow } from "../../components/users/UserRow";
 export const Users = () => {
   const dispatch = useDispatch();
   const { usersList } = useTypedSelector((state) => state.users);
-
-  //para hacer el loader
   const { status } = useTypedSelector((state) => state.users);
-
+  const [query, setQuery] = useState("");
+  const [users, setUsers] = useState(usersList);
   const [activeFilter, setActiveFilter] = useState("Start date");
 
   useEffect(() => {
     dispatch(getDataUsers());
   }, []);
 
+  const getAllUsers = () => {
+    setUsers(usersList);
+  };
+  const filterByType = (type) => {
+    setUsers(usersList.filter((user) => user.state === type));
+  };
+
+  useEffect(() => {
+    setUsers(
+      usersList.filter((user) => user.name.toLowerCase().includes(query))
+    );
+  }, [query, usersList]);
+
+  useEffect(() => {
+    const orderedUsers = [...usersList];
+    switch (activeFilter) {
+      case "Start date":
+        orderedUsers.sort((a, b) => {
+          let dateA = a.date;
+          let dateB = b.date;
+          if (dateB.split("/").join() > dateA.split("/").join()) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+        break;
+      case "Name":
+        orderedUsers.sort((a, b) => {
+          const nameA = a.name.toUpperCase().replace(/\s/g, "");
+          const nameB = b.name.toUpperCase().replace(/\s/g, "");
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      default:
+        break;
+    }
+    setUsers(orderedUsers);
+  }, [activeFilter, usersList]);
+
   return (
     <>
       <TableActions>
         <TableFilters>
-          <FilterButton>All Employees</FilterButton>
-          <FilterButton>Active Employees</FilterButton>
-          <FilterButton>Inactive Employees</FilterButton>
+          <FilterButton onClick={getAllUsers}>All Employees</FilterButton>
+          <FilterButton onClick={() => filterByType("ACTIVE")}>
+            Active Employees
+          </FilterButton>
+          <FilterButton onClick={() => filterByType("INACTIVE")}>
+            Inactive Employees
+          </FilterButton>
         </TableFilters>
+
+        <InputText
+          placeholder="Search Employee"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        ></InputText>
+
         <TableButtons>
           <CreateButton>
             <NavLink to="/newUser">+ New User</NavLink>
@@ -70,7 +127,7 @@ export const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {usersList.map((user) => (
+              {users.map((user) => (
                 <UserRow key={user.id} user={user} />
               ))}
             </tbody>

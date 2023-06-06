@@ -52,6 +52,14 @@ const FilterButton = styled.button`
     outline: none;
   }
 `;
+const InputText = styled.input`
+  border-color: #135846;
+  border-radius: 12px;
+  width: 150px;
+  height: 40px;
+  margin-left: 15px;
+  text-align: center;
+`;
 
 export {
   Table,
@@ -60,4 +68,5 @@ export {
   TableFilters,
   FilterButton,
   TableButtons,
+  InputText,
 };

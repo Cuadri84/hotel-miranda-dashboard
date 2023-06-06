@@ -2,11 +2,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { createNewUser } from "../../features/usersSlice";
+import { useTypedSelector } from "../../store/store";
+
 // Components
 import UserForm from "../../components/users/UserForm";
 
 const NewUser = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { usersList } = useTypedSelector((state) => state.users);
 
   const formTitle = "Please fill the form to create a new user";
   const [currentUser, setCurrentUser] = useState({
@@ -38,7 +45,9 @@ const NewUser = () => {
     navigate("/users");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    dispatch(createNewUser(currentUser));
+    console.log(usersList);
     navigate("/users");
   };
   return (
