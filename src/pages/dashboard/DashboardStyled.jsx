@@ -92,6 +92,7 @@ const ContactSwiperContainer = styled.div`
   box-shadow: 0px 4px 4px #00000005;
   border-radius: 2rem;
   overflow: hidden;
+  width: 1830px;
   p {
     margin: 3rem 0 0 3rem;
     font-family: "Poppins";
@@ -100,7 +101,7 @@ const ContactSwiperContainer = styled.div`
     color: #393939;
   }
   .swiper {
-    width: 96%;
+    width: 100%;
     .swiper-button-prev,
     .swiper-button-next {
       background-color: #135846;

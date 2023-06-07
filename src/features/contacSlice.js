@@ -11,7 +11,7 @@ export const getDataContacts = createAsyncThunk(
 
 const initialState = {
   contactsList: [],
-  status: "loading",
+  status: "idle",
 };
 
 export const conctactSlice = createSlice({
