@@ -16,6 +16,7 @@ import { NewBooking } from "./pages/bookings/NewBooking";
 import NewUser from "./pages/users/NewUser";
 import NewRoom from "./pages/rooms/NewRoom";
 import { EditUser } from "./pages/users/EditUser";
+import { EditBooking } from "./pages/bookings/EditBooking";
 
 function App() {
   const authReady = window.localStorage.getItem("auth");
@@ -40,6 +41,7 @@ function App() {
             <Route path="*" element={<ProtectRoute authReady={authReady} />}>
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:bookingId" element={<SingleBooking />} />
+              <Route path="editBooking/:bookingId" element={<EditBooking />} />
               <Route path="newBooking" element={<NewBooking />} />
               <Route path="rooms" element={<Rooms />} />
               <Route path="rooms/:roomId" element={<SingleRoom />} />

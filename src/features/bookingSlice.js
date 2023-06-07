@@ -30,6 +30,13 @@ export const createNewBooking = createAsyncThunk(
   }
 );
 
+export const editBooking = createAsyncThunk(
+  "bookings/EditBooking",
+  async (idBooking) => {
+    return await idBooking;
+  }
+);
+
 const initialState = {
   bookingsList: [],
   status: "idle",
@@ -75,6 +82,14 @@ export const bookingSlice = createSlice({
     });
     builder.addCase(createNewBooking.fulfilled, (state, action) => {
       state.bookingsList = [...state.bookingsList, action.payload];
+    });
+    builder.addCase(editBooking.fulfilled, (state, action) => {
+      state.bookingsList = state.bookingsList.map((booking) => {
+        return booking.bookingID === action.payload.bookingID
+          ? action.payload
+          : booking;
+      });
+      state.singleBooking = null;
     });
   },
 });

@@ -18,20 +18,25 @@ import {
   Status,
 } from "../../components/bookings/BookingRowStyled";
 
+//components
+import { Loader } from "../../components/styled/Loader";
+
 export const SingleBooking = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { bookingId } = params;
   const { singleBooking } = useTypedSelector((state) => state.bookings);
   const [currentBooking, setCurrentBooking] = useState(singleBooking);
+  //sometimes bug dont show the single booking: coment old the guest container antry again and it works
 
   useEffect(() => {
     dispatch(getBooking(Number(bookingId)));
-
     setCurrentBooking(singleBooking);
   }, [singleBooking, dispatch, bookingId]);
 
-  return (
+  return !currentBooking ? (
+    <Loader />
+  ) : (
     <Container>
       <Subcontainer>
         <GuestContainer>

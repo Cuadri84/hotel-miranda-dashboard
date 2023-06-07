@@ -34,6 +34,11 @@ export const BookingRow = (booking) => {
     dispatch(deleteBooking(bookingID));
   };
 
+  const editSingleBooking = (e, bookingID) => {
+    e.preventDefault();
+    navigate("/editBooking/" + bookingID);
+  };
+
   return (
     <Row
       onClick={() => {
@@ -88,7 +93,14 @@ export const BookingRow = (booking) => {
           <DropDown>
             <ul>
               <li>
-                <button>Edit booking</button>
+                <button
+                  onClick={(e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    editSingleBooking(e, booking.booking.bookingID);
+                  }}
+                >
+                  Edit booking
+                </button>
               </li>
               <li>
                 <button

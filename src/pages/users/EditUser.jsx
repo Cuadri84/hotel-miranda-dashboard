@@ -17,7 +17,6 @@ export const EditUser = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  console.log(id);
   const { singleUser } = useTypedSelector((state) => state.users);
   const [currentUser, setCurrentUser] = useState(null);
   const formTitle =
@@ -25,7 +24,6 @@ export const EditUser = () => {
 
   useEffect(() => {
     dispatch(getUser(Number(id)));
-
     setCurrentUser(singleUser);
   }, [singleUser, dispatch, id]);
 
@@ -46,7 +44,7 @@ export const EditUser = () => {
     navigate("/users");
   };
 
-  return !currentUser ? (
+  return currentUser === null ? (
     <Loader />
   ) : (
     <UserForm
