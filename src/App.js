@@ -17,6 +17,7 @@ import NewUser from "./pages/users/NewUser";
 import NewRoom from "./pages/rooms/NewRoom";
 import { EditUser } from "./pages/users/EditUser";
 import { EditBooking } from "./pages/bookings/EditBooking";
+import { EditRoom } from "./pages/rooms/EditRoom";
 
 function App() {
   const authReady = window.localStorage.getItem("auth");
@@ -45,6 +46,7 @@ function App() {
               <Route path="newBooking" element={<NewBooking />} />
               <Route path="rooms" element={<Rooms />} />
               <Route path="rooms/:roomId" element={<SingleRoom />} />
+              <Route path="editRoom/:roomId" element={<EditRoom />} />
               <Route path="newRoom" element={<NewRoom />} />
               <Route path="contact" element={<Contact />} />
               <Route path="users" element={<Users />} />

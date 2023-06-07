@@ -34,7 +34,6 @@ export const SingleRoom = () => {
     <Container>
       <Subcontainer>
         <GuestContainer>
-          {/* este div comentarlo y actualizar y entonces funciona porque a veces falla el redux */}
           <div>
             <img src={currentRoom.photo} alt="User pic" />
             <GuestName>{currentRoom.bed_type}</GuestName>

@@ -33,6 +33,11 @@ export const RoomRow = (room) => {
     dispatch(deleteRoom(id));
   };
 
+  const editSingleRoom = (e, id) => {
+    e.preventDefault();
+    navigate("/editRoom/" + id);
+  };
+
   return (
     <Row
       onClick={() => {
@@ -114,10 +119,14 @@ export const RoomRow = (room) => {
           <DropDown>
             <ul>
               <li>
-                <button>Room details</button>
-              </li>
-              <li>
-                <button>Edit room</button>
+                <button
+                  onClick={(e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    editSingleRoom(e, room.room.room_number);
+                  }}
+                >
+                  Edit room
+                </button>
               </li>
               <li>
                 <button

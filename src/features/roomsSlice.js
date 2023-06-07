@@ -14,6 +14,10 @@ export const deleteRoom = createAsyncThunk("rooms/DeleteRooms", async (id) => {
   return await id;
 });
 
+export const editRoom = createAsyncThunk("rooms/EditRoom", async (id) => {
+  return await id;
+});
+
 export const createNewRoom = createAsyncThunk(
   "rooms/CreateRoom",
   async (newRoom) => {
@@ -66,6 +70,12 @@ export const roomsSlice = createSlice({
     });
     builder.addCase(createNewRoom.fulfilled, (state, action) => {
       state.roomsList = [...state.roomsList, action.payload];
+    });
+    builder.addCase(editRoom.fulfilled, (state, action) => {
+      state.roomsList = state.roomsList.map((room) => {
+        return room.id === action.payload.id ? action.payload : room;
+      });
+      state.singleRoom = null;
     });
   },
 });
