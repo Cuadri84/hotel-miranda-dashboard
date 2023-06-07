@@ -33,6 +33,11 @@ export const UserRow = (user) => {
     dispatch(deleteUser(id));
   };
 
+  const editSingleUser = (e, id) => {
+    e.preventDefault();
+    navigate("/editUser/" + id);
+  };
+
   return (
     <Row
       onClick={() => {
@@ -103,7 +108,14 @@ export const UserRow = (user) => {
           <DropDown>
             <ul>
               <li>
-                <button>Edit user</button>
+                <button
+                  onClick={(e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    editSingleUser(e, user.user.id);
+                  }}
+                >
+                  Edit user
+                </button>
               </li>
               <li>
                 <button

@@ -174,11 +174,10 @@ const Status = styled.p`
 const DropDown = styled.div`
   display: block;
   position: absolute;
-  background-color: white;
+  background-color: transparent;
   color: black;
-
-  top: 60%;
-  left: 20%;
+  top: 50px;
+  left: -5px;
   z-index: 2;
   ul {
     list-style: none;
@@ -192,6 +191,7 @@ const DropDown = styled.div`
         height: fit-content;
         border-radius: 15px;
         padding: 10px 15px;
+        background-color: white;
         display: block;
         border: 1px solid rgba(38, 166, 91, 1);
         color: black;

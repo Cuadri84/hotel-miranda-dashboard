@@ -15,6 +15,7 @@ import { ProtectRoute } from "./components/ProtectedRoute";
 import { NewBooking } from "./pages/bookings/NewBooking";
 import NewUser from "./pages/users/NewUser";
 import NewRoom from "./pages/rooms/NewRoom";
+import { EditUser } from "./pages/users/EditUser";
 
 function App() {
   const authReady = window.localStorage.getItem("auth");
@@ -46,6 +47,7 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="users" element={<Users />} />
               <Route path="users/:userId" element={<SingleUser />} />
+              <Route path="editUser/:id" element={<EditUser />} />
               <Route path="newUser" element={<NewUser />} />
               <Route path="login" element={<Login />} />
             </Route>

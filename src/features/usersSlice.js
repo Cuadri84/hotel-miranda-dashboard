@@ -11,6 +11,9 @@ export const getUser = createAsyncThunk("user/GetUserDetails", async (id) => {
 export const deleteUser = createAsyncThunk("users/DeleteUser", async (id) => {
   return await id;
 });
+export const editUser = createAsyncThunk("users/EditUser", async (id) => {
+  return await id;
+});
 
 export const createNewUser = createAsyncThunk(
   "users/CreateUser",
@@ -64,6 +67,12 @@ export const usersSlice = createSlice({
     });
     builder.addCase(createNewUser.fulfilled, (state, action) => {
       state.usersList = [...state.usersList, action.payload];
+    });
+    builder.addCase(editUser.fulfilled, (state, action) => {
+      state.usersList = state.usersList.map((user) => {
+        return user.id === action.payload.id ? action.payload : user;
+      });
+      state.singleUser = null;
     });
   },
 });
