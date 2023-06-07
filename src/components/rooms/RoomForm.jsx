@@ -15,7 +15,6 @@ import {
   InputCancel,
 } from "../../pages/login/LoginStyled";
 
-// This form gets used from editRoom and newRoom. If used for editing a room it will be preloaded with the data from the currentRoom to edit
 const RoomForm = ({
   currentRoom,
   handleInput,
@@ -44,7 +43,12 @@ const RoomForm = ({
     <>
       <LoginContainer>
         <LoginCard
-          style={{ height: "fit-content", margin: "2rem 0", width: "30%" }}
+          style={{
+            height: "fit-content",
+            margin: "2rem 0",
+            width: "50%",
+            border: "1px solid rgba(38, 166, 91, 1)",
+          }}
         >
           <FormTitle>{formTitle}</FormTitle>
           <form
@@ -169,7 +173,8 @@ const RoomForm = ({
               </RadioDescription>
               <Input
                 required
-                type="text"
+                type="number"
+                min={0}
                 className="input-user"
                 name="room_number"
                 value={currentRoom.room_number}
@@ -222,6 +227,7 @@ const RoomForm = ({
               <Input
                 required
                 type="number"
+                min={0}
                 className="input-user"
                 placeholder="Price per night"
                 name="room_rate"
@@ -237,6 +243,7 @@ const RoomForm = ({
                 <Input
                   required
                   type="number"
+                  min={0}
                   className="input-user"
                   name="discountPercent"
                   value={currentRoom.discountPercent}

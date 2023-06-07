@@ -9,13 +9,9 @@ import { createNewRoom } from "../../features/roomsSlice";
 // Components
 import RoomForm from "../../components/rooms/RoomForm";
 
-import { useTypedSelector } from "../../store/store";
-
 const NewRoom = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { status } = useTypedSelector((state) => state.users);
 
   const formTitle = "Please fill the form to create a new room";
   const [currentRoom, setCurrentRoom] = useState({

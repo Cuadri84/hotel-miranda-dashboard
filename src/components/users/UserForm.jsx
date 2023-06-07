@@ -16,7 +16,6 @@ import {
 } from "../../pages/login/LoginStyled";
 import { DropdownMenu } from "../../components/styled/DropDownMenu";
 
-// This form gets used from editBooking and newBooking. If used for editing a booking it will be preloaded with the data from the currentUser to edit
 const UserForm = ({
   currentUser,
   handleInput,
@@ -28,7 +27,12 @@ const UserForm = ({
     <>
       <LoginContainer>
         <LoginCard
-          style={{ height: "fit-content", margin: "2rem 0", width: "30%" }}
+          style={{
+            height: "fit-content",
+            margin: "2rem 0",
+            width: "50%",
+            border: "1px solid rgba(38, 166, 91, 1)",
+          }}
         >
           <FormTitle style={{ textDecoration: "underline" }}>
             {formTitle}
@@ -86,7 +90,8 @@ const UserForm = ({
               </RadioDescription>
               <Input
                 required
-                type="text"
+                type="number"
+                min={0}
                 className="input-user"
                 value={currentUser.phone}
                 placeholder="Phone Number"

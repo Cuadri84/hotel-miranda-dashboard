@@ -14,8 +14,6 @@ import {
   InputSubmit,
   InputCancel,
 } from "../../pages/login/LoginStyled";
-
-// This form gets used from editBooking and newBooking. If used for editing a booking it will be preloaded with the data from the currentBooking to edit
 const BookingForm = ({
   currentBooking,
   handleInput,
@@ -27,7 +25,12 @@ const BookingForm = ({
     <>
       <LoginContainer>
         <LoginCard
-          style={{ height: "fit-content", margin: "2rem 0", width: "30%" }}
+          style={{
+            height: "fit-content",
+            margin: "2rem 0",
+            width: "50%",
+            border: "1px solid rgba(38, 166, 91, 1)",
+          }}
         >
           <FormTitle style={{ textDecoration: "underline" }}>
             {formTitle}
@@ -87,6 +90,7 @@ const BookingForm = ({
                 required
                 style={{ color: "#777777" }}
                 type="date"
+                min={currentBooking.checkIn}
                 className="input-user"
                 placeholder="dd-mm-yyyy"
                 name="checkOut"

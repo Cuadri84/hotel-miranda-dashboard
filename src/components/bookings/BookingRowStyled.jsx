@@ -174,7 +174,9 @@ const Status = styled.p`
 const DropDown = styled.div`
   display: block;
   position: absolute;
-  background-color: #777777;
+  background-color: white;
+  color: black;
+
   top: 60%;
   left: 20%;
   z-index: 2;
@@ -188,10 +190,11 @@ const DropDown = styled.div`
         margin: 0;
         width: 100%;
         height: fit-content;
+        border-radius: 15px;
         padding: 10px 15px;
         display: block;
-        border: 1px solid #d4d4d4;
-        color: white;
+        border: 1px solid rgba(38, 166, 91, 1);
+        color: black;
         font-family: var(--font-poppins);
         transition: all 0.3s;
         &:hover {
