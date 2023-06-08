@@ -6,7 +6,17 @@ import { useNavigate } from "react-router";
 import { Row } from "../bookings/BookingRowStyled";
 import { DataContainer, DataContainerButton } from "./ContactRowStyled";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { archiveContact } from "../../features/contacSlice";
+
 export const ContactRow = (props) => {
+  const dispatch = useDispatch();
+
+  const handleContact = (id) => {
+    dispatch(archiveContact(id));
+  };
+
   return (
     <Row key={props.contact.id}>
       <DataContainer className="data-container__text">
@@ -22,7 +32,25 @@ export const ContactRow = (props) => {
         <p>{props.contact.message.body}</p>
       </DataContainer>
       <DataContainerButton>
-        <button className="red">Archive</button>
+        {props.contact.archived ? (
+          <button
+            className="green"
+            onClick={() => {
+              return handleContact(props.contact.id);
+            }}
+          >
+            restore
+          </button>
+        ) : (
+          <button
+            className="red"
+            onClick={() => {
+              return handleContact(props.contact.id);
+            }}
+          >
+            Archive
+          </button>
+        )}
       </DataContainerButton>
     </Row>
   );

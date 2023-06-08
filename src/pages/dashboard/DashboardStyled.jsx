@@ -107,7 +107,7 @@ const ContactSwiperContainer = styled.div`
       background-color: #135846;
       color: white;
       height: 5.6rem;
-      width: 5.6rem;
+      width: 5.2rem;
       border: 1px solid #ffffff;
       border-radius: 12px;
       & .swiper-button-disabled {

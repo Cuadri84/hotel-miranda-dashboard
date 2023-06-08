@@ -9,6 +9,13 @@ export const getDataContacts = createAsyncThunk(
   }
 );
 
+export const archiveContact = createAsyncThunk(
+  "contacts/archivedContact",
+  async (id) => {
+    return await id;
+  }
+);
+
 const initialState = {
   contactsList: [],
   status: "idle",
@@ -30,6 +37,12 @@ export const conctactSlice = createSlice({
         state.status = "failed";
         console.error("Not possible to fetch the contacts");
       });
+    builder.addCase(archiveContact.fulfilled, (state, action) => {
+      const index = state.contactsList.findIndex(
+        (contact) => contact.id === action.payload
+      );
+      state.contactsList[index].archived = !state.contactsList[index].archived;
+    });
   },
 });
 

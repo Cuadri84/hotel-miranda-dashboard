@@ -26,15 +26,51 @@ import { Loader } from "../../components/styled/Loader";
 export const Contact = () => {
   const dispatch = useDispatch();
   const { contactsList } = useTypedSelector((state) => state.contacts);
-
-  //para hacer el loader
   const { status } = useTypedSelector((state) => state.contacts);
+  const [contactsTypefilter, setContactsTypeFilter] = useState();
+
+  const contacts = contactsList.filter(
+    (contact) => !contactsTypefilter || contact.archived === contactsTypefilter
+  );
+
+  useEffect(() => {
+    if (status === "idle") dispatch(getDataContacts());
+  }, [contacts, dispatch, status]);
 
   const [activeFilter, setActiveFilter] = useState("Date");
 
-  useEffect(() => {
-    dispatch(getDataContacts());
-  }, []);
+  // useEffect(() => {
+  //   const orderedContacts = [...contactsList];
+  //   switch (activeFilter) {
+  //     case "Date":
+  //       orderedContacts.sort((a, b) => {
+  //         let dateA = a.date;
+  //         let dateB = b.date;
+  //         if (dateB.split("-").join() < dateA.split("-").join()) {
+  //           return -1;
+  //         } else {
+  //           return 1;
+  //         }
+  //       });
+  //       break;
+  //     case "User":
+  //       orderedContacts.sort((a, b) => {
+  //         const nameA = a.user.name.toUpperCase().replace(/\s/g, "");
+  //         const nameB = b.user.name.toUpperCase().replace(/\s/g, "");
+  //         if (nameA < nameB) {
+  //           return -1;
+  //         }
+  //         if (nameA > nameB) {
+  //           return 1;
+  //         }
+  //         return 0;
+  //       });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   setContacts(orderedContacts);
+  // }, [activeFilter, contactsList]);
 
   return (
     <>
@@ -44,8 +80,12 @@ export const Contact = () => {
       </ContactSwiperContainer>
       <TableActions>
         <TableFilters>
-          <FilterButton>All Customer Reviews</FilterButton>
-          <FilterButton>Archived</FilterButton>
+          <FilterButton onClick={() => setContactsTypeFilter("")}>
+            All Customer Reviews
+          </FilterButton>
+          <FilterButton onClick={() => setContactsTypeFilter(true)}>
+            Archived
+          </FilterButton>
         </TableFilters>
         <TableButtons>
           <DropdownMenu
@@ -70,7 +110,7 @@ export const Contact = () => {
               </tr>
             </thead>
             <tbody className="task-container">
-              {contactsList.map((contact) => (
+              {contacts.map((contact) => (
                 <ContactRow key={contact.id} contact={contact} />
               ))}
             </tbody>
