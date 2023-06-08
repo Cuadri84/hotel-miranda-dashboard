@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Swiper Components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,11 +18,8 @@ import { useTypedSelector } from "../../store/store";
 export const ContactSwiper = () => {
   const dispatch = useDispatch();
   const { contactsList } = useTypedSelector((state) => state.contacts);
-  const [contactsTypefilter, setContactsTypeFilter] = useState();
   const { status } = useTypedSelector((state) => state.contacts);
-  const contacts = contactsList.filter(
-    (contact) => !contactsTypefilter || contact.archived === contactsTypefilter
-  );
+  const contacts = contactsList.filter((contact) => contact.archived === false);
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataContacts());
