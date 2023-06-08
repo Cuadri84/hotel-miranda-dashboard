@@ -1,6 +1,5 @@
 // React & Router
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
 
 // Styled Components
 import { Row } from "../bookings/BookingRowStyled";
