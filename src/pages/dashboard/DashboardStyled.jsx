@@ -149,7 +149,7 @@ const ContactSwiperContainer = styled.div`
       color: #4e4e4e;
       margin: 3rem;
     }
-    .reviewUser {
+    .contactUser {
       display: flex;
       flex-direction: row;
       text-align: left;

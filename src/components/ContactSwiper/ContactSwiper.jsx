@@ -39,7 +39,7 @@ export const ContactSwiper = () => {
       {contacts.map((contact) => (
         <SwiperSlide key={contact.id}>
           <p>{contact.message.body}</p>
-          <div className="reviewUser">
+          <div className="contactUser">
             {" "}
             <div>
               <h2>{contact.user.name}</h2>
