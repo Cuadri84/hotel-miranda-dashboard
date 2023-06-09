@@ -34,7 +34,7 @@ export const Bookings = () => {
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataBookings());
-  }, [bookings, dispatch, status]);
+  }, [bookingsList, dispatch, status]);
 
   const getAllBookings = () => {
     setBookings(bookingsList);

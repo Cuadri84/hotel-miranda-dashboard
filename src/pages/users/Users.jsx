@@ -35,7 +35,7 @@ export const Users = () => {
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataUsers());
-  }, [users, dispatch, status]);
+  }, [usersList, dispatch, status]);
 
   const getAllUsers = () => {
     setUsers(usersList);

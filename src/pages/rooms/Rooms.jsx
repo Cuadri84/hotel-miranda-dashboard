@@ -33,7 +33,7 @@ export const Rooms = () => {
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataRooms());
-  }, [rooms, dispatch, status]);
+  }, [roomsList, dispatch, status]);
 
   const getAllRooms = () => {
     setRooms(roomsList);
