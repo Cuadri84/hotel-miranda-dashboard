@@ -31,7 +31,7 @@ export const Contact = () => {
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataContacts());
-  }, [contacts, dispatch, status]);
+  }, [contactsList, dispatch, status]);
 
   const getAllContacts = () => {
     setContacts(contactsList);
