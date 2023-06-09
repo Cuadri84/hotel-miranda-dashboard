@@ -27,50 +27,54 @@ export const Contact = () => {
   const dispatch = useDispatch();
   const { contactsList } = useTypedSelector((state) => state.contacts);
   const { status } = useTypedSelector((state) => state.contacts);
-  const [contactsTypefilter, setContactsTypeFilter] = useState();
-
-  const contacts = contactsList.filter(
-    (contact) => !contactsTypefilter || contact.archived === contactsTypefilter
-  );
+  const [contacts, setContacts] = useState(contactsList);
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataContacts());
   }, [contacts, dispatch, status]);
 
+  const getAllContacts = () => {
+    setContacts(contactsList);
+  };
+
+  const filterByType = (type) => {
+    setContacts(contactsList.filter((contact) => contact.archived === type));
+  };
+
   const [activeFilter, setActiveFilter] = useState("Date");
 
-  // useEffect(() => {
-  //   const orderedContacts = [...contactsList];
-  //   switch (activeFilter) {
-  //     case "Date":
-  //       orderedContacts.sort((a, b) => {
-  //         let dateA = a.date;
-  //         let dateB = b.date;
-  //         if (dateB.split("-").join() < dateA.split("-").join()) {
-  //           return -1;
-  //         } else {
-  //           return 1;
-  //         }
-  //       });
-  //       break;
-  //     case "User":
-  //       orderedContacts.sort((a, b) => {
-  //         const nameA = a.user.name.toUpperCase().replace(/\s/g, "");
-  //         const nameB = b.user.name.toUpperCase().replace(/\s/g, "");
-  //         if (nameA < nameB) {
-  //           return -1;
-  //         }
-  //         if (nameA > nameB) {
-  //           return 1;
-  //         }
-  //         return 0;
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   setContacts(orderedContacts);
-  // }, [activeFilter, contactsList]);
+  useEffect(() => {
+    const orderedContacts = [...contactsList];
+    switch (activeFilter) {
+      case "Date":
+        orderedContacts.sort((a, b) => {
+          let dateA = a.date;
+          let dateB = b.date;
+          if (dateB.split("-").join() < dateA.split("-").join()) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+        break;
+      case "User":
+        orderedContacts.sort((a, b) => {
+          const nameA = a.user.name.toUpperCase().replace(/\s/g, "");
+          const nameB = b.user.name.toUpperCase().replace(/\s/g, "");
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      default:
+        break;
+    }
+    setContacts(orderedContacts);
+  }, [activeFilter, contactsList]);
 
   return (
     <>
@@ -80,10 +84,10 @@ export const Contact = () => {
       </ContactSwiperContainer>
       <TableActions>
         <TableFilters>
-          <FilterButton onClick={() => setContactsTypeFilter("")}>
+          <FilterButton onClick={() => getAllContacts()}>
             All Customer Reviews
           </FilterButton>
-          <FilterButton onClick={() => setContactsTypeFilter(true)}>
+          <FilterButton onClick={() => filterByType(true)}>
             Archived
           </FilterButton>
         </TableFilters>
