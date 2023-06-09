@@ -1,6 +1,9 @@
 // React & Router
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
+
+// React Context
+import { useLogout } from "../../hooks/useLogOut";
 
 // Styled Components
 import {
@@ -16,8 +19,13 @@ import Logo from "../../assets/sidebar/logo.png";
 
 const TopBar = () => {
   let location = useLocation();
-  const navigate = useNavigate();
+  const { logout } = useLogout();
   const [title, setTitle] = useState("");
+
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    logout();
+  };
 
   useEffect(() => {
     switch (location.pathname) {
@@ -40,11 +48,6 @@ const TopBar = () => {
         setTitle("");
     }
   }, [location]);
-
-  const logOut = () => {
-    localStorage.removeItem("auth");
-    navigate("/login");
-  };
 
   return (
     <TopbarContainer>

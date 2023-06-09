@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// React Context
+import { useLogin } from "../../hooks/useLogin";
+
 // Styled Components
 import {
   LoginContainer,
@@ -10,30 +13,26 @@ import {
   InputContainer,
   Input,
   LoginButton,
-  Description,
 } from "./LoginStyled";
 
 import Logo from "../../assets/sidebar/logo.png";
 
 export const Login = () => {
-  const navigate = useNavigate();
+  const { login } = useLogin();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validateLogin = () => {
     if (email === "d" && password === "d") {
+      login(email, password);
       localStorage.setItem(
         "auth",
-        JSON.stringify([
-          {
-            email: "d@mail.com",
-            password: "1234",
-          },
-        ])
+        JSON.stringify({ auth: true, email: email, password: password })
       );
-      navigate("/");
+    } else {
+      alert("Email or password are not correct! Please try again...");
     }
   };
 
@@ -47,12 +46,16 @@ export const Login = () => {
             alt="Hotel admin logo"
           />
         </LogoContainer>
-        {/* <Description>
-          Please use <strong>test@test.com</strong> and <strong>12345</strong>{" "}
-          as login data for testing purposes and keep in mind that this Website
-          is meant to be used on a computer (not a mobile device)
-        </Description> */}
-        <form onSubmit={handleSubmit}>
+        <form>
+          <InputContainer>
+            <Input
+              type="text"
+              className="input-userName"
+              value={userName}
+              placeholder="User Name"
+              onChange={(e) => setUserName(e.target.value)}
+            ></Input>
+          </InputContainer>
           <InputContainer>
             <Input
               type="text"
@@ -69,7 +72,7 @@ export const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
           </InputContainer>
-          <LoginButton type="login" text="LOGIN">
+          <LoginButton type="login" text="LOGIN" onClick={validateLogin}>
             Login
           </LoginButton>
         </form>

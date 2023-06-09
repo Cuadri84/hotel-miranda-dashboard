@@ -1,4 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
+
+// React Context
+import { useAuthContext } from "./hooks/useAuthContext";
+
 import Dashboard from "./pages/dashboard/Dashboard";
 import { Bookings } from "./pages/bookings/Bookings";
 import { Rooms } from "./pages/rooms/Rooms";
@@ -20,7 +24,8 @@ import { EditBooking } from "./pages/bookings/EditBooking";
 import { EditRoom } from "./pages/rooms/EditRoom";
 
 function App() {
-  const authReady = window.localStorage.getItem("auth");
+  const { authReady } = useAuthContext();
+  console.log(authReady);
 
   return (
     <div>
@@ -31,7 +36,7 @@ function App() {
           <Routes>
             <Route
               path="/login"
-              element={authReady ? <Navigate replace to="/" /> : <Login />}
+              element={authReady ? <Navigate to="/" /> : <Login />}
             />
             <Route
               path="/"
