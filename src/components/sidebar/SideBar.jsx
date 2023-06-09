@@ -20,7 +20,7 @@ import Heart from "../../assets/sidebar/heart-icon.svg";
 import CurrentUser from "./CurrentUser";
 
 export const SideBar = () => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
   const location = useLocation();
 
   const displayMenu = () => {
