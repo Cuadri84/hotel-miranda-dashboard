@@ -109,7 +109,9 @@ const NotesButton = styled.button`
   }}
 `;
 
-const Status = styled.p`
+const Status = styled.button`
+  width: 150px;
+  border-style: none;
   ${(props) => {
     switch (props.$type) {
       case "Check In":
