@@ -1,6 +1,5 @@
 // React & Router
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // React Context
 import { useLogin } from "../../hooks/useLogin";
@@ -50,7 +49,7 @@ export const Login = () => {
           <InputContainer>
             <Input
               type="text"
-              className="input-userName"
+              data-cy="userName"
               value={userName}
               placeholder="User Name"
               onChange={(e) => setUserName(e.target.value)}
@@ -59,20 +58,29 @@ export const Login = () => {
           <InputContainer>
             <Input
               type="text"
+              data-cy="mail"
               value={email}
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
+              required
             ></Input>
           </InputContainer>
           <InputContainer>
             <Input
               type="password"
+              data-cy="password"
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              required
             ></Input>
           </InputContainer>
-          <LoginButton type="login" text="LOGIN" onClick={validateLogin}>
+          <LoginButton
+            data-cy="submit"
+            type="login"
+            text="LOGIN"
+            onClick={validateLogin}
+          >
             Login
           </LoginButton>
         </form>
