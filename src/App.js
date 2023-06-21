@@ -25,7 +25,6 @@ import { EditRoom } from "./pages/rooms/EditRoom";
 
 function App() {
   const { authReady } = useAuthContext();
-  console.log(authReady);
 
   return (
     <div>
