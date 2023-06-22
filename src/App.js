@@ -1,27 +1,27 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 // React Context
 import { useAuthContext } from "./hooks/useAuthContext";
 
-import Dashboard from "./pages/dashboard/Dashboard";
-import { Bookings } from "./pages/bookings/Bookings";
-import { Rooms } from "./pages/rooms/Rooms";
-import { Contact } from "./pages/contact/Contact";
-import { Users } from "./pages/users/Users";
-import { Login } from "./pages/login/Login";
-import TopBar from "./components/topbar/TopBar";
-import { SideBar } from "./components/sidebar/SideBar";
 import Layout from "./components/Layout";
-import { SingleBooking } from "./pages/bookings/SingleBooking";
-import { SingleUser } from "./pages/users/SingleUser";
-import { SingleRoom } from "./pages/rooms/SingleRoom";
 import { ProtectRoute } from "./components/ProtectedRoute";
-import { NewBooking } from "./pages/bookings/NewBooking";
-import NewUser from "./pages/users/NewUser";
-import NewRoom from "./pages/rooms/NewRoom";
-import { EditUser } from "./pages/users/EditUser";
+import { SideBar } from "./components/sidebar/SideBar";
+import TopBar from "./components/topbar/TopBar";
+import { Bookings } from "./pages/bookings/Bookings";
 import { EditBooking } from "./pages/bookings/EditBooking";
+import { NewBooking } from "./pages/bookings/NewBooking";
+import { SingleBooking } from "./pages/bookings/SingleBooking";
+import { Contact } from "./pages/contact/Contact";
+import Dashboard from "./pages/dashboard/Dashboard";
+import { Login } from "./pages/login/Login";
 import { EditRoom } from "./pages/rooms/EditRoom";
+import NewRoom from "./pages/rooms/NewRoom";
+import { Rooms } from "./pages/rooms/Rooms";
+import { SingleRoom } from "./pages/rooms/SingleRoom";
+import { EditUser } from "./pages/users/EditUser";
+import NewUser from "./pages/users/NewUser";
+import { SingleUser } from "./pages/users/SingleUser";
+import { Users } from "./pages/users/Users";
 
 function App() {
   const { authReady } = useAuthContext();
