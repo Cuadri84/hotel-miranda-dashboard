@@ -7,8 +7,6 @@ import { getUser } from "../../features/usersSlice";
 import { useTypedSelector } from "../../store/store";
 
 //STYLED
-import { Container } from "../../components/styled/ContainerStyled";
-import { Subcontainer, VerticalLine } from "../bookings/SingleBookingStyled";
 import {
   BookingID,
   DataContainer,
@@ -16,6 +14,8 @@ import {
   GuestName,
   Status,
 } from "../../components/bookings/BookingRowStyled";
+import { Container } from "../../components/styled/ContainerStyled";
+import { Subcontainer, VerticalLine } from "../bookings/SingleBookingStyled";
 
 export const SingleUser = () => {
   const dispatch = useDispatch();

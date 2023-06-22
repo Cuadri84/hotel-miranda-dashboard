@@ -1,5 +1,5 @@
 // React & Router
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 // Redux
@@ -9,20 +9,20 @@ import { useTypedSelector } from "../../store/store";
 
 // Styled Components
 import {
-  Table,
-  HeaderTitle,
-  TableActions,
-  TableFilters,
   FilterButton,
+  HeaderTitle,
+  Table,
+  TableActions,
   TableButtons,
+  TableFilters,
 } from "../../components/styled/Tables";
 
 //Components
+import { RoomRow } from "../../components/rooms/RoomRow";
+import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { Container } from "../../components/styled/ContainerStyled";
 import { DropdownMenu } from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
-import { CreateButton } from "../../components/styled/ButtonsStyled";
-import { RoomRow } from "../../components/rooms/RoomRow";
 
 export const Rooms = () => {
   const dispatch = useDispatch();

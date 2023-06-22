@@ -6,14 +6,15 @@ import { useLogin } from "../../hooks/useLogin";
 
 // Styled Components
 import {
-  LoginContainer,
-  LoginCard,
-  LogoContainer,
-  InputContainer,
   Input,
+  InputContainer,
   LoginButton,
+  LoginCard,
+  LoginContainer,
+  LogoContainer,
 } from "./LoginStyled";
 
+//Assets
 import Logo from "../../assets/sidebar/logo.png";
 
 export const Login = () => {

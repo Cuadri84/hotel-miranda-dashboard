@@ -1,11 +1,11 @@
 // React
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { getRoom, editRoom } from "../../features/roomsSlice";
+import { editRoom, getRoom } from "../../features/roomsSlice";
 import { useTypedSelector } from "../../store/store";
 
 //components

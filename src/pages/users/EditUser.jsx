@@ -1,16 +1,16 @@
 // React
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { getUser, editUser } from "../../features/usersSlice";
+import { editUser, getUser } from "../../features/usersSlice";
 import { useTypedSelector } from "../../store/store";
 
 //Conponents
-import UserForm from "../../components/users/UserForm";
 import { Loader } from "../../components/styled/Loader";
+import UserForm from "../../components/users/UserForm";
 
 export const EditUser = () => {
   const dispatch = useDispatch();

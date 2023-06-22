@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 // Redux
@@ -8,21 +8,21 @@ import { useTypedSelector } from "../../store/store";
 
 // Styled Components
 import {
-  Table,
-  HeaderTitle,
-  TableActions,
-  TableFilters,
   FilterButton,
-  TableButtons,
+  HeaderTitle,
   InputText,
+  Table,
+  TableActions,
+  TableButtons,
+  TableFilters,
 } from "../../components/styled/Tables.jsx";
 
 //Components
+import { BookingRow } from "../../components/bookings/BookingRow.jsx";
+import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
 import { Container } from "../../components/styled/ContainerStyled.jsx";
 import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
 import { Loader } from "../../components/styled/Loader";
-import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
-import { BookingRow } from "../../components/bookings/BookingRow.jsx";
 
 export const Bookings = () => {
   const dispatch = useDispatch();

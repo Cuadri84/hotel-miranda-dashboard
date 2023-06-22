@@ -1,11 +1,11 @@
 // React
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { getBooking, editBooking } from "../../features/bookingSlice";
+import { editBooking, getBooking } from "../../features/bookingSlice";
 import { useTypedSelector } from "../../store/store";
 
 //Components

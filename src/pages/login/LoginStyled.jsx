@@ -154,17 +154,17 @@ const RadioDescription = styled.p`
 `;
 
 export {
-  LoginContainer,
-  LoginCard,
-  LogoContainer,
-  InputContainer,
-  Input,
-  LoginButton,
   Description,
+  FormTitle,
+  Input,
+  InputCancel,
+  InputContainer,
+  InputSubmit,
+  LoginButton,
+  LoginCard,
+  LoginContainer,
+  LogoContainer,
+  RadioDescription,
   RadioInput,
   RadioLabel,
-  RadioDescription,
-  InputSubmit,
-  FormTitle,
-  InputCancel,
 };

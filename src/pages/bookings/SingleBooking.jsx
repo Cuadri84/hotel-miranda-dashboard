@@ -8,8 +8,6 @@ import { getBooking } from "../../features/bookingSlice";
 import { useTypedSelector } from "../../store/store";
 
 //STYLED
-import { Container } from "../../components/styled/ContainerStyled";
-import { Subcontainer, VerticalLine } from "./SingleBookingStyled";
 import {
   BookingID,
   DataContainer,
@@ -17,6 +15,8 @@ import {
   GuestName,
   Status,
 } from "../../components/bookings/BookingRowStyled";
+import { Container } from "../../components/styled/ContainerStyled";
+import { Subcontainer, VerticalLine } from "./SingleBookingStyled";
 
 //components
 import { Loader } from "../../components/styled/Loader";
@@ -27,7 +27,6 @@ export const SingleBooking = () => {
   const { bookingId } = params;
   const { singleBooking } = useTypedSelector((state) => state.bookings);
   const [currentBooking, setCurrentBooking] = useState(singleBooking);
-  //sometimes bug dont show the single booking: coment old the guest container antry again and it works
 
   useEffect(() => {
     dispatch(getBooking(Number(bookingId)));
