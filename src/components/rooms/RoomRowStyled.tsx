@@ -76,7 +76,11 @@ const RoomPrice = styled.p`
   }
 `;
 
-const RoomStatus = styled.button`
+interface RoomStatusProps {
+  status: string;
+}
+
+const RoomStatus = styled.button<RoomStatusProps>`
   width: 120px;
   border-style: none;
   background-color: ${(props) => props.status};

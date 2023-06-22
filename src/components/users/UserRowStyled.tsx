@@ -58,8 +58,10 @@ const DataContainer = styled.td`
     padding-left: 4rem;
   }
 `;
-
-const Status = styled.p`
+interface PropsStatus {
+  $type: string;
+}
+const Status = styled.p<PropsStatus>`
   ${(props) => {
     switch (props.$type) {
       case "ACTIVE":

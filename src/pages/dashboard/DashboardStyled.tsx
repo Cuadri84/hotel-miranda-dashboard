@@ -86,7 +86,11 @@ const CalendarAndGraphSubcontainer = styled.div`
   }
 `;
 
-const ContactSwiperContainer = styled.div`
+interface PropsSwipper {
+  variant: string;
+}
+
+const ContactSwiperContainer = styled.div<PropsSwipper>`
   position: relative;
   ${(props) => (props.variant === "white" ? "background-color:#fff" : "")};
   box-shadow: 0px 4px 4px #00000005;

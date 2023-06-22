@@ -4,7 +4,11 @@ import React from "react";
 // Styled Components
 import styled, { css } from "styled-components";
 
-const DropdownMenuStyled = styled.select`
+interface PropsDropwdown {
+  $type: string;
+}
+
+const DropdownMenuStyled = styled.select<PropsDropwdown>`
   ${(props) => {
     switch (props.$type) {
       case "green":
@@ -36,7 +40,15 @@ const DropdownMenuStyled = styled.select`
 `;
 
 // Dropdown component. It is given a number of options depending on in which page the dropdown is being used
-const DropdownMenu = ({
+interface DropdownMenuProps {
+  type: string;
+  options: string[];
+  setActiveFilter: (value: string) => void;
+  handleInput: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  selected: string | null;
+}
+
+const DropdownMenu: React.FC<DropdownMenuProps> = ({
   type,
   options,
   setActiveFilter,

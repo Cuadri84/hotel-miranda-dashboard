@@ -14,7 +14,7 @@ function CurrentUser() {
       <UserName>David Cuadrillero</UserName>
       <UserEmail>https://github.com/Cuadri84</UserEmail>
       <LinkButton>
-        <button>Edit user</button>
+        <a href="edit own user button">Edit user</a>
       </LinkButton>
     </Card>
   );

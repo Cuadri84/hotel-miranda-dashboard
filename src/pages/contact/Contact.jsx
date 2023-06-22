@@ -13,14 +13,14 @@ import {
   TableFilters,
   FilterButton,
   TableButtons,
-} from "../../components/styled/Tables.jsx";
+} from "../../components/styled/Tables";
 
 //Components
 import { ContactSwiper } from "../../components/ContactSwiper/ContactSwiper";
 import { Container } from "../../components/styled/ContainerStyled";
 import { ContactSwiperContainer } from "../dashboard/DashboardStyled";
-import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
-import { ContactRow } from "../../components/contacts/ContactRow.jsx";
+import { DropdownMenu } from "../../components/styled/DropDownMenu";
+import { ContactRow } from "../../components/contacts/ContactRow";
 import { Loader } from "../../components/styled/Loader";
 
 export const Contact = () => {

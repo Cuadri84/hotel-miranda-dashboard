@@ -15,14 +15,14 @@ import {
   FilterButton,
   TableButtons,
   InputText,
-} from "../../components/styled/Tables.jsx";
+} from "../../components/styled/Tables";
 
 //Components
-import { Container } from "../../components/styled/ContainerStyled.jsx";
-import { DropdownMenu } from "../../components/styled/DropDownMenu.jsx";
+import { Container } from "../../components/styled/ContainerStyled";
+import { DropdownMenu } from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
-import { CreateButton } from "../../components/styled/ButtonsStyled.jsx";
-import { BookingRow } from "../../components/bookings/BookingRow.jsx";
+import { CreateButton } from "../../components/styled/ButtonsStyled";
+import { BookingRow } from "../../components/bookings/BookingRow";
 
 export const Bookings = () => {
   const dispatch = useDispatch();

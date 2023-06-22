@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-const SidebarContainer = styled.div`
+interface SidebarContainerProps {
+  display: string;
+  adjustHeight: string;
+}
+
+const SidebarContainer = styled.div<SidebarContainerProps>`
   width: ${(props) => props.display};
   min-width: ${(props) => props.display};
   max-height: ${(props) => props.adjustHeight};
@@ -37,54 +42,49 @@ const Navigation = styled.nav`
   }
 `;
 
-const Link = styled.li`
+interface LinkProps {
+  route: string;
+  current: string;
+}
+
+const Link = styled.li<LinkProps>`
   width: 70%;
   transition: all 0.2s;
+
   &:hover p,
   &:hover svg {
     fill: #e23428;
     color: #e23428;
   }
+
   a {
     display: flex;
     height: 7rem;
     border-radius: 6px;
     align-items: center;
     gap: 2rem;
+
     div {
       margin-right: 15%;
       transition: background-color 0.2s;
       width: 0.8rem;
       height: 100%;
-      background-color: ${(props) => {
-        if (props.route === props.current) {
-          return "#E23428";
-        } else {
-          return "#FFFFFF";
-        }
-      }};
+      background-color: ${(props) =>
+        props.route === props.current ? "#E23428" : "#FFFFFF"};
       border-radius: 0 8px 8px 0;
     }
+
     p {
-      color: ${(props) => {
-        if (props.route === props.current) {
-          return "#E23428";
-        } else {
-          return "#799283";
-        }
-      }};
+      color: ${(props) =>
+        props.route === props.current ? "#E23428" : "#799283"};
       font-family: var(--font-poppins);
       font-size: 1.8rem;
       text-decoration: none;
     }
+
     svg {
-      fill: ${(props) => {
-        if (props.route === props.current) {
-          return "#E23428";
-        } else {
-          return "#799283";
-        }
-      }};
+      fill: ${(props) =>
+        props.route === props.current ? "#E23428" : "#799283"};
     }
   }
 `;

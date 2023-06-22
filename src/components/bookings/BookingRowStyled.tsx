@@ -68,9 +68,13 @@ const DataContainerButton = styled.td`
   }
 `;
 
-const NotesButton = styled.button`
+interface NotesButtonProps {
+  type: string;
+}
+
+const NotesButton = styled.button<NotesButtonProps>`
   ${(props) => {
-    if (props.type === "") {
+    if (props.type) {
       return css`
         background-color: white;
         font-family: var(--font-poppins);
@@ -109,7 +113,11 @@ const NotesButton = styled.button`
   }}
 `;
 
-const Status = styled.button`
+interface StatusProps {
+  $type: string;
+}
+
+const Status = styled.button<StatusProps>`
   width: 150px;
   border-style: none;
   ${(props) => {
