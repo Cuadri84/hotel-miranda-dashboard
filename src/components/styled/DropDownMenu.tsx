@@ -43,16 +43,14 @@ const DropdownMenuStyled = styled.select<PropsDropwdown>`
 interface DropdownMenuProps {
   type: string;
   options: string[];
-  setActiveFilter: (value: string) => void;
-  handleInput: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  selected: string | null;
+  onSelect: (value: string) => void;
+  selected?: string | null;
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   type,
   options,
-  setActiveFilter,
-  handleInput,
+  onSelect,
   selected,
 }) => {
   return (
@@ -61,17 +59,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         defaultValue={selected ? selected : "Manager"}
         $type={type}
         name="position"
-        onChange={(e) => {
-          if (
-            e.target.value !== "Manager" &&
-            e.target.value !== "Reception" &&
-            e.target.value !== "Room Service"
-          ) {
-            setActiveFilter(e.target.value);
-          } else {
-            handleInput(e);
-          }
-        }}
+        onChange={(e) => onSelect(e.target.value)}
       >
         {options.map((option, index) => {
           return <option key={index}>{option}</option>;
@@ -91,4 +79,4 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   );
 };
 
-export { DropdownMenu };
+export { DropdownMenu, DropdownMenuProps };

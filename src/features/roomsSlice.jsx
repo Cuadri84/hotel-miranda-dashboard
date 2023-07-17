@@ -1,40 +1,62 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
+import { fetchData } from "./fetchData";
 
-export const getDataRooms = createAsyncThunk("rooms/fetchRooms", () => {
-  return addDelay(fetchData("Rooms"), 200);
+export const getDataRooms = createAsyncThunk("rooms/fetchRooms", async () => {
+  const result = await addDelay(fetchData("Rooms"), 200);
+  return result;
 });
 
-export const getRoom = createAsyncThunk("room/GetRoomDetails", async (id) => {
-  return await id;
-});
-
-export const deleteRoom = createAsyncThunk("rooms/DeleteRooms", async (id) => {
-  return await id;
-});
-
-export const editRoom = createAsyncThunk("rooms/EditRoom", async (id) => {
-  return await id;
-});
-
-export const createNewRoom = createAsyncThunk(
-  "rooms/CreateRoom",
-  async (newRoom) => {
-    return await newRoom;
+export const getRoom = createAsyncThunk(
+  "room/GetRoomDetails",
+  async (id: string) => {
+    const result = await id;
+    return result;
   }
 );
 
-const initialState = {
+export const deleteRoom = createAsyncThunk(
+  "rooms/DeleteRooms",
+  async (id: string) => {
+    const result = await id;
+    return result;
+  }
+);
+
+export const editRoom = createAsyncThunk(
+  "rooms/EditRoom",
+  async (id: string) => {
+    const result = await id;
+    return result;
+  }
+);
+
+export const createNewRoom = createAsyncThunk(
+  "rooms/CreateRoom",
+  async (newRoom: any) => {
+    const result = await newRoom;
+    return result;
+  }
+);
+
+interface RoomState {
+  roomsList: any[];
+  status: "idle" | "loading" | "success" | "failed";
+  singleRoom: any;
+  singleRoomStatus: "loading" | "success" | "failed";
+}
+
+const initialState: RoomState = {
   roomsList: [],
   status: "idle",
-  singleRoom: "",
+  singleRoom: null,
   singleRoomStatus: "loading",
 };
 
 export const roomsSlice = createSlice({
   name: "rooms",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getDataRooms.pending, (state) => {

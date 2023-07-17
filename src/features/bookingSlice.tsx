@@ -1,43 +1,56 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
+import { fetchData } from "./fetchData";
+import { Booking } from "./interfaces/interfaces";
 
-export const getDataBookings = createAsyncThunk(
+export const getDataBookings = createAsyncThunk<Booking[]>(
   "bookings/fetchBookings",
-  () => {
-    return addDelay(fetchData("Bookings"), 200);
+  async () => {
+    const result = await addDelay(fetchData("Bookings"), 200);
+    return result as Booking[];
   }
 );
 
-export const getBooking = createAsyncThunk(
+export const getBooking = createAsyncThunk<string, string>(
   "booking/GetBookingDetails",
-  async (idBooking) => {
-    return await idBooking;
+  async (id) => {
+    const result = await id;
+    return result;
   }
 );
 
-export const deleteBooking = createAsyncThunk(
+export const deleteBooking = createAsyncThunk<string, string>(
   "bookings/DeleteBooking",
   async (bookingID) => {
-    return await bookingID;
+    const result = await bookingID;
+    return result;
   }
 );
 
-export const createNewBooking = createAsyncThunk(
+export const createNewBooking = createAsyncThunk<string, any>(
   "bookings/CreateBooking",
   async (newBooking) => {
-    return await newBooking;
+    const result = await newBooking;
+    return result;
   }
 );
 
-export const editBooking = createAsyncThunk(
+export const editBooking = createAsyncThunk<string, string>(
   "bookings/EditBooking",
   async (idBooking) => {
-    return await idBooking;
+    const result = await idBooking;
+    return result;
   }
 );
 
-const initialState = {
+interface BookingState {
+  bookingsList: Booking[];
+  status: "idle" | "loading" | "success" | "failed";
+  singleBooking: any | null;
+  singleBookingStatus: "loading" | "success" | "failed";
+}
+
+const initialState: BookingState = {
   bookingsList: [],
   status: "idle",
   singleBooking: null,
@@ -47,6 +60,7 @@ const initialState = {
 export const bookingSlice = createSlice({
   name: "bookings",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getDataBookings.pending, (state) => {
@@ -68,7 +82,7 @@ export const bookingSlice = createSlice({
       .addCase(getBooking.fulfilled, (state, action) => {
         state.singleBookingStatus = "success";
         state.singleBooking = state.bookingsList.find(
-          (booking) => booking.bookingID === action.payload
+          (booking) => booking.id.toString() === action.payload
         );
       })
       .addCase(getBooking.rejected, (state) => {
@@ -77,17 +91,18 @@ export const bookingSlice = createSlice({
       });
     builder.addCase(deleteBooking.fulfilled, (state, action) => {
       state.bookingsList = state.bookingsList.filter(
-        (booking) => booking.bookingID !== action.payload
+        (booking) => booking.id !== action.payload
       );
     });
     builder.addCase(createNewBooking.fulfilled, (state, action) => {
-      state.bookingsList = [...state.bookingsList, action.payload];
+      const newBooking = JSON.parse(action.payload) as Booking;
+      state.bookingsList = [...state.bookingsList, newBooking];
     });
+
     builder.addCase(editBooking.fulfilled, (state, action) => {
+      const updatedBooking = JSON.parse(action.payload) as Booking;
       state.bookingsList = state.bookingsList.map((booking) => {
-        return booking.bookingID === action.payload.bookingID
-          ? action.payload
-          : booking;
+        return booking.id === updatedBooking.id ? updatedBooking : booking;
       });
       state.singleBooking = null;
     });

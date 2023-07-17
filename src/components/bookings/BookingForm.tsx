@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 
 // Styled Components
 import {
@@ -14,13 +14,34 @@ import {
   InputSubmit,
   InputCancel,
 } from "../../pages/login/LoginStyled";
-const BookingForm = ({
+
+interface BookingFormProps {
+  currentBooking: {
+    name: string;
+    checkIn: string;
+    checkOut: string;
+    specialRequest: string;
+    room_number: number;
+    status: string;
+  };
+  formTitle: string;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
+  handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const BookingForm: React.FC<BookingFormProps> = ({
   currentBooking,
   handleInput,
   handleSubmit,
   formTitle,
   handleCancel,
 }) => {
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleSubmit();
+  };
+
   return (
     <>
       <LoginContainer>
@@ -35,12 +56,7 @@ const BookingForm = ({
           <FormTitle style={{ textDecoration: "underline" }}>
             {formTitle}
           </FormTitle>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
+          <form onSubmit={onSubmit}>
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
                 User Name
@@ -49,24 +65,13 @@ const BookingForm = ({
                 required
                 type="text"
                 className="input-user"
-                value={currentBooking.userName}
+                value={currentBooking.name}
                 placeholder="User Name"
-                name="userName"
+                name="name"
                 onChange={handleInput}
-              ></Input>
+              />
             </InputContainer>
-            <InputContainer>
-              <RadioDescription style={{ textDecoration: "underline" }}>
-                User picture
-              </RadioDescription>
-              <Input
-                className="input-user"
-                value={currentBooking.userPicture}
-                placeholder="Copy your photo URL"
-                name="userPicture"
-                onChange={(e) => handleInput(e.target.value)}
-              ></Input>
-            </InputContainer>
+
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
                 Check in
@@ -80,7 +85,7 @@ const BookingForm = ({
                 name="checkIn"
                 value={currentBooking.checkIn}
                 onChange={handleInput}
-              ></Input>
+              />
             </InputContainer>
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
@@ -96,9 +101,12 @@ const BookingForm = ({
                 name="checkOut"
                 value={currentBooking.checkOut}
                 onChange={handleInput}
-              ></Input>
+              />
             </InputContainer>
             <InputContainer>
+              <RadioDescription style={{ textDecoration: "underline" }}>
+                Special request
+              </RadioDescription>
               <Input
                 type="text"
                 className="input-user"
@@ -106,53 +114,9 @@ const BookingForm = ({
                 name="specialRequest"
                 value={currentBooking.specialRequest}
                 onChange={handleInput}
-              ></Input>
+              />
             </InputContainer>
-            <InputContainer>
-              <RadioDescription style={{ textDecoration: "underline" }}>
-                Select the Room Type
-              </RadioDescription>
-              <RadioInput
-                required
-                type="radio"
-                id="singleBed"
-                value="Single Bed"
-                name="roomType"
-                onClick={handleInput}
-                defaultChecked={currentBooking.roomType === "Single Bed"}
-              />
-              <RadioLabel htmlFor="singleBed">Single Bed</RadioLabel>
-              <RadioInput
-                required
-                type="radio"
-                id="doubleBed"
-                value="Double Bed"
-                name="roomType"
-                onClick={handleInput}
-                defaultChecked={currentBooking.roomType === "Double Bed"}
-              />
-              <RadioLabel htmlFor="doubleBed">Double Bed</RadioLabel>
-              <RadioInput
-                required
-                type="radio"
-                id="doubleSuperior"
-                value="Double Superior"
-                name="roomType"
-                onClick={handleInput}
-                defaultChecked={currentBooking.roomType === "Double Superior"}
-              />
-              <RadioLabel htmlFor="doubleSuperior">Double Superior</RadioLabel>
-              <RadioInput
-                required
-                type="radio"
-                id="suite"
-                value="Suite"
-                name="roomType"
-                onClick={handleInput}
-                defaultChecked={currentBooking.roomType === "Suite"}
-              />
-              <RadioLabel htmlFor="suite">Suite</RadioLabel>
-            </InputContainer>
+
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
                 Select the Booking Status
@@ -163,7 +127,7 @@ const BookingForm = ({
                 id="checkIn"
                 value="Check In"
                 name="status"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentBooking.status === "Check In"}
               />
               <RadioLabel htmlFor="checkIn">Check In</RadioLabel>
@@ -173,7 +137,7 @@ const BookingForm = ({
                 id="checkOut"
                 value="Check Out"
                 name="status"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentBooking.status === "Check Out"}
               />
               <RadioLabel htmlFor="checkOut">Check Out</RadioLabel>
@@ -183,7 +147,7 @@ const BookingForm = ({
                 id="inProgress"
                 value="In Progress"
                 name="status"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentBooking.status === "In Progress"}
               />
               <RadioLabel htmlFor="inProgress">In Progress</RadioLabel>

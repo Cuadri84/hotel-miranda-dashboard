@@ -1,37 +1,48 @@
-// React & Router
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { RootStateOrAny, useDispatch } from "react-redux";
 import { getBooking } from "../../features/bookingSlice";
 import { useTypedSelector } from "../../store/store";
 
-//STYLED
+// STYLED
 import { Container } from "../../components/styled/ContainerStyled";
 import { Subcontainer, VerticalLine } from "./SingleBookingStyled";
 import {
-  BookingID,
   DataContainer,
   GuestContainer,
   GuestName,
   Status,
 } from "../../components/bookings/BookingRowStyled";
 
-//components
+// Components
 import { Loader } from "../../components/styled/Loader";
+import { Booking } from "../../features/interfaces/interfaces";
 
-export const SingleBooking = () => {
+export const SingleBooking: React.FC = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-  const { bookingId } = params;
-  const { singleBooking } = useTypedSelector((state) => state.bookings);
-  const [currentBooking, setCurrentBooking] = useState(singleBooking);
-  //sometimes bug dont show the single booking: coment old the guest container antry again and it works
+  const params = useParams<{ bookingId: string }>();
+  const bookingId = params.bookingId;
+
+  const { singleBooking } = useTypedSelector(
+    (state: RootStateOrAny) => state.bookings
+  );
+
+  const [currentBooking, setCurrentBooking] = useState<Booking>(singleBooking);
+
+  let orderDate: string | null =
+    currentBooking?.orderDate?.toLocaleString() || null;
+  let checkIn: string | null =
+    currentBooking?.checkIn?.toLocaleString() || null;
+  let checkOut: string | null =
+    currentBooking?.checkOut?.toLocaleString() || null;
 
   useEffect(() => {
-    dispatch(getBooking(Number(bookingId)));
-    setCurrentBooking(singleBooking);
+    if (bookingId) {
+      dispatch(getBooking(bookingId));
+      setCurrentBooking(singleBooking);
+    }
   }, [singleBooking, dispatch, bookingId]);
 
   return !currentBooking ? (
@@ -41,13 +52,13 @@ export const SingleBooking = () => {
       <Subcontainer>
         <GuestContainer>
           <div>
-            <GuestName>{currentBooking.userName}</GuestName>
-            <BookingID>ID:{currentBooking.bookingID}</BookingID>
+            <GuestName>{currentBooking.name}</GuestName>
+
             <DataContainer>
-              <p>Check in: {currentBooking.checkIn}</p>
-              <p>Check Out: {currentBooking.checkOut}</p>
-              <p>Order Date: {currentBooking.orderDate}</p>
-              <p>Room Type: {currentBooking.roomType}</p>
+              <p>Check in: {checkIn}</p>
+              <p>Check Out: {checkOut}</p>
+              <p>Order Date: {orderDate}</p>
+              <p>Room Type: {currentBooking.room_number}</p>
               <Status $type={currentBooking.status}>
                 {currentBooking.status}
               </Status>

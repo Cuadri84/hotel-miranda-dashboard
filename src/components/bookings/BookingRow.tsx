@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { deleteBooking } from "../../features/bookingSlice";
 
+import { Booking } from "../../features/interfaces/interfaces";
+
 // Styled Components
 import {
   Row,
@@ -18,85 +20,94 @@ import {
   NotesButton,
   DropDown,
 } from "./BookingRowStyled";
+interface BookingRowProps {
+  booking: Booking; // Utiliza la interfaz Booking en las props
+}
 
-export const BookingRow = (booking) => {
+export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  let orderDate: string = booking.orderDate.toLocaleString();
+  let checkIn: string = booking.checkIn.toLocaleString();
+  let checkOut: string = booking.checkOut.toLocaleString();
+
   const [showOptions, setShowOptions] = useState(false);
 
-  const goToSingleBooking = (id) => {
+  const goToSingleBooking = (id: string) => {
     navigate("/bookings/" + id);
   };
 
-  const deleteCurrentBooking = (e, bookingID) => {
+  const deleteCurrentBooking = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    dispatch(deleteBooking(bookingID));
+
+    dispatch(deleteBooking(id));
   };
 
-  const editSingleBooking = (e, bookingID) => {
+  const editSingleBooking = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    navigate("/editBooking/" + bookingID);
+    navigate("/editBooking/" + id);
   };
 
   return (
     <Row
       onClick={() => {
-        goToSingleBooking(booking.booking.bookingID);
+        goToSingleBooking(booking.id);
       }}
     >
       <td>
         <GuestContainer>
           <div>
-            <GuestName>{booking.booking.userName}</GuestName>
-            <BookingID>#{booking.booking.bookingID}</BookingID>
+            <GuestName>{booking.name}</GuestName>
+            <BookingID>#{booking.id}</BookingID>
           </div>
         </GuestContainer>
       </td>
       <DataContainer className="data-container__text">
-        <p>{booking.booking.orderDate}</p>
+        <p>{orderDate}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{booking.booking.checkIn}</p>
+        <p>{checkIn}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{booking.booking.checkOut}</p>
+        <p>{checkOut}</p>
       </DataContainer>
       <td>
-        <NotesButton>
-          {booking.booking.specialRequest === "" ? "No Notes" : "View Notes"}
+        <NotesButton type="button">
+          {booking.specialRequest === "" ? "No Notes" : "View Notes"}
         </NotesButton>
       </td>
 
       <DataContainer className="data-container__text">
-        <p>{booking.booking.roomType}</p>
+        <p>{booking.room_number}</p>
       </DataContainer>
       <td>
-        <Status $type={booking.booking.status}>{booking.booking.status}</Status>
+        <Status $type={booking.status}>{booking.status}</Status>
       </td>
       <DataContainerButton style={{ position: "relative" }}>
-        <button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowOptions(!showOptions);
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="30"
             width="30"
             viewBox="0 0 48 48"
-            onClick={(e) => {
-              if (e && e.stopPropagation) e.stopPropagation();
-              setShowOptions(!showOptions);
-            }}
           >
             <path d="M24.05 41.7q-1.25 0-2.125-.875t-.875-2.075q0-1.2.875-2.1.875-.9 2.075-.9 1.25 0 2.1.9.85.9.85 2.1 0 1.2-.85 2.075-.85.875-2.05.875Zm0-14.75q-1.25 0-2.125-.875T21.05 24q0-1.25.875-2.1.875-.85 2.075-.85 1.25 0 2.1.85.85.85.85 2.05 0 1.25-.85 2.125t-2.05.875Zm0-14.7q-1.25 0-2.125-.875T21.05 9.25q0-1.25.875-2.125T24 6.25q1.25 0 2.1.875.85.875.85 2.125t-.85 2.125q-.85.875-2.05.875Z" />
           </svg>
         </button>
-        {showOptions ? (
+        {showOptions && (
           <DropDown>
             <ul>
               <li>
                 <button
                   onClick={(e) => {
-                    if (e && e.stopPropagation) e.stopPropagation();
-                    editSingleBooking(e, booking.booking.bookingID);
+                    e.stopPropagation();
+                    editSingleBooking(e, booking.id);
                   }}
                 >
                   Edit booking
@@ -105,8 +116,8 @@ export const BookingRow = (booking) => {
               <li>
                 <button
                   onClick={(e) => {
-                    if (e && e.stopPropagation) e.stopPropagation();
-                    deleteCurrentBooking(e, booking.booking.bookingID);
+                    e.stopPropagation();
+                    deleteCurrentBooking(e, booking.id);
                   }}
                 >
                   Delete booking
@@ -114,7 +125,7 @@ export const BookingRow = (booking) => {
               </li>
             </ul>
           </DropDown>
-        ) : null}
+        )}
       </DataContainerButton>
     </Row>
   );

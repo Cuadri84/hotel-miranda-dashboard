@@ -19,7 +19,6 @@ export const EditRoom = () => {
   const { roomId } = params;
   const { singleRoom } = useTypedSelector((state) => state.rooms);
   const [currentRoom, setCurrentRoom] = useState(null);
-  console.log(currentRoom);
 
   const formTitle =
     "Here you can edit the fields needed and save them to update the original room";

@@ -2,36 +2,61 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
 
-export const getDataUsers = createAsyncThunk("users/fetchUsers", () => {
-  return addDelay(fetchData("Users"), 200);
-});
-export const getUser = createAsyncThunk("user/GetUserDetails", async (id) => {
-  return await id;
-});
-export const deleteUser = createAsyncThunk("users/DeleteUser", async (id) => {
-  return await id;
-});
-export const editUser = createAsyncThunk("users/EditUser", async (id) => {
-  return await id;
+export const getDataUsers = createAsyncThunk("users/fetchUsers", async () => {
+  const result = await addDelay(fetchData("Users"), 200);
+  return result;
 });
 
-export const createNewUser = createAsyncThunk(
-  "users/CreateUser",
-  async (newUser) => {
-    return await newUser;
+export const getUser = createAsyncThunk(
+  "user/GetUserDetails",
+  async (id: string) => {
+    const result = await id;
+    return result;
   }
 );
 
-const initialState = {
+export const deleteUser = createAsyncThunk(
+  "users/DeleteUser",
+  async (id: string) => {
+    const result = await id;
+    return result;
+  }
+);
+
+export const editUser = createAsyncThunk(
+  "users/EditUser",
+  async (id: string) => {
+    const result = await id;
+    return result;
+  }
+);
+
+export const createNewUser = createAsyncThunk(
+  "users/CreateUser",
+  async (newUser: any) => {
+    const result = await newUser;
+    return result;
+  }
+);
+
+interface UserState {
+  usersList: any[];
+  status: "idle" | "loading" | "success" | "failed";
+  singleUser: any;
+  singleUserStatus: "loading" | "success" | "failed";
+}
+
+const initialState: UserState = {
   usersList: [],
   status: "idle",
-  singleUser: "",
+  singleUser: null,
   singleUserStatus: "loading",
 };
 
 export const usersSlice = createSlice({
   name: "users",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getDataUsers.pending, (state) => {

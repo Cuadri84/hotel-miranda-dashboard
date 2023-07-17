@@ -1,29 +1,37 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./fetchData";
 import { addDelay } from "../functions/extras";
+import { fetchData } from "./fetchData";
 
 export const getDataContacts = createAsyncThunk(
   "contacts/fetchContacts",
-  () => {
-    return addDelay(fetchData("Contacts"), 200);
+  async () => {
+    const result = await addDelay(fetchData("Contacts"), 200);
+    return result;
   }
 );
 
 export const archiveContact = createAsyncThunk(
   "contacts/archivedContact",
-  async (id) => {
-    return await id;
+  async (id: string) => {
+    const result = await id;
+    return result;
   }
 );
 
-const initialState = {
+interface ContactState {
+  contactsList: any[];
+  status: "idle" | "loading" | "success" | "failed";
+}
+
+const initialState: ContactState = {
   contactsList: [],
   status: "idle",
 };
 
-export const conctactSlice = createSlice({
+export const contactSlice = createSlice({
   name: "contacts",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getDataContacts.pending, (state) => {
@@ -46,4 +54,4 @@ export const conctactSlice = createSlice({
   },
 });
 
-export default conctactSlice.reducer;
+export default contactSlice.reducer;
