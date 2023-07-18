@@ -28,9 +28,14 @@ export const EditBooking: React.FC = () => {
   useEffect(() => {
     if (bookingId) {
       dispatch(getBooking(bookingId));
+    }
+  }, [dispatch, bookingId]);
+
+  useEffect(() => {
+    if (singleBooking) {
       setCurrentBooking(singleBooking);
     }
-  }, [singleBooking, dispatch, bookingId]);
+  }, [singleBooking]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,8 +55,10 @@ export const EditBooking: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (currentBooking && currentBooking.id) {
-      dispatch(editBooking(currentBooking.id));
+    if (currentBooking && currentBooking._id) {
+      dispatch(
+        editBooking({ _id: currentBooking._id, booking: currentBooking })
+      );
       navigate("/bookings");
     }
   };

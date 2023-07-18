@@ -15,22 +15,21 @@ import {
   DataContainerButton,
   GuestContainer,
   GuestName,
-  BookingID,
   Status,
   NotesButton,
   DropDown,
 } from "./BookingRowStyled";
 interface BookingRowProps {
-  booking: Booking; // Utiliza la interfaz Booking en las props
+  booking: Booking;
 }
 
 export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  let orderDate: string = booking.orderDate.toLocaleString();
-  let checkIn: string = booking.checkIn.toLocaleString();
-  let checkOut: string = booking.checkOut.toLocaleString();
+  let orderDate: string = new Date(booking.orderDate).toLocaleDateString();
+  let checkIn: string = new Date(booking.checkIn).toLocaleDateString();
+  let checkOut: string = new Date(booking.checkOut).toLocaleDateString();
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -52,14 +51,13 @@ export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
   return (
     <Row
       onClick={() => {
-        goToSingleBooking(booking.id);
+        goToSingleBooking(booking._id);
       }}
     >
       <td>
         <GuestContainer>
           <div>
             <GuestName>{booking.name}</GuestName>
-            <BookingID>#{booking.id}</BookingID>
           </div>
         </GuestContainer>
       </td>
@@ -107,7 +105,7 @@ export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    editSingleBooking(e, booking.id);
+                    editSingleBooking(e, booking._id);
                   }}
                 >
                   Edit booking
@@ -117,7 +115,7 @@ export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    deleteCurrentBooking(e, booking.id);
+                    deleteCurrentBooking(e, booking._id);
                   }}
                 >
                   Delete booking

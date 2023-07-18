@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // Redux
@@ -18,7 +18,6 @@ import {
 
 // Components
 import { Loader } from "../../components/styled/Loader";
-import { Booking } from "../../features/interfaces/interfaces";
 
 export const SingleBooking: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,46 +28,42 @@ export const SingleBooking: React.FC = () => {
     (state: RootStateOrAny) => state.bookings
   );
 
-  const [currentBooking, setCurrentBooking] = useState<Booking>(singleBooking);
-
   let orderDate: string | null =
-    currentBooking?.orderDate?.toLocaleString() || null;
-  let checkIn: string | null =
-    currentBooking?.checkIn?.toLocaleString() || null;
+    singleBooking?.orderDate?.toLocaleString() || null;
+  let checkIn: string | null = singleBooking?.checkIn?.toLocaleString() || null;
   let checkOut: string | null =
-    currentBooking?.checkOut?.toLocaleString() || null;
+    singleBooking?.checkOut?.toLocaleString() || null;
 
   useEffect(() => {
     if (bookingId) {
       dispatch(getBooking(bookingId));
-      setCurrentBooking(singleBooking);
     }
-  }, [singleBooking, dispatch, bookingId]);
+  }, [dispatch, bookingId]);
 
-  return !currentBooking ? (
+  return !singleBooking ? (
     <Loader />
   ) : (
     <Container>
       <Subcontainer>
         <GuestContainer>
           <div>
-            <GuestName>{currentBooking.name}</GuestName>
+            <GuestName>{singleBooking.name}</GuestName>
 
             <DataContainer>
               <p>Check in: {checkIn}</p>
               <p>Check Out: {checkOut}</p>
               <p>Order Date: {orderDate}</p>
-              <p>Room Type: {currentBooking.room_number}</p>
-              <Status $type={currentBooking.status}>
-                {currentBooking.status}
+              <p>Room Type: {singleBooking.room_number}</p>
+              <Status $type={singleBooking.status}>
+                {singleBooking.status}
               </Status>
             </DataContainer>
           </div>
           <VerticalLine />
           <DataContainer>
             <p>Special Request:</p>
-            {currentBooking.specialRequest ? (
-              <p>{currentBooking.specialRequest}</p>
+            {singleBooking.specialRequest ? (
+              <p>{singleBooking.specialRequest}</p>
             ) : (
               <p>No special request registered.</p>
             )}

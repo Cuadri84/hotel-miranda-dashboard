@@ -16,9 +16,9 @@ export const NewBooking: React.FC = () => {
 
   const formTitle = "Please fill the form to create a new booking";
   const [currentBooking, setCurrentBooking] = useState<Booking>({
-    id: "",
+    _id: "",
     name: "",
-    orderDate: new Date().toISOString().split("T")[0],
+    orderDate: new Date(),
     checkIn: new Date().toISOString().split("T")[0],
     checkOut: new Date().toISOString().split("T")[0],
     specialRequest: "",
@@ -36,7 +36,6 @@ export const NewBooking: React.FC = () => {
     navigate("/bookings");
   };
   const handleSubmit = () => {
-    console.log(currentBooking);
     dispatch(createNewBooking(currentBooking));
     navigate("/bookings");
   };

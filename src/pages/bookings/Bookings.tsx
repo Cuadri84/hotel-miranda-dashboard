@@ -70,16 +70,16 @@ export const Bookings: React.FC = () => {
             dateB.split("/").reverse().join() <
             dateA.split("/").reverse().join()
           ) {
-            return -1;
-          } else {
             return 1;
+          } else {
+            return -1;
           }
         });
         break;
       case "Guest":
         orderedBookings.sort((a, b) => {
-          const nameA = a.userName.toUpperCase().replace(/\s/g, "");
-          const nameB = b.userName.toUpperCase().replace(/\s/g, "");
+          const nameA = a.name.toUpperCase().replace(/\s/g, "");
+          const nameB = b.name.toUpperCase().replace(/\s/g, "");
           if (nameA < nameB) {
             return -1;
           }
@@ -90,7 +90,7 @@ export const Bookings: React.FC = () => {
         });
         break;
       case "Check In":
-        orderedBookings.sort((a, b) => a.room_rate - b.room_rate);
+        orderedBookings.sort((a, b) => a.checkIn - b.checkIn);
         break;
       case "Check Out":
         orderedBookings.sort((a, b) => a.room_rate - b.room_rate);
@@ -156,7 +156,7 @@ export const Bookings: React.FC = () => {
             </thead>
             <tbody>
               {bookings.map((booking) => (
-                <BookingRow key={booking.id} booking={booking} />
+                <BookingRow key={booking._id} booking={booking} />
               ))}
             </tbody>
           </Table>

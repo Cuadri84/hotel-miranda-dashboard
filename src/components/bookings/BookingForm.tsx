@@ -116,7 +116,20 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 onChange={handleInput}
               />
             </InputContainer>
-
+            <InputContainer>
+              <RadioDescription style={{ textDecoration: "underline" }}>
+                Room number
+              </RadioDescription>
+              <Input
+                required
+                type="text"
+                className="input-user"
+                value={currentBooking.room_number}
+                placeholder="Room number"
+                name="room_number"
+                onChange={handleInput}
+              />
+            </InputContainer>
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
                 Select the Booking Status

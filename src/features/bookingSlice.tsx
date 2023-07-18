@@ -1,47 +1,79 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDelay } from "../functions/extras";
-import { fetchData } from "./fetchData";
+import fetch from "cross-fetch";
 import { Booking } from "./interfaces/interfaces";
 
 export const getDataBookings = createAsyncThunk<Booking[]>(
   "bookings/fetchBookings",
   async () => {
-    const result = await addDelay(fetchData("Bookings"), 200);
+    const result = await fetch("http://localhost:3001/bookings")
+      .then((res) => res.json())
+      .then((data) => data);
+
     return result as Booking[];
   }
 );
 
 export const getBooking = createAsyncThunk<string, string>(
   "booking/GetBookingDetails",
-  async (id) => {
-    const result = await id;
+  async (_id) => {
+    const result = await fetch(`http://localhost:3001/bookings/${_id}`)
+      .then((res) => res.json())
+      .then((data) => data);
     return result;
   }
 );
 
 export const deleteBooking = createAsyncThunk<string, string>(
   "bookings/DeleteBooking",
-  async (bookingID) => {
-    const result = await bookingID;
-    return result;
+  async (_id) => {
+    await fetch(`http://localhost:3001/bookings/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => data);
+    return _id;
   }
 );
 
-export const createNewBooking = createAsyncThunk<string, any>(
+export const createNewBooking = createAsyncThunk<string, Booking>(
   "bookings/CreateBooking",
   async (newBooking) => {
-    const result = await newBooking;
+    const response = await fetch(`http://localhost:3001/bookings/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBooking),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create booking");
+    }
+
+    const result = await response.json();
+
     return result;
   }
 );
 
-export const editBooking = createAsyncThunk<string, string>(
-  "bookings/EditBooking",
-  async (idBooking) => {
-    const result = await idBooking;
-    return result;
+export const editBooking = createAsyncThunk<
+  string,
+  { _id: string; booking: Booking }
+>("bookings/EditBooking", async ({ _id, booking }) => {
+  const response = await fetch(`http://localhost:3001/bookings/${_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(booking),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to edit booking");
   }
-);
+
+  return _id;
+});
 
 interface BookingState {
   bookingsList: Booking[];
@@ -74,6 +106,7 @@ export const bookingSlice = createSlice({
         state.status = "failed";
         console.error("Not possible to fetch the bookings");
       });
+
     builder
       .addCase(getBooking.pending, (state) => {
         state.singleBooking = null;
@@ -81,19 +114,19 @@ export const bookingSlice = createSlice({
       })
       .addCase(getBooking.fulfilled, (state, action) => {
         state.singleBookingStatus = "success";
-        state.singleBooking = state.bookingsList.find(
-          (booking) => booking.id.toString() === action.payload
-        );
+        state.singleBooking = action.payload;
       })
       .addCase(getBooking.rejected, (state) => {
         state.singleBookingStatus = "failed";
         console.error("Not possible to fetch the booking");
       });
+
     builder.addCase(deleteBooking.fulfilled, (state, action) => {
       state.bookingsList = state.bookingsList.filter(
-        (booking) => booking.id !== action.payload
+        (booking) => booking._id !== action.payload
       );
     });
+
     builder.addCase(createNewBooking.fulfilled, (state, action) => {
       const newBooking = JSON.parse(action.payload) as Booking;
       state.bookingsList = [...state.bookingsList, newBooking];
@@ -102,7 +135,7 @@ export const bookingSlice = createSlice({
     builder.addCase(editBooking.fulfilled, (state, action) => {
       const updatedBooking = JSON.parse(action.payload) as Booking;
       state.bookingsList = state.bookingsList.map((booking) => {
-        return booking.id === updatedBooking.id ? updatedBooking : booking;
+        return booking._id === updatedBooking._id ? updatedBooking : booking;
       });
       state.singleBooking = null;
     });
