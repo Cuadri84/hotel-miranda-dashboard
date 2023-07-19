@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, RootStateOrAny } from "react-redux";
 import { getDataContacts } from "../../features/contacSlice";
 import { useTypedSelector } from "../../store/store";
 
@@ -19,15 +19,21 @@ import {
 import { ContactSwiper } from "../../components/ContactSwiper/ContactSwiper";
 import { Container } from "../../components/styled/ContainerStyled";
 import { ContactSwiperContainer } from "../dashboard/DashboardStyled";
-import { DropdownMenu } from "../../components/styled/DropDownMenu";
+import {
+  DropdownMenu,
+  DropdownMenuProps,
+} from "../../components/styled/DropDownMenu";
 import { ContactRow } from "../../components/contacts/ContactRow";
 import { Loader } from "../../components/styled/Loader";
+import { IContact } from "../../features/interfaces/interfaces";
 
-export const Contact = () => {
+export const Contact: React.FC = () => {
   const dispatch = useDispatch();
-  const { contactsList } = useTypedSelector((state) => state.contacts);
-  const { status } = useTypedSelector((state) => state.contacts);
-  const [contacts, setContacts] = useState(contactsList);
+  const { contactsList, status } = useTypedSelector(
+    (state: RootStateOrAny) => state.contacts
+  );
+
+  const [contacts, setContacts] = useState<IContact[]>(contactsList);
 
   useEffect(() => {
     if (status === "idle") dispatch(getDataContacts());
@@ -37,11 +43,13 @@ export const Contact = () => {
     setContacts(contactsList);
   };
 
-  const filterByType = (type) => {
-    setContacts(contactsList.filter((contact) => contact.archived === type));
+  const filterByType = (type: boolean) => {
+    setContacts(
+      contactsList.filter((contact: IContact) => contact.archived === type)
+    );
   };
 
-  const [activeFilter, setActiveFilter] = useState("Date");
+  const [activeFilter, setActiveFilter] = useState<string>("Date");
 
   useEffect(() => {
     const orderedContacts = [...contactsList];
@@ -57,10 +65,10 @@ export const Contact = () => {
           }
         });
         break;
-      case "User":
+      case "Name":
         orderedContacts.sort((a, b) => {
-          const nameA = a.user.name.toUpperCase().replace(/\s/g, "");
-          const nameB = b.user.name.toUpperCase().replace(/\s/g, "");
+          const nameA = a.name.toUpperCase().replace(/\s/g, "");
+          const nameB = b.name.toUpperCase().replace(/\s/g, "");
           if (nameA < nameB) {
             return -1;
           }
@@ -76,11 +84,20 @@ export const Contact = () => {
     setContacts(orderedContacts);
   }, [activeFilter, contactsList]);
 
+  const handleSelect = (value: string) => {
+    setActiveFilter(value);
+  };
+
+  const dropdownMenuProps: DropdownMenuProps = {
+    type: "white",
+    options: ["Date", "Name"],
+    onSelect: handleSelect,
+  };
+
   return (
     <>
-      {" "}
-      <ContactSwiperContainer>
-        <ContactSwiper></ContactSwiper>
+      <ContactSwiperContainer variant="">
+        <ContactSwiper />
       </ContactSwiperContainer>
       <TableActions>
         <TableFilters>
@@ -92,11 +109,7 @@ export const Contact = () => {
           </FilterButton>
         </TableFilters>
         <TableButtons>
-          <DropdownMenu
-            setActiveFilter={setActiveFilter}
-            type="white"
-            options={["Date", "User"]}
-          ></DropdownMenu>
+          <DropdownMenu {...dropdownMenuProps} />
         </TableButtons>
       </TableActions>
       {status === "loading" ? (
@@ -115,7 +128,7 @@ export const Contact = () => {
             </thead>
             <tbody className="task-container">
               {contacts.map((contact) => (
-                <ContactRow key={contact.id} contact={contact} />
+                <ContactRow key={contact._id} contact={contact} />
               ))}
             </tbody>
           </Table>

@@ -8,34 +8,42 @@ import { DataContainer, DataContainerButton } from "./ContactRowStyled";
 // Redux
 import { useDispatch } from "react-redux";
 import { archiveContact } from "../../features/contacSlice";
+import { IContact } from "../../features/interfaces/interfaces";
 
-export const ContactRow = (props) => {
+interface ContactRowcontact {
+  contact: IContact;
+}
+
+export const ContactRow: React.FC<ContactRowcontact> = (contact) => {
   const dispatch = useDispatch();
 
-  const handleContact = (id) => {
-    dispatch(archiveContact(id));
+  const handleContact = (_id: string) => {
+    console.log(_id);
+    dispatch(archiveContact(_id));
   };
 
+  let date: string = new Date(contact.contact.date).toLocaleDateString();
+
   return (
-    <Row key={props.contact.id}>
+    <Row key={contact.contact._id}>
       <DataContainer className="data-container__text">
-        <p>#{props.contact.id}</p>
+        <p>#{contact.contact._id}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{props.contact.date}</p>
+        <p>{date}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{props.contact.user.name}</p>
+        <p>{contact.contact.name}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{props.contact.message.body}</p>
+        <p>{contact.contact.messageBody}</p>
       </DataContainer>
       <DataContainerButton>
-        {props.contact.archived ? (
+        {contact.contact.archived ? (
           <button
             className="green"
             onClick={() => {
-              return handleContact(props.contact.id);
+              return handleContact(contact.contact._id);
             }}
           >
             restore
@@ -44,7 +52,7 @@ export const ContactRow = (props) => {
           <button
             className="red"
             onClick={() => {
-              return handleContact(props.contact.id);
+              return handleContact(contact.contact._id);
             }}
           >
             Archive

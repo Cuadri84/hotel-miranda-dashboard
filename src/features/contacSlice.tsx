@@ -1,20 +1,38 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDelay } from "../functions/extras";
-import { fetchData } from "./fetchData";
+import { IContact } from "./interfaces/interfaces";
 
 export const getDataContacts = createAsyncThunk(
   "contacts/fetchContacts",
   async () => {
-    const result = await addDelay(fetchData("Contacts"), 200);
-    return result;
+    const result = await fetch("http://localhost:3001/contact")
+      .then((res) => res.json())
+      .then((data) => data);
+
+    return result as IContact[];
   }
 );
 
 export const archiveContact = createAsyncThunk(
   "contacts/archivedContact",
-  async (id: string) => {
-    const result = await id;
-    return result;
+  async (_id: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/contact/${_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ archived: true }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to archive contact");
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw new Error("Failed to archive contact");
+    }
   }
 );
 
@@ -46,10 +64,17 @@ export const contactSlice = createSlice({
         console.error("Not possible to fetch the contacts");
       });
     builder.addCase(archiveContact.fulfilled, (state, action) => {
+      const updatedContact = action.payload;
+
       const index = state.contactsList.findIndex(
-        (contact) => contact.id === action.payload
+        (contact) => contact._id === updatedContact._id
       );
-      state.contactsList[index].archived = !state.contactsList[index].archived;
+
+      if (state.contactsList) {
+        if (index !== -1 && index < state.contactsList.length) {
+          state.contactsList[index] = updatedContact;
+        }
+      }
     });
   },
 });

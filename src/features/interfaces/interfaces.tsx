@@ -9,19 +9,14 @@ interface Booking {
   status: string;
 }
 
-interface Contact {
-  id: number;
-  date: string;
-  user: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-  message: {
-    subject: string;
-    body: string;
-  };
-  stars: number;
+interface IContact {
+  _id: string;
+  date: Date;
+  name: string;
+  mail: string;
+  phone: number;
+  messageSubject: string;
+  messageBody: string;
   archived: boolean;
 }
 
@@ -56,4 +51,4 @@ interface User {
   state: string;
 }
 
-export { Booking, Contact, Room, User };
+export { Booking, IContact, Room, User };
