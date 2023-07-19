@@ -1,6 +1,8 @@
 // React
 import React from "react";
 
+import { IUser } from "../../features/interfaces/interfaces";
+
 // Styled Components
 import {
   LoginContainer,
@@ -14,15 +16,23 @@ import {
   InputSubmit,
   InputCancel,
 } from "../../pages/login/LoginStyled";
-import { DropdownMenu } from "../../components/styled/DropDownMenu";
 
-const UserForm = ({
+interface UserFormProps {
+  currentUser: IUser;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
+  formTitle: string;
+  handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const UserForm: React.FC<UserFormProps> = ({
   currentUser,
   handleInput,
   handleSubmit,
   formTitle,
   handleCancel,
 }) => {
+  let date: string = new Date(currentUser.date).toLocaleDateString();
   return (
     <>
       <LoginContainer>
@@ -99,19 +109,40 @@ const UserForm = ({
                 onChange={handleInput}
               ></Input>
             </InputContainer>
-            <InputContainer
-              style={{ width: "fit-content", marginBottom: "2rem" }}
-            >
+            <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
-                Position
+                Select Position
               </RadioDescription>
-              <DropdownMenu
-                type="white"
+              <RadioInput
+                required
+                type="radio"
+                id="Manager"
+                value="Manager"
                 name="position"
-                options={["Manager", "Reception", "Room Service"]}
-                selected={currentUser.position}
-                handleInput={handleInput}
-              ></DropdownMenu>
+                onChange={handleInput}
+                defaultChecked={currentUser.position === "Manager"}
+              />
+              <RadioLabel htmlFor="Manager">Manager</RadioLabel>
+              <RadioInput
+                required
+                type="radio"
+                id="Reception"
+                value="Reception"
+                name="position"
+                onChange={handleInput}
+                defaultChecked={currentUser.position === "Reception"}
+              />
+              <RadioLabel htmlFor="Reception">Reception</RadioLabel>
+              <RadioInput
+                required
+                type="radio"
+                id="Room Service"
+                value="Room Service"
+                name="position"
+                onChange={handleInput}
+                defaultChecked={currentUser.position === "Room Service"}
+              />
+              <RadioLabel htmlFor="Room Service">Room Service</RadioLabel>
             </InputContainer>
             <InputContainer>
               <RadioDescription style={{ textDecoration: "underline" }}>
@@ -151,7 +182,7 @@ const UserForm = ({
                 id="ACTIVE"
                 value="ACTIVE"
                 name="state"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentUser.state === "ACTIVE"}
               />
               <RadioLabel htmlFor="ACTIVE">Active</RadioLabel>
@@ -161,7 +192,7 @@ const UserForm = ({
                 id="INACTIVE"
                 value="INACTIVE"
                 name="state"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentUser.state === "INACTIVE"}
               />
               <RadioLabel htmlFor="INACTIVE">Inactive</RadioLabel>

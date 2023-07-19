@@ -39,7 +39,6 @@ export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
 
   const deleteCurrentBooking = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-
     dispatch(deleteBooking(id));
   };
 

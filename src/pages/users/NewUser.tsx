@@ -1,49 +1,45 @@
 // React
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router";
 
 // Redux
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../features/usersSlice";
 
+import { IUser } from "../../features/interfaces/interfaces";
+
 // Components
 import UserForm from "../../components/users/UserForm";
 
-const NewUser = () => {
+export const NewUser: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formTitle = "Please fill the form to create a new user";
-  const [currentUser, setCurrentUser] = useState({
-    id: Math.floor(Math.random() * 100000),
+  const [currentUser, setCurrentUser] = useState<IUser>({
+    _id: "",
     photo: "",
     name: "",
     position: "",
     email: "",
     phone: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     description: "",
-    state: "",
+    state: "ACTIVE",
     pass: "",
   });
 
-  const handleInput = (event) => {
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    let valToUpdate;
-    if (name === "position") {
-      valToUpdate = value;
-    } else {
-      valToUpdate = value;
-    }
-    setCurrentUser((prevState) => ({ ...prevState, [name]: valToUpdate }));
+    setCurrentUser((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleCancel = (e) => {
+  const handleCancel = (e: FormEvent) => {
     e.preventDefault();
     navigate("/users");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     dispatch(createNewUser(currentUser));
     navigate("/users");
   };
@@ -57,5 +53,3 @@ const NewUser = () => {
     />
   );
 };
-
-export default NewUser;

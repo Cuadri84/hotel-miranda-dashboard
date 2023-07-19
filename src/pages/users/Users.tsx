@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { RootStateOrAny, useDispatch } from "react-redux";
 import { getDataUsers } from "../../features/usersSlice";
 import { useTypedSelector } from "../../store/store";
 
@@ -18,19 +18,25 @@ import {
   InputText,
 } from "../../components/styled/Tables";
 
+import { IUser } from "../../features/interfaces/interfaces";
+
 //Components
 import { Container } from "../../components/styled/ContainerStyled";
-import { DropdownMenu } from "../../components/styled/DropDownMenu";
+import {
+  DropdownMenu,
+  DropdownMenuProps,
+} from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
 import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { UserRow } from "../../components/users/UserRow";
 
-export const Users = () => {
+export const Users: React.FC = () => {
   const dispatch = useDispatch();
-  const { usersList } = useTypedSelector((state) => state.users);
-  const { status } = useTypedSelector((state) => state.users);
+  const { usersList, status } = useTypedSelector(
+    (state: RootStateOrAny) => state.users
+  );
   const [query, setQuery] = useState("");
-  const [users, setUsers] = useState(usersList);
+  const [users, setUsers] = useState<IUser[]>(usersList);
   const [activeFilter, setActiveFilter] = useState("Start date");
 
   useEffect(() => {
@@ -41,13 +47,13 @@ export const Users = () => {
     setUsers(usersList);
   };
 
-  const filterByType = (type) => {
-    setUsers(usersList.filter((user) => user.state === type));
+  const filterByType = (type: "ACTIVE" | "INACTIVE") => {
+    setUsers(usersList.filter((user: IUser) => user.state === type));
   };
 
   useEffect(() => {
     setUsers(
-      usersList.filter((user) => user.name.toLowerCase().includes(query))
+      usersList.filter((user: IUser) => user.name.toLowerCase().includes(query))
     );
   }, [query, usersList]);
 
@@ -84,6 +90,16 @@ export const Users = () => {
     setUsers(orderedUsers);
   }, [activeFilter, usersList]);
 
+  const handleSelect = (value: string) => {
+    setActiveFilter(value);
+  };
+
+  const dropdownMenuProps: DropdownMenuProps = {
+    type: "white",
+    options: ["Start Date", "Name"],
+    onSelect: handleSelect,
+  };
+
   return (
     <>
       <TableActions>
@@ -107,11 +123,7 @@ export const Users = () => {
           <CreateButton>
             <NavLink to="/newUser">+ New User</NavLink>
           </CreateButton>
-          <DropdownMenu
-            setActiveFilter={setActiveFilter}
-            type="white"
-            options={["Start date", "Name"]}
-          ></DropdownMenu>
+          <DropdownMenu {...dropdownMenuProps} />
         </TableButtons>
       </TableActions>
       {status === "loading" ? (
@@ -129,7 +141,7 @@ export const Users = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <UserRow key={user.id} user={user} />
+                <UserRow key={user._id} user={user} />
               ))}
             </tbody>
           </Table>

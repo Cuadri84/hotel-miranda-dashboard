@@ -39,8 +39,8 @@ interface Room {
   room_status: string;
 }
 
-interface User {
-  id: number;
+interface IUser {
+  _id: string;
   photo: string;
   name: string;
   position: string;
@@ -48,7 +48,8 @@ interface User {
   phone: string;
   date: string;
   description: string;
-  state: string;
+  state: "ACTIVE" | "INACTIVE";
+  pass: string;
 }
 
-export { Booking, IContact, Room, User };
+export { Booking, IContact, Room, IUser };

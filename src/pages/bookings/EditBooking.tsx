@@ -50,7 +50,6 @@ export const EditBooking: React.FC = () => {
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
     navigate("/bookings");
   };
 

@@ -1,40 +1,78 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./fetchData";
-import { addDelay } from "../functions/extras";
+import fetch from "cross-fetch";
+import { IUser } from "./interfaces/interfaces";
 
-export const getDataUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const result = await addDelay(fetchData("Users"), 200);
-  return result;
-});
+export const getDataUsers = createAsyncThunk<IUser[]>(
+  "users/fetchUsers",
+  async () => {
+    const result = await fetch("http://localhost:3001/users")
+      .then((res) => res.json())
+      .then((data) => data);
 
-export const getUser = createAsyncThunk(
+    return result as IUser[];
+  }
+);
+
+export const getUser = createAsyncThunk<string, string>(
   "user/GetUserDetails",
-  async (id: string) => {
-    const result = await id;
+  async (_id) => {
+    const result = await fetch(`http://localhost:3001/users/${_id}`)
+      .then((res) => res.json())
+      .then((data) => data);
     return result;
   }
 );
 
-export const deleteUser = createAsyncThunk(
+export const deleteUser = createAsyncThunk<string, string>(
   "users/DeleteUser",
-  async (id: string) => {
-    const result = await id;
-    return result;
+  async (_id) => {
+    await fetch(`http://localhost:3001/users/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => data);
+    return _id;
   }
 );
 
-export const editUser = createAsyncThunk(
+export const editUser = createAsyncThunk<IUser, { _id: string; user: IUser }>(
   "users/EditUser",
-  async (id: string) => {
-    const result = await id;
+  async ({ _id, user }) => {
+    const response = await fetch(`http://localhost:3001/users/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to edit user");
+    }
+
+    const result = await response.json();
+
     return result;
   }
 );
 
-export const createNewUser = createAsyncThunk(
+export const createNewUser = createAsyncThunk<IUser, IUser>(
   "users/CreateUser",
-  async (newUser: any) => {
-    const result = await newUser;
+  async (newUser) => {
+    const response = await fetch(`http://localhost:3001/users/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create user");
+    }
+
+    const result = await response.json();
+
     return result;
   }
 );
@@ -77,9 +115,7 @@ export const usersSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.singleUserStatus = "success";
-        state.singleUser = state.usersList.find(
-          (user) => user.id === action.payload
-        );
+        state.singleUser = action.payload;
       })
       .addCase(getUser.rejected, (state) => {
         state.singleUserStatus = "failed";
@@ -95,7 +131,7 @@ export const usersSlice = createSlice({
     });
     builder.addCase(editUser.fulfilled, (state, action) => {
       state.usersList = state.usersList.map((user) => {
-        return user.id === action.payload.id ? action.payload : user;
+        return user.id === action.payload._id ? action.payload : user;
       });
       state.singleUser = null;
     });

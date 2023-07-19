@@ -1,6 +1,8 @@
 // React
 import React, { ChangeEvent, FormEvent } from "react";
 
+import { Booking } from "../../features/interfaces/interfaces";
+
 // Styled Components
 import {
   LoginContainer,
@@ -16,14 +18,7 @@ import {
 } from "../../pages/login/LoginStyled";
 
 interface BookingFormProps {
-  currentBooking: {
-    name: string;
-    checkIn: string;
-    checkOut: string;
-    specialRequest: string;
-    room_number: number;
-    status: string;
-  };
+  currentBooking: Booking;
   formTitle: string;
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;

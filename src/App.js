@@ -17,7 +17,7 @@ import { SingleUser } from "./pages/users/SingleUser";
 import { SingleRoom } from "./pages/rooms/SingleRoom";
 import { ProtectRoute } from "./components/ProtectedRoute";
 import { NewBooking } from "./pages/bookings/NewBooking";
-import NewUser from "./pages/users/NewUser";
+import { NewUser } from "./pages/users/NewUser";
 import NewRoom from "./pages/rooms/NewRoom";
 import { EditUser } from "./pages/users/EditUser";
 import { EditBooking } from "./pages/bookings/EditBooking";
