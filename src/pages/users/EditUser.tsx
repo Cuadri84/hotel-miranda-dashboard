@@ -52,7 +52,6 @@ export const EditUser: React.FC = () => {
   const handleSubmit = () => {
     if (currentUser && currentUser._id) {
       dispatch(editUser({ _id: currentUser._id, user: currentUser }));
-
       navigate("/users");
     }
   };
