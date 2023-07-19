@@ -35,7 +35,7 @@ export const deleteBooking = createAsyncThunk<string, string>(
   }
 );
 
-export const createNewBooking = createAsyncThunk<string, Booking>(
+export const createNewBooking = createAsyncThunk<Booking, Booking>(
   "bookings/CreateBooking",
   async (newBooking) => {
     const response = await fetch(`http://localhost:3001/bookings/`, {
@@ -57,7 +57,7 @@ export const createNewBooking = createAsyncThunk<string, Booking>(
 );
 
 export const editBooking = createAsyncThunk<
-  string,
+  Booking,
   { _id: string; booking: Booking }
 >("bookings/EditBooking", async ({ _id, booking }) => {
   const response = await fetch(`http://localhost:3001/bookings/${_id}`, {
@@ -72,7 +72,9 @@ export const editBooking = createAsyncThunk<
     throw new Error("Failed to edit booking");
   }
 
-  return _id;
+  const result = await response.json();
+
+  return result;
 });
 
 interface BookingState {
@@ -128,12 +130,12 @@ export const bookingSlice = createSlice({
     });
 
     builder.addCase(createNewBooking.fulfilled, (state, action) => {
-      const newBooking = JSON.parse(action.payload) as Booking;
+      const newBooking = action.payload;
       state.bookingsList = [...state.bookingsList, newBooking];
     });
 
     builder.addCase(editBooking.fulfilled, (state, action) => {
-      const updatedBooking = JSON.parse(action.payload) as Booking;
+      const updatedBooking = action.payload;
       state.bookingsList = state.bookingsList.map((booking) => {
         return booking._id === updatedBooking._id ? updatedBooking : booking;
       });
