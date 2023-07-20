@@ -1,6 +1,7 @@
 // React & Router
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 // Redux
 import { useDispatch } from "react-redux";
@@ -39,6 +40,13 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
   const deleteCurrentUser = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     dispatch(deleteUser(id));
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Deleted user",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const editSingleUser = (e: React.MouseEvent, id: string) => {

@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router";
 
+import Swal from "sweetalert2";
+
 // Redux
 import { useDispatch } from "react-redux";
 import { createNewBooking } from "../../features/bookingSlice";
@@ -38,6 +40,13 @@ export const NewBooking: React.FC = () => {
   const handleSubmit = () => {
     dispatch(createNewBooking(currentBooking));
     navigate("/bookings");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Created new Booking",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

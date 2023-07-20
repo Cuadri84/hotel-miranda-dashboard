@@ -2,6 +2,8 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router";
 
+import Swal from "sweetalert2";
+
 // Redux
 import { useDispatch } from "react-redux";
 import { createNewUser } from "../../features/usersSlice";
@@ -42,6 +44,13 @@ export const NewUser: React.FC = () => {
   const handleSubmit = () => {
     dispatch(createNewUser(currentUser));
     navigate("/users");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Created new User",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
   return (
     <UserForm

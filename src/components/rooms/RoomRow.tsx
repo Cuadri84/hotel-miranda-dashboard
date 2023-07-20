@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+import Swal from "sweetalert2";
+
 // Redux
 import { useDispatch } from "react-redux";
 import { deleteRoom } from "../../features/roomsSlice";
@@ -37,6 +39,13 @@ export const RoomRow: React.FC<RoomRowProps> = ({ room }) => {
   const deleteCurrentRoom = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     dispatch(deleteRoom(id));
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Deleted Room",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   const editSingleRoom = (e: React.MouseEvent, id: string) => {
