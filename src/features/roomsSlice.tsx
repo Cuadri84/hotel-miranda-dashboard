@@ -1,40 +1,74 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDelay } from "../functions/extras";
-import { fetchData } from "./fetchData";
+import { IRoom } from "./interfaces/interfaces";
 
 export const getDataRooms = createAsyncThunk("rooms/fetchRooms", async () => {
-  const result = await addDelay(fetchData("Rooms"), 200);
-  return result;
+  const result = await fetch("http://localhost:3001/rooms")
+    .then((res) => res.json())
+    .then((data) => data);
+
+  return result as IRoom[];
 });
 
 export const getRoom = createAsyncThunk(
   "room/GetRoomDetails",
-  async (id: string) => {
-    const result = await id;
+  async (_id: string) => {
+    const result = await fetch(`http://localhost:3001/rooms/${_id}`)
+      .then((res) => res.json())
+      .then((data) => data);
     return result;
   }
 );
 
-export const deleteRoom = createAsyncThunk(
+export const deleteRoom = createAsyncThunk<string, string>(
   "rooms/DeleteRooms",
-  async (id: string) => {
-    const result = await id;
-    return result;
+  async (_id) => {
+    await fetch(`http://localhost:3001/rooms/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => data);
+    return _id;
   }
 );
 
-export const editRoom = createAsyncThunk(
-  "rooms/EditRoom",
-  async (id: string) => {
-    const result = await id;
-    return result;
-  }
-);
-
-export const createNewRoom = createAsyncThunk(
+export const createNewRoom = createAsyncThunk<IRoom, IRoom>(
   "rooms/CreateRoom",
-  async (newRoom: any) => {
-    const result = await newRoom;
+  async (newRoom) => {
+    const response = await fetch(`http://localhost:3001/rooms/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRoom),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create Room");
+    }
+
+    const result = await response.json();
+
+    return result;
+  }
+);
+
+export const editRoom = createAsyncThunk<IRoom, { _id: string; room: IRoom }>(
+  "rooms/EditRoom",
+  async ({ _id, room }) => {
+    const response = await fetch(`http://localhost:3001/rooms/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(room),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to edit room");
+    }
+
+    const result = await response.json();
+
     return result;
   }
 );
@@ -77,9 +111,7 @@ export const roomsSlice = createSlice({
       })
       .addCase(getRoom.fulfilled, (state, action) => {
         state.singleRoomStatus = "success";
-        state.singleRoom = state.roomsList.find(
-          (room) => room.room_number === action.payload
-        );
+        state.singleRoom = action.payload;
       })
       .addCase(getRoom.rejected, (state) => {
         state.singleRoomStatus = "failed";
@@ -87,7 +119,7 @@ export const roomsSlice = createSlice({
       });
     builder.addCase(deleteRoom.fulfilled, (state, action) => {
       state.roomsList = state.roomsList.filter(
-        (room) => room.id !== action.payload
+        (room) => room._id !== action.payload
       );
     });
     builder.addCase(createNewRoom.fulfilled, (state, action) => {
@@ -95,7 +127,7 @@ export const roomsSlice = createSlice({
     });
     builder.addCase(editRoom.fulfilled, (state, action) => {
       state.roomsList = state.roomsList.map((room) => {
-        return room.id === action.payload.id ? action.payload : room;
+        return room.id === action.payload._id ? action.payload : room;
       });
       state.singleRoom = null;
     });

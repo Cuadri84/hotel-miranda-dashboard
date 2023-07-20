@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 
 // Styled Components
 import {
@@ -14,12 +14,21 @@ import {
   InputSubmit,
   InputCancel,
 } from "../../pages/login/LoginStyled";
+import { IRoom } from "../../features/interfaces/interfaces";
 
-const RoomForm = ({
+interface RoomFormProps {
+  currentRoom: IRoom;
+  formTitle: string;
+  handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
+  handleCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const RoomForm: React.FC<RoomFormProps> = ({
   currentRoom,
+  formTitle,
   handleInput,
   handleSubmit,
-  formTitle,
   handleCancel,
 }) => {
   const listOfAmenities = [
@@ -130,40 +139,40 @@ const RoomForm = ({
                 required
                 type="radio"
                 id="singleBed"
-                value="Single Bed"
+                value="single"
                 name="bed_type"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentRoom.bed_type === "Single Bed"}
               />
-              <RadioLabel htmlFor="singleBed">Single Bed</RadioLabel>
+              <RadioLabel htmlFor="singleBed">Single</RadioLabel>
               <RadioInput
                 required
                 type="radio"
-                id="doubleBed"
-                value="Double Bed"
+                id="double"
+                value="double"
                 name="bed_type"
-                onClick={handleInput}
-                defaultChecked={currentRoom.bed_type === "Double Bed"}
+                onChange={handleInput}
+                defaultChecked={currentRoom.bed_type === "double"}
               />
-              <RadioLabel htmlFor="doubleBed">Double Bed</RadioLabel>
+              <RadioLabel htmlFor="doubleBed">Double</RadioLabel>
               <RadioInput
                 required
                 type="radio"
                 id="doubleSuperior"
-                value="Double Superior"
+                value="double-superior"
                 name="bed_type"
-                onClick={handleInput}
-                defaultChecked={currentRoom.bed_type === "Double Superior"}
+                onChange={handleInput}
+                defaultChecked={currentRoom.bed_type === "double-superior"}
               />
               <RadioLabel htmlFor="doubleSuperior">Double Superior</RadioLabel>
               <RadioInput
                 required
                 type="radio"
                 id="suite"
-                value="Suite"
+                value="suite"
                 name="bed_type"
-                onClick={handleInput}
-                defaultChecked={currentRoom.bed_type === "Suite"}
+                onChange={handleInput}
+                defaultChecked={currentRoom.bed_type === "suite"}
               />
               <RadioLabel htmlFor="suite">Suite</RadioLabel>
             </InputContainer>
@@ -205,7 +214,7 @@ const RoomForm = ({
                 id="yes"
                 value="Yes"
                 name="discount"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentRoom.discount === "Yes"}
               />
               <RadioLabel htmlFor="yes">Yes</RadioLabel>
@@ -215,7 +224,7 @@ const RoomForm = ({
                 id="no"
                 value="No"
                 name="discount"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentRoom.discount === "No"}
               />
               <RadioLabel htmlFor="no">No</RadioLabel>
@@ -278,7 +287,7 @@ const RoomForm = ({
                       name="room_facilities"
                       id={amenity}
                       value={amenity}
-                      onClick={handleInput}
+                      onChange={handleInput}
                       defaultChecked
                     />
                   ) : (
@@ -287,7 +296,7 @@ const RoomForm = ({
                       name="room_facilities"
                       id={amenity}
                       value={amenity}
-                      onClick={handleInput}
+                      onChange={handleInput}
                     />
                   )}
 
@@ -305,7 +314,7 @@ const RoomForm = ({
                 id="available"
                 value="Available"
                 name="room_status"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentRoom.room_status === "Available"}
               />
               <RadioLabel htmlFor="available">Available</RadioLabel>
@@ -315,7 +324,7 @@ const RoomForm = ({
                 id="booked"
                 value="Booked"
                 name="room_status"
-                onClick={handleInput}
+                onChange={handleInput}
                 defaultChecked={currentRoom.room_status === "Booked"}
               />
               <RadioLabel htmlFor="booked">Booked</RadioLabel>

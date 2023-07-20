@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { deleteRoom } from "../../features/roomsSlice";
 
+import { IRoom } from "../../features/interfaces/interfaces";
+
 // Styled Components
 import {
   RoomNameContainer,
@@ -18,22 +20,26 @@ import {
 } from "./RoomRowStyled";
 import { Row, DropDown } from "../bookings/BookingRowStyled";
 
-export const RoomRow = (room) => {
+interface RoomRowProps {
+  room: IRoom;
+}
+
+export const RoomRow: React.FC<RoomRowProps> = ({ room }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [showOptions, setShowOptions] = useState(false);
 
-  const goToSingleRoom = (id) => {
+  const goToSingleRoom = (id: string) => {
     navigate("/rooms/" + id);
   };
 
-  const deleteCurrentRoom = (e, id) => {
+  const deleteCurrentRoom = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     dispatch(deleteRoom(id));
   };
 
-  const editSingleRoom = (e, id) => {
+  const editSingleRoom = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     navigate("/editRoom/" + id);
   };
@@ -41,51 +47,51 @@ export const RoomRow = (room) => {
   return (
     <Row
       onClick={() => {
-        goToSingleRoom(room.room.room_number);
+        goToSingleRoom(room._id);
       }}
     >
       <td>
         <RoomNameContainer>
-          <img src={room.room.photo} alt="Room Img" />
+          <img src={room.photo} alt="Room Img" />
           <div>
-            <RoomNumber>Room Nr: {room.room.room_number}</RoomNumber>
-            <RoomId>#{room.room.id}</RoomId>
+            <RoomNumber>Room Nr: {room.room_number}</RoomNumber>
+            <RoomId>#{room._id}</RoomId>
           </div>
         </RoomNameContainer>
       </td>
       <DataContainer>
-        <RoomText>{room.room.bed_type}</RoomText>
+        <RoomText>{room.bed_type}</RoomText>
       </DataContainer>
       <DataContainer>
         <RoomText>
-          {room.room.room_facilities.map((facility, index) => (
+          {room.room_facilities.map((facility, index) => (
             <span key={index}>
               {/* Small logic to includes ",", "." and "&" in the right places of the displayed array. */}
-              {(index && index !== room.room.room_facilities.length - 1
+              {(index && index !== room.room_facilities.length - 1
                 ? ", "
                 : "") +
-                (index && index === room.room.room_facilities.length - 1
+                (index && index === room.room_facilities.length - 1
                   ? " & "
                   : "") +
                 facility +
-                (index === room.room.room_facilities.length - 1 ? "." : "")}
+                (index === room.room_facilities.length - 1 ? "." : "")}
             </span>
           ))}
         </RoomText>
       </DataContainer>
       <DataContainer>
         <RoomPrice>
-          ${room.room.room_rate}
+          ${room.room_rate}
           <span>/night</span>
         </RoomPrice>
       </DataContainer>
       <DataContainer>
         <RoomPrice>
           $
-          {room.room.discount === "Yes"
+          {room.discount === "Yes"
             ? (
-                room.room.room_rate -
-                (room.room.room_rate * room.room.discountPercent) / 100
+                room.room_rate -
+                (room.room_rate * room.discountPercent) / 100
               ).toFixed(2)
             : "-"}
           <span>/night</span>
@@ -93,9 +99,9 @@ export const RoomRow = (room) => {
       </DataContainer>
       <td>
         <RoomStatus
-          status={room.room.room_status === "Available" ? "#5AD07A" : "#E23428"}
+          status={room.room_status === "Available" ? "#5AD07A" : "#E23428"}
         >
-          {room.room.room_status}
+          {room.room_status}
         </RoomStatus>
       </td>
       <DataContainerButton style={{ position: "relative", top: "25px" }}>
@@ -121,7 +127,7 @@ export const RoomRow = (room) => {
                 <button
                   onClick={(e) => {
                     if (e && e.stopPropagation) e.stopPropagation();
-                    editSingleRoom(e, room.room.room_number);
+                    editSingleRoom(e, room._id);
                   }}
                 >
                   Edit room
@@ -131,7 +137,7 @@ export const RoomRow = (room) => {
                 <button
                   onClick={(e) => {
                     if (e && e.stopPropagation) e.stopPropagation();
-                    deleteCurrentRoom(e, room.room.id);
+                    deleteCurrentRoom(e, room._id);
                   }}
                 >
                   Delete room

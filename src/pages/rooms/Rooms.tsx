@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { RootStateOrAny, useDispatch } from "react-redux";
 import { getDataRooms } from "../../features/roomsSlice";
 import { useTypedSelector } from "../../store/store";
 
@@ -19,16 +19,22 @@ import {
 
 //Components
 import { Container } from "../../components/styled/ContainerStyled";
-import { DropdownMenu } from "../../components/styled/DropDownMenu";
+import {
+  DropdownMenu,
+  DropdownMenuProps,
+} from "../../components/styled/DropDownMenu";
 import { Loader } from "../../components/styled/Loader";
 import { CreateButton } from "../../components/styled/ButtonsStyled";
 import { RoomRow } from "../../components/rooms/RoomRow";
+import { IRoom } from "../../features/interfaces/interfaces";
 
-export const Rooms = () => {
+export const Rooms: React.FC = () => {
   const dispatch = useDispatch();
-  const { roomsList } = useTypedSelector((state) => state.rooms);
-  const { status } = useTypedSelector((state) => state.rooms);
-  const [rooms, setRooms] = useState(roomsList);
+  const { roomsList, status } = useTypedSelector(
+    (state: RootStateOrAny) => state.rooms
+  );
+
+  const [rooms, setRooms] = useState<IRoom[]>(roomsList);
   const [activeFilter, setActiveFilter] = useState("Room Nr.");
 
   useEffect(() => {
@@ -39,8 +45,8 @@ export const Rooms = () => {
     setRooms(roomsList);
   };
 
-  const filterByType = (type) => {
-    setRooms(roomsList.filter((room) => room.room_status === type));
+  const filterByType = (type: string) => {
+    setRooms(roomsList.filter((room: IRoom) => room.room_status === type));
   };
 
   useEffect(() => {
@@ -61,6 +67,16 @@ export const Rooms = () => {
     setRooms(orderedRooms);
   }, [activeFilter, roomsList]);
 
+  const handleSelect = (value: string) => {
+    setActiveFilter(value);
+  };
+
+  const dropdownMenuProps: DropdownMenuProps = {
+    type: "white",
+    options: ["Room Nr.", "Highest rate first", "Lowest rate first"],
+    onSelect: handleSelect,
+  };
+
   return (
     <>
       {" "}
@@ -78,11 +94,7 @@ export const Rooms = () => {
           <CreateButton>
             <NavLink to="/newRoom">+ New Room</NavLink>
           </CreateButton>
-          <DropdownMenu
-            setActiveFilter={setActiveFilter}
-            type="white"
-            options={["Room Nr.", "Highest rate first", "Lowest rate first"]}
-          ></DropdownMenu>
+          <DropdownMenu {...dropdownMenuProps} />
         </TableButtons>
       </TableActions>
       {status === "loading" ? (
@@ -103,7 +115,7 @@ export const Rooms = () => {
             </thead>
             <tbody>
               {rooms.map((rooms) => (
-                <RoomRow key={rooms.id} room={rooms} />
+                <RoomRow key={rooms._id} room={rooms} />
               ))}
             </tbody>
           </Table>

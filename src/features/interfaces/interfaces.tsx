@@ -20,16 +20,16 @@ interface IContact {
   archived: boolean;
 }
 
-interface Room {
-  id: string;
-  room_number: string;
+interface IRoom {
+  _id: string;
+  room_number: number;
   photo: string;
   photoTwo: string;
   photoThree: string;
   photoFour: string;
   photoFive: string;
   description: string;
-  discountPercent: string;
+  discountPercent: number;
   discount: string;
   cancellationPolicy: string;
   bed_type: string;
@@ -37,6 +37,7 @@ interface Room {
   room_rate: number;
   room_offer: string;
   room_status: string;
+  bookings: { type: Booking[]; default: [] };
 }
 
 interface IUser {
@@ -52,4 +53,4 @@ interface IUser {
   pass: string;
 }
 
-export { Booking, IContact, Room, IUser };
+export { Booking, IContact, IRoom, IUser };

@@ -2,14 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import contactSlice from "../features/contacSlice";
 import bookingSlice from "../features/bookingSlice";
-// import roomsSlice from "../features/roomsSlice";
+import roomsSlice from "../features/roomsSlice";
 import usersSlice from "../features/usersSlice";
 
 export const store = configureStore({
   reducer: {
     contacts: contactSlice,
     bookings: bookingSlice,
-    // rooms: roomsSlice,
+    rooms: roomsSlice,
     users: usersSlice,
   },
 });
