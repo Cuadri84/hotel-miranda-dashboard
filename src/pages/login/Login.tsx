@@ -75,12 +75,7 @@ export const Login = () => {
               required
             ></Input>
           </InputContainer>
-          <LoginButton
-            data-cy="submit"
-            type="login"
-            text="LOGIN"
-            onClick={validateLogin}
-          >
+          <LoginButton data-cy="submit" onClick={validateLogin}>
             Login
           </LoginButton>
         </form>

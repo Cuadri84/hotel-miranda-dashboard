@@ -19,8 +19,8 @@ import ArrowsClose from "../../assets/sidebar/arrows-left.png";
 import Heart from "../../assets/sidebar/heart-icon.svg";
 import CurrentUser from "./CurrentUser";
 
-export const SideBar = () => {
-  const [display, setDisplay] = useState(false);
+export const SideBar: React.FC = () => {
+  const [display, setDisplay] = useState<boolean>(false);
   const location = useLocation();
 
   const displayMenu = () => {
@@ -30,7 +30,7 @@ export const SideBar = () => {
   return (
     <SidebarContainer
       display={display ? "300px" : "0px"}
-      adjustHeight={display ? "100%" : 0}
+      adjustHeight={display ? "100%" : "0px"}
     >
       <ArrowButton onClick={displayMenu}>
         {!display ? (
