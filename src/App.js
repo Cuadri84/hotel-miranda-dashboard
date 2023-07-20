@@ -19,7 +19,7 @@ import NewRoom from "./pages/rooms/NewRoom";
 import { Rooms } from "./pages/rooms/Rooms";
 import { SingleRoom } from "./pages/rooms/SingleRoom";
 import { EditUser } from "./pages/users/EditUser";
-import NewUser from "./pages/users/NewUser";
+import { NewUser } from "./pages/users/NewUser";
 import { SingleUser } from "./pages/users/SingleUser";
 import { Users } from "./pages/users/Users";
 
