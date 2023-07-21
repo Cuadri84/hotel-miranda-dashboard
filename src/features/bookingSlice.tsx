@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import fetch from "cross-fetch";
 import { Booking } from "./interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export const getDataBookings = createAsyncThunk<Booking[]>(
   "bookings/fetchBookings",
@@ -31,6 +32,13 @@ export const deleteBooking = createAsyncThunk<string, string>(
     })
       .then((res) => res.json())
       .then((data) => data);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Deleted Booking",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return _id;
   }
 );
@@ -49,7 +57,13 @@ export const createNewBooking = createAsyncThunk<Booking, Booking>(
     if (!response.ok) {
       throw new Error("Failed to create booking");
     }
-
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Created new Booking",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     const result = await response.json();
 
     return result;
@@ -71,7 +85,13 @@ export const editBooking = createAsyncThunk<
   if (!response.ok) {
     throw new Error("Failed to edit booking");
   }
-
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Edited Booking",
+    showConfirmButton: false,
+    timer: 1500,
+  });
   const result = await response.json();
 
   return result;

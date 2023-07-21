@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
-import Swal from "sweetalert2";
-
 // Redux
 import { useDispatch } from "react-redux";
 import { deleteBooking } from "../../features/bookingSlice";
@@ -42,13 +40,6 @@ export const BookingRow: React.FC<BookingRowProps> = ({ booking }) => {
   const deleteCurrentBooking = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     dispatch(deleteBooking(id));
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Deleted Booking",
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   const editSingleBooking = (e: React.MouseEvent, id: string) => {

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
-import Swal from "sweetalert2";
-
 // Redux
 import { useDispatch } from "react-redux";
 import { deleteRoom } from "../../features/roomsSlice";
@@ -10,17 +8,17 @@ import { deleteRoom } from "../../features/roomsSlice";
 import { IRoom } from "../../features/interfaces/interfaces";
 
 // Styled Components
+import { DropDown, Row } from "../bookings/BookingRowStyled";
 import {
-  RoomNameContainer,
-  RoomId,
-  RoomNumber,
   DataContainer,
   DataContainerButton,
-  RoomText,
+  RoomId,
+  RoomNameContainer,
+  RoomNumber,
   RoomPrice,
   RoomStatus,
+  RoomText,
 } from "./RoomRowStyled";
-import { Row, DropDown } from "../bookings/BookingRowStyled";
 
 interface RoomRowProps {
   room: IRoom;
@@ -39,13 +37,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({ room }) => {
   const deleteCurrentRoom = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     dispatch(deleteRoom(id));
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Deleted Room",
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   const editSingleRoom = (e: React.MouseEvent, id: string) => {

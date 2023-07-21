@@ -9,6 +9,7 @@ import { DataContainer, DataContainerButton } from "./ContactRowStyled";
 import { useDispatch } from "react-redux";
 import { archiveContact } from "../../features/contacSlice";
 import { IContact } from "../../features/interfaces/interfaces";
+import Swal from "sweetalert2";
 
 interface ContactRowcontact {
   contact: IContact;
@@ -18,7 +19,6 @@ export const ContactRow: React.FC<ContactRowcontact> = (contact) => {
   const dispatch = useDispatch();
 
   const handleContact = (_id: string) => {
-    console.log(_id);
     dispatch(archiveContact(_id));
   };
 
@@ -43,6 +43,13 @@ export const ContactRow: React.FC<ContactRowcontact> = (contact) => {
           <button
             className="green"
             onClick={() => {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Restored Contact",
+                showConfirmButton: false,
+                timer: 1500,
+              });
               return handleContact(contact.contact._id);
             }}
           >
@@ -52,6 +59,13 @@ export const ContactRow: React.FC<ContactRowcontact> = (contact) => {
           <button
             className="red"
             onClick={() => {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Archived Contact",
+                showConfirmButton: false,
+                timer: 1500,
+              });
               return handleContact(contact.contact._id);
             }}
           >

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IRoom } from "./interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export const getDataRooms = createAsyncThunk("rooms/fetchRooms", async () => {
   const result = await fetch("http://localhost:3001/rooms")
@@ -27,6 +28,13 @@ export const deleteRoom = createAsyncThunk<string, string>(
     })
       .then((res) => res.json())
       .then((data) => data);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Deleted Room",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return _id;
   }
 );
@@ -45,7 +53,13 @@ export const createNewRoom = createAsyncThunk<IRoom, IRoom>(
     if (!response.ok) {
       throw new Error("Failed to create Room");
     }
-
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Created Room",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     const result = await response.json();
 
     return result;
@@ -66,7 +80,13 @@ export const editRoom = createAsyncThunk<IRoom, { _id: string; room: IRoom }>(
     if (!response.ok) {
       throw new Error("Failed to edit room");
     }
-
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Edited Room",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     const result = await response.json();
 
     return result;

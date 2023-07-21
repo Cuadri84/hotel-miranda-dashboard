@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import fetch from "cross-fetch";
 import { IUser } from "./interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export const getDataUsers = createAsyncThunk<IUser[]>(
   "users/fetchUsers",
@@ -31,6 +32,13 @@ export const deleteUser = createAsyncThunk<string, string>(
     })
       .then((res) => res.json())
       .then((data) => data);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Deleted user",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return _id;
   }
 );
@@ -49,7 +57,13 @@ export const editUser = createAsyncThunk<IUser, { _id: string; user: IUser }>(
     if (!response.ok) {
       throw new Error("Failed to edit user");
     }
-
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Edited user",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     const result = await response.json();
 
     return result;
@@ -72,6 +86,13 @@ export const createNewUser = createAsyncThunk<IUser, IUser>(
     }
 
     const result = await response.json();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Created new User",
+      showConfirmButton: false,
+      timer: 1500,
+    });
 
     return result;
   }

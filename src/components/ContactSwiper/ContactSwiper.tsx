@@ -10,6 +10,7 @@ import { archiveContact, getDataContacts } from "../../features/contacSlice";
 import { useTypedSelector } from "../../store/store";
 
 import { IContact } from "../../features/interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export const ContactSwiper: React.FC = () => {
   const dispatch = useDispatch();
@@ -47,18 +48,7 @@ export const ContactSwiper: React.FC = () => {
             </div>
             <div>
               {contact.archived ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="30"
-                  width="30"
-                  viewBox="0 0 48 48"
-                  fill="#5AD07A"
-                  onClick={() => {
-                    return handleContact(contact._id);
-                  }}
-                >
-                  <path d="m21.05 32.45 13.5-13.5-1.75-1.7L21.05 29l-5.9-5.95-1.7 1.75ZM24 43q-3.9 0-7.375-1.5t-6.05-4.075Q8 34.85 6.5 31.375 5 27.9 5 24q0-3.95 1.5-7.425Q8 13.1 10.575 10.55 13.15 8 16.625 6.5 20.1 5 24 5q3.95 0 7.425 1.5Q34.9 8 37.45 10.55 40 13.1 41.5 16.575 43 20.05 43 24q0 3.9-1.5 7.375t-4.05 6.05Q34.9 40 31.425 41.5 27.95 43 24 43Zm0-2.25q7 0 11.875-4.9T40.75 24q0-7-4.875-11.875T24 7.25q-6.95 0-11.85 4.875Q7.25 17 7.25 24q0 6.95 4.9 11.85 4.9 4.9 11.85 4.9ZM24 24Z" />
-                </svg>
+                ""
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,6 +57,13 @@ export const ContactSwiper: React.FC = () => {
                   viewBox="0 0 48 48"
                   fill="#E23428"
                   onClick={() => {
+                    Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "Archived Contact",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
                     return handleContact(contact._id);
                   }}
                 >
