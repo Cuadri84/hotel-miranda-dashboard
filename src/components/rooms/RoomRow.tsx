@@ -55,7 +55,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({ room }) => {
           <img src={room.photo} alt="Room Img" />
           <div>
             <RoomNumber>Room Nr: {room.room_number}</RoomNumber>
-            <RoomId>#{room._id}</RoomId>
           </div>
         </RoomNameContainer>
       </td>

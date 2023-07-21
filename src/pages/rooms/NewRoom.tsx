@@ -49,7 +49,7 @@ const NewRoom: React.FC = () => {
 
   const handleSubmit = () => {
     dispatch(createNewRoom(currentRoom));
-    console.log(currentRoom);
+
     navigate("/rooms");
   };
   return (

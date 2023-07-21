@@ -120,9 +120,9 @@ export const Contact: React.FC = () => {
           <Table>
             <thead>
               <tr>
-                <HeaderTitle>Order ID</HeaderTitle>
-                <HeaderTitle>Date</HeaderTitle>
                 <HeaderTitle>Customer</HeaderTitle>
+                <HeaderTitle>Date</HeaderTitle>
+                <HeaderTitle>Subject</HeaderTitle>
                 <HeaderTitle>Comment</HeaderTitle>
                 <HeaderTitle>Action</HeaderTitle>
               </tr>

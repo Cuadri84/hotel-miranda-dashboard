@@ -27,13 +27,13 @@ export const ContactRow: React.FC<ContactRowcontact> = (contact) => {
   return (
     <Row key={contact.contact._id}>
       <DataContainer className="data-container__text">
-        <p>#{contact.contact._id}</p>
+        <p>{contact.contact.name}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
         <p>{date}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
-        <p>{contact.contact.name}</p>
+        <p>{contact.contact.messageSubject}</p>
       </DataContainer>
       <DataContainer className="data-container__text">
         <p>{contact.contact.messageBody}</p>

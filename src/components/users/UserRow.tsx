@@ -57,7 +57,6 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
           <img src={user.photo} alt="User portrait" />
           <div>
             <UserName>{user.name}</UserName>
-            <UserID>#{user._id}</UserID>
             <UserJoinDate>Joined on {date}</UserJoinDate>
           </div>
         </UserContainer>

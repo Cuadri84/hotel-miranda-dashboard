@@ -21,7 +21,7 @@ export const EditRoom: React.FC = () => {
   const { singleRoom } = useTypedSelector(
     (state: RootStateOrAny) => state.rooms
   );
-  console.log(singleRoom);
+
   const [currentRoom, setCurrentRoom] = useState<IRoom | null>(null);
 
   const formTitle =
@@ -56,7 +56,7 @@ export const EditRoom: React.FC = () => {
   const handleSubmit = () => {
     if (currentRoom && currentRoom._id) {
       dispatch(editRoom({ _id: currentRoom._id, room: currentRoom }));
-      console.log(currentRoom);
+
       navigate("/rooms");
     }
   };
