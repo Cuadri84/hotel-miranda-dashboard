@@ -123,7 +123,7 @@ export const usersSlice = createSlice({
       });
     builder.addCase(deleteUser.fulfilled, (state, action) => {
       state.usersList = state.usersList.filter(
-        (user) => user.id !== action.payload
+        (user) => user._id !== action.payload
       );
     });
     builder.addCase(createNewUser.fulfilled, (state, action) => {
@@ -131,7 +131,7 @@ export const usersSlice = createSlice({
     });
     builder.addCase(editUser.fulfilled, (state, action) => {
       state.usersList = state.usersList.map((user) => {
-        return user.id === action.payload._id ? action.payload : user;
+        return user._id === action.payload._id ? action.payload : user;
       });
       state.singleUser = null;
     });

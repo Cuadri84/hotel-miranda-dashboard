@@ -127,7 +127,7 @@ export const roomsSlice = createSlice({
     });
     builder.addCase(editRoom.fulfilled, (state, action) => {
       state.roomsList = state.roomsList.map((room) => {
-        return room.id === action.payload._id ? action.payload : room;
+        return room._id === action.payload._id ? action.payload : room;
       });
       state.singleRoom = null;
     });
