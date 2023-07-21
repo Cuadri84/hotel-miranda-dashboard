@@ -37,7 +37,7 @@ interface IRoom {
   room_rate: number;
   room_offer: string;
   room_status: string;
-  bookings: { type: Booking[]; default: [] };
+  bookings?: string[];
 }
 
 interface IUser {

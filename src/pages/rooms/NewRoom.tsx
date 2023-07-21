@@ -33,7 +33,6 @@ const NewRoom: React.FC = () => {
     room_rate: 0,
     room_offer: "",
     room_status: "",
-    bookings: { type: [], default: [] },
   });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
