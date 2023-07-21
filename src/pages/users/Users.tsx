@@ -134,7 +134,7 @@ export const Users: React.FC = () => {
             <thead>
               <tr>
                 <HeaderTitle>Name</HeaderTitle>
-                <HeaderTitle>Job Desk</HeaderTitle>
+                <HeaderTitle>Job</HeaderTitle>
                 <HeaderTitle>Contact</HeaderTitle>
                 <HeaderTitle>Status</HeaderTitle>
               </tr>

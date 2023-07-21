@@ -62,7 +62,7 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
         </UserContainer>
       </td>
       <DataContainer className="data-container__text">
-        <p>{user.description}</p>
+        <p>{user.position}</p>
       </DataContainer>
       <td>
         <UserContainer>

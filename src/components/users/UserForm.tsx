@@ -32,7 +32,6 @@ const UserForm: React.FC<UserFormProps> = ({
   formTitle,
   handleCancel,
 }) => {
-  let date: string = new Date(currentUser.date).toLocaleDateString();
   return (
     <>
       <LoginContainer>
