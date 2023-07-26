@@ -6,6 +6,7 @@ import { useLogin } from "../../hooks/useLogin";
 
 // Styled Components
 import {
+  Description,
   Input,
   InputContainer,
   LoginButton,
@@ -25,7 +26,7 @@ export const Login = () => {
   const [userName, setUserName] = useState("");
 
   const validateLogin = () => {
-    if (email === "d" && password === "d") {
+    if (email === "test@mail.com" && password === "1234") {
       login(email, password);
       localStorage.setItem(
         "auth",
@@ -46,6 +47,11 @@ export const Login = () => {
             alt="Hotel admin logo"
           />
         </LogoContainer>
+        <Description>
+          {" "}
+          Please use <strong>test@mail.com</strong> and <strong>1234</strong> as
+          login data for testing purposes
+        </Description>
         <form>
           <InputContainer>
             <Input

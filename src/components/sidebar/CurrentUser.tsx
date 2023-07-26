@@ -13,9 +13,9 @@ function CurrentUser() {
       <img className="image" src={UserPic} alt="" />
       <UserName>David Cuadrillero</UserName>
       <UserEmail>https://github.com/Cuadri84</UserEmail>
-      <LinkButton>
-        <a href="edit own user button">Edit user</a>
-      </LinkButton>
+      {/* <LinkButton>
+        <a href="">Edit user</a>
+      </LinkButton> */}
     </Card>
   );
 }
