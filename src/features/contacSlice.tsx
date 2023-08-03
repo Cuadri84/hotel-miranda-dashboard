@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IContact } from "./interfaces/interfaces";
+import { URI } from "./bookingSlice";
 
 export const getDataContacts = createAsyncThunk(
   "contacts/fetchContacts",
   async () => {
-    const result = await fetch("http://localhost:3001/contact")
+    const result = await fetch(`${URI}/contact`)
       .then((res) => res.json())
       .then((data) => data);
 
@@ -16,7 +17,7 @@ export const archiveContact = createAsyncThunk(
   "contacts/archivedContact",
   async (_id: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/contact/${_id}`, {
+      const response = await fetch(`${URI}/contact/${_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

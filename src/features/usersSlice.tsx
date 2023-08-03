@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import fetch from "cross-fetch";
 import { IUser } from "./interfaces/interfaces";
 import Swal from "sweetalert2";
+import { URI } from "./bookingSlice";
 
 export const getDataUsers = createAsyncThunk<IUser[]>(
   "users/fetchUsers",
   async () => {
-    const result = await fetch("http://localhost:3001/users")
+    const result = await fetch(`${URI}/users`)
       .then((res) => res.json())
       .then((data) => data);
 
@@ -17,7 +18,7 @@ export const getDataUsers = createAsyncThunk<IUser[]>(
 export const getUser = createAsyncThunk<string, string>(
   "user/GetUserDetails",
   async (_id) => {
-    const result = await fetch(`http://localhost:3001/users/${_id}`)
+    const result = await fetch(`${URI}/users/${_id}`)
       .then((res) => res.json())
       .then((data) => data);
     return result;
@@ -27,7 +28,7 @@ export const getUser = createAsyncThunk<string, string>(
 export const deleteUser = createAsyncThunk<string, string>(
   "users/DeleteUser",
   async (_id) => {
-    await fetch(`http://localhost:3001/users/${_id}`, {
+    await fetch(`${URI}/users/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -46,7 +47,7 @@ export const deleteUser = createAsyncThunk<string, string>(
 export const editUser = createAsyncThunk<IUser, { _id: string; user: IUser }>(
   "users/EditUser",
   async ({ _id, user }) => {
-    const response = await fetch(`http://localhost:3001/users/${_id}`, {
+    const response = await fetch(`${URI}/users/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +74,7 @@ export const editUser = createAsyncThunk<IUser, { _id: string; user: IUser }>(
 export const createNewUser = createAsyncThunk<IUser, IUser>(
   "users/CreateUser",
   async (newUser) => {
-    const response = await fetch(`http://localhost:3001/users/`, {
+    const response = await fetch(`${URI}/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IRoom } from "./interfaces/interfaces";
 import Swal from "sweetalert2";
+import { URI } from "./bookingSlice";
 
 export const getDataRooms = createAsyncThunk("rooms/fetchRooms", async () => {
-  const result = await fetch("http://localhost:3001/rooms")
+  const result = await fetch(`${URI}/rooms`)
     .then((res) => res.json())
     .then((data) => data);
 
@@ -13,7 +14,7 @@ export const getDataRooms = createAsyncThunk("rooms/fetchRooms", async () => {
 export const getRoom = createAsyncThunk(
   "room/GetRoomDetails",
   async (_id: string) => {
-    const result = await fetch(`http://localhost:3001/rooms/${_id}`)
+    const result = await fetch(`${URI}/rooms/${_id}`)
       .then((res) => res.json())
       .then((data) => data);
     return result;
@@ -23,7 +24,7 @@ export const getRoom = createAsyncThunk(
 export const deleteRoom = createAsyncThunk<string, string>(
   "rooms/DeleteRooms",
   async (_id) => {
-    await fetch(`http://localhost:3001/rooms/${_id}`, {
+    await fetch(`${URI}/rooms/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -42,7 +43,7 @@ export const deleteRoom = createAsyncThunk<string, string>(
 export const createNewRoom = createAsyncThunk<IRoom, IRoom>(
   "rooms/CreateRoom",
   async (newRoom) => {
-    const response = await fetch(`http://localhost:3001/rooms/`, {
+    const response = await fetch(`${URI}/rooms/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +70,7 @@ export const createNewRoom = createAsyncThunk<IRoom, IRoom>(
 export const editRoom = createAsyncThunk<IRoom, { _id: string; room: IRoom }>(
   "rooms/EditRoom",
   async ({ _id, room }) => {
-    const response = await fetch(`http://localhost:3001/rooms/${_id}`, {
+    const response = await fetch(`${URI}/rooms/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

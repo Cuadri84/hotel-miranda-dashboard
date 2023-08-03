@@ -3,10 +3,12 @@ import fetch from "cross-fetch";
 import { Booking } from "./interfaces/interfaces";
 import Swal from "sweetalert2";
 
+export const URI = "https://g5ggh3oiwc.execute-api.eu-west-3.amazonaws.com/dev";
+
 export const getDataBookings = createAsyncThunk<Booking[]>(
   "bookings/fetchBookings",
   async () => {
-    const result = await fetch("http://localhost:3001/bookings")
+    const result = await fetch(`${URI}/bookings`)
       .then((res) => res.json())
       .then((data) => data);
 
@@ -17,7 +19,7 @@ export const getDataBookings = createAsyncThunk<Booking[]>(
 export const getBooking = createAsyncThunk<string, string>(
   "booking/GetBookingDetails",
   async (_id) => {
-    const result = await fetch(`http://localhost:3001/bookings/${_id}`)
+    const result = await fetch(`${URI}/bookings/${_id}`)
       .then((res) => res.json())
       .then((data) => data);
     return result;
@@ -27,7 +29,7 @@ export const getBooking = createAsyncThunk<string, string>(
 export const deleteBooking = createAsyncThunk<string, string>(
   "bookings/DeleteBooking",
   async (_id) => {
-    await fetch(`http://localhost:3001/bookings/${_id}`, {
+    await fetch(`${URI}/bookings/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -46,7 +48,7 @@ export const deleteBooking = createAsyncThunk<string, string>(
 export const createNewBooking = createAsyncThunk<Booking, Booking>(
   "bookings/CreateBooking",
   async (newBooking) => {
-    const response = await fetch(`http://localhost:3001/bookings/`, {
+    const response = await fetch(`${URI}/bookings/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +76,7 @@ export const editBooking = createAsyncThunk<
   Booking,
   { _id: string; booking: Booking }
 >("bookings/EditBooking", async ({ _id, booking }) => {
-  const response = await fetch(`http://localhost:3001/bookings/${_id}`, {
+  const response = await fetch(`${URI}/bookings/${_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
