@@ -12,7 +12,6 @@ import { DropDown, Row } from "../bookings/BookingRowStyled";
 import {
   DataContainer,
   DataContainerButton,
-  RoomId,
   RoomNameContainer,
   RoomNumber,
   RoomPrice,
