@@ -15,7 +15,6 @@ The following technologies were used in building Miranda Backend:
 - Styled componentsw
 - TypeScript
 - Cypress
-- Jest
 
 ## Installation
 
