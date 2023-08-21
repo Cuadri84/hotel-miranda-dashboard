@@ -14,7 +14,6 @@ import {
   DataContainer,
   UserContainer,
   UserName,
-  UserID,
   UserJoinDate,
   Status,
 } from "./UserRowStyled";

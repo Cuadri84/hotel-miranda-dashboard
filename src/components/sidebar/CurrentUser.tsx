@@ -2,7 +2,7 @@
 import React from "react";
 
 // Styled Components
-import { Card, UserName, UserEmail, LinkButton } from "./CurrentUserStyled";
+import { Card, UserName, UserEmail } from "./CurrentUserStyled";
 
 //assets
 import UserPic from "../../assets/sidebar/yo.jpg";
