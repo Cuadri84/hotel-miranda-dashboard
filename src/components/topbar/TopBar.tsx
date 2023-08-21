@@ -63,7 +63,7 @@ const TopBar = () => {
       </TopbarTitle>
 
       <IconContainer>
-        <Icon>
+        {/* <Icon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="3rem"
@@ -89,7 +89,7 @@ const TopBar = () => {
           <div className="hithere">
             <p>0</p>
           </div>
-        </Icon>
+        </Icon> */}
         <Icon onClick={() => logOut()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
