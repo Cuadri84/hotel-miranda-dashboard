@@ -30,4 +30,5 @@ To get started with Miranda Backend, follow these steps:
 3. Start the server:
    `npm start`
 
+This app its also deployed in: http://hotel-miranda-dashboard.s3-website.eu-west-3.amazonaws.com/
 Contact: davidcuadrillerosaura@gmail.com
