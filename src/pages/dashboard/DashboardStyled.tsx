@@ -96,7 +96,7 @@ const ContactSwiperContainer = styled.div<PropsSwipper>`
   box-shadow: 0px 4px 4px #00000005;
   border-radius: 2rem;
   overflow: hidden;
-  width: 1830px;
+  width: 98%;
   p {
     margin: 3rem 0 0 3rem;
     font-family: "Poppins";
